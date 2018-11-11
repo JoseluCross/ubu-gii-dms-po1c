@@ -1,5 +1,6 @@
 package model;
+import java.util.Collection;
 
-public class Backlog {
-
+public abstract class Backlog {
+	protected Collection<Collection<Tarea>> log;
 }
