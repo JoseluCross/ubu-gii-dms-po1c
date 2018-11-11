@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Collection;
 import java.util.LinkedList;
 
 public class ProductBacklog extends Backlog {
@@ -15,7 +14,15 @@ public class ProductBacklog extends Backlog {
 	
 	private ProductBacklog() {
 		super();
-		super.log = new LinkedList<Collection<Tarea>>();
+		super.log = new LinkedList<LinkedList<Tarea>>();
 		super.log.add(new LinkedList<Tarea>());
+	}
+	
+	public boolean add(Tarea tarea) {
+		return super.log.get(0).add(tarea);
+	}
+	
+	public LinkedList<Tarea> getLista() {
+		return super.log.get(0);
 	}
 }
