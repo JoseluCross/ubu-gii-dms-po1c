@@ -1,7 +1,10 @@
 package model;
 
+import java.util.Objects;
+
 public class Tarea {
 	
+	private int idt;
 	private String titulo;
 	private String descripcion;
 	private int coste;
@@ -9,9 +12,11 @@ public class Tarea {
 	private Requisito requisito;
 	private MiembroEquipo miembro;
 	
-	public Tarea(String titulo, String descripcion, int coste, int beneficio, Requisito requisito) {
-		assert requisito != null: "El requisito no puede ser nulo";
+	public Tarea(int idt, String titulo, String descripcion, int coste, int beneficio, Requisito requisito) {
+		if (requisito == null)
+			throw new IllegalArgumentException("Toda tarea ha de estar asociada a un requisito");
 		
+		this.idt = idt;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.coste = coste;
@@ -19,11 +24,16 @@ public class Tarea {
 		this.requisito = requisito;
 	}
 	
-	public Tarea(String titulo, String descripcion, int coste, int beneficio, Requisito requisito, MiembroEquipo miembro) {
-		this(titulo, descripcion, coste, beneficio, requisito);
+	public Tarea(int idt,String titulo, String descripcion, int coste, int beneficio, Requisito requisito, MiembroEquipo miembro) {
+		this(idt, titulo, descripcion, coste, beneficio, requisito);
+		this.miembro = miembro;
 	}
 	
 	/*Getters*/
+	
+	public int getID() {
+		return this.idt;
+	}
 	
 	public String getTitulo() {
 		return this.titulo;
@@ -72,8 +82,21 @@ public class Tarea {
 	}
 	
 	public void setRequisito(Requisito requisito) {
-		assert requisito != null: "El requisito no puede ser nulo";
+		if (requisito == null)
+			throw new IllegalArgumentException("Toda tarea ha de estar asociada a un requisito");
 		this.requisito = requisito;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof Tarea)
+			return ((Tarea)o).getID()==this.idt;
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(idt);
 	}
 
 	
