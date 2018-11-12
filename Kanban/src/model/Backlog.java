@@ -1,6 +1,6 @@
 package model;
-import java.util.LinkedList;
+import java.util.*;
 
 public abstract class Backlog {
-	protected LinkedList<LinkedList<Tarea>> log;
+	protected List<Collection<Tarea>> log;
 }

@@ -1,6 +1,6 @@
 package model;
 
-import java.util.LinkedList;
+import java.util.*;
 
 public class ProductBacklog extends Backlog {
 	private static ProductBacklog instance;
@@ -14,7 +14,7 @@ public class ProductBacklog extends Backlog {
 	
 	private ProductBacklog() {
 		super();
-		super.log = new LinkedList<LinkedList<Tarea>>();
+		super.log = new LinkedList<Collection<Tarea>>();
 		super.log.add(new LinkedList<Tarea>());
 	}
 	
@@ -22,7 +22,7 @@ public class ProductBacklog extends Backlog {
 		return super.log.get(0).add(tarea);
 	}
 	
-	public LinkedList<Tarea> getLista() {
+	public Collection<Tarea> getLista() {
 		return super.log.get(0);
 	}
 }
