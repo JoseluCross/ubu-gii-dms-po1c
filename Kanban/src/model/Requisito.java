@@ -29,4 +29,12 @@ public abstract class Requisito {
 	public int getPrioridad() {
 		return this.prioridad;
 	}
+	
+	@Override 
+	public boolean equals(Object o) {
+		if (o instanceof Requisito) {
+			return ((Requisito)o).getId() == this.id;
+		}
+		return false;
+	}
 }
