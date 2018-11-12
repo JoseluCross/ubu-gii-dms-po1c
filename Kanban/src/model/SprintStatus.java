@@ -3,7 +3,7 @@ package model;
 public enum SprintStatus {
 	PorHacer(0),
 	Haciendo(1),
-	Validancion(2),
+	Validacion(2),
 	Completada(3);
 	
 	private int num;
