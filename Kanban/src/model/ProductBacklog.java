@@ -5,7 +5,7 @@ import java.util.*;
 public class ProductBacklog extends Backlog {
 	private static ProductBacklog instance;
 	
-	public ProductBacklog getInstance() {
+	public static ProductBacklog getInstance() {
 		if(instance == null) {
 			instance = new ProductBacklog();
 		}

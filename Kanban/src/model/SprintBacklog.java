@@ -4,10 +4,11 @@ import java.util.*;
 
 public class SprintBacklog extends Backlog {
 	
-	private Date start;
-	private Date end;
+	private Calendar start;
+	private Calendar end;
+	private static int DAYS=30;
 	
-	private SprintBacklog(Date start, Date end) {
+	public SprintBacklog() {
 		super();
 		super.log = new LinkedList<Collection<Tarea>>();
 		//Por hacer ~ 0
@@ -19,8 +20,9 @@ public class SprintBacklog extends Backlog {
 		//Completadas ~ 3
 		super.log.add(new LinkedList<Tarea>());
 		
-		this.start = start;
-		this.end = end;
+		this.start = Calendar.getInstance();
+		this.end = (Calendar) start.clone();
+		this.end.add(Calendar.DATE,DAYS);
 	}
 	
 	public boolean add(Tarea tarea) {
@@ -40,19 +42,19 @@ public class SprintBacklog extends Backlog {
 		return super.log.get(opc.getNum());
 	}
 	
-	public Date getStart() {
+	public Calendar getStart() {
 		return this.start;
 	}
 	
-	public Date getEnd() {
+	public Calendar getEnd() {
 		return this.end;
 	}
 	
-	public void setStart(Date start) {
+	public void setStart(Calendar start) {
 		this.start = start;
 	}
 	
-	public void setEnd(Date end) {
+	public void setEnd(Calendar end) {
 		this.end = end;
 	}
 }
