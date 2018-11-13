@@ -220,9 +220,104 @@ public class CSVPersistence implements Persistence {
 	}
 
 	@Override
-	public void save() {
+	public void save() throws PersistenceException {
+		/*Primero se crean los ficheros .csv.new*/
+		if (config == null) 
+			throw new PersistenceException("No se ha configurado");
+		
+		String folder = config.get("folder");
+		if (folder == null)
+			throw new PersistenceException("No se ha configurado el campo \"folder\"");
+		BufferedWriter bw = null;
+		String superpath = folder+File.separator; 
+		String path = "";
+		try {
+			/*Guarda sprints*/
+			path = superpath+SPRINTFILE;
+			bw = new BufferedWriter(new FileWriter(path+".new"));
+			guardaSprint(bw);
+			/*Guarda de requisitos*/
+			path = superpath+REQUISITOFILE;
+			bw = new BufferedWriter(new FileWriter(path+".new"));
+			guardaRequisitos(bw);
+			this.idr = this.newID(requisitos.keySet());
+			/*Guarda de miembros*/
+			path = superpath+MIEMBROFILE;
+			bw = new BufferedWriter(new FileWriter(path+".new"));
+			guardaMiembros(bw);
+			this.idm = this.newID(miembros.keySet());
+			/*Guarda de tareas*/
+			path = superpath+TAREAFILE;
+			bw = new BufferedWriter(new FileWriter(path+".new"));
+			guardaTareas(bw);
+			this.idt = this.newID(tareas.keySet());
+			/*Guarda tareas en los sprints*/
+			path = superpath+SPRINTTAREA;
+			bw = new BufferedWriter(new FileWriter(path+".new"));
+			guardaTareasSprint(bw);
+			
+		}catch(IOException ex) {
+			throw new PersistenceException("El fichero "+path+" no se puede escribir",ex);
+		}
+		/*Al crearse bien se copia la versión anterior a .old*/
+		/*Los csv.new pasan a llamarse .csv*/
+	}
+	
+	private void guardaTareasSprint(BufferedWriter bw) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	private void guardaSprint(BufferedWriter bw) throws IOException {
+		for(SprintBacklog sb : this.sprints.values()) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			String start = sdf.format(sb.getStart().getTime());
+			String end = sdf.format(sb.getEnd().getTime());
+			bw.write(String.join(SPLIT, ""+sb.getId(),sb.getNombre(),start,end)+"\n");
+		}
+		bw.close();
+	}
+	
+	private void guardaRequisitos(BufferedWriter bw) throws IOException {
+		for(Requisito rb : this.requisitos.values()) {
+			String of;
+			int type;
+			if(rb instanceof HistoriaUsuario) {
+				type = 0;
+				of = ((HistoriaUsuario)rb).getActor();
+			}else {
+				type = 1;
+				of = ((Defecto)rb).getCommit();
+			}
+			bw.write(String.join(SPLIT,""+type,""+rb.getId(),rb.getNombre(),rb.getDescripcion(),rb.getPrioridad()+"")+"\n");
+		}
+		bw.close();
+	}
+	
+	private void guardaMiembros(BufferedWriter bw) throws IOException {
+		for(MiembroEquipo mb : this.miembros.values()) {
+			bw.write(String.join(SPLIT, ""+mb.getId(),mb.getNombre(),mb.getPuesto())+"\n");
+		}
+		bw.close();
+	}
+	
+	private void guardaTareas(BufferedWriter bw) throws IOException {
+		for(Tarea tr : this.tareas.values()) {
+			MiembroEquipo mb = tr.getMiembroEquipo();
+			if (mb == null)
+				mb = new MiembroEquipo(-1, "AAA", "EEE");
+			bw.write(String.join(
+					SPLIT, 
+					""+tr.getId(),
+					tr.getTitulo(),
+					tr.getDescripcion(),
+					""+tr.getCoste(),
+					""+tr.getBeneficio(),
+					""+tr.getRequisito().getId(),
+					""+mb.getId()
+					)+"\n");
+		}
+		bw.close();
 	}
 	
 	private int newID(Set<Integer> integer) {

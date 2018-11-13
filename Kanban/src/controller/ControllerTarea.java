@@ -41,11 +41,8 @@ public class ControllerTarea extends AbstractController<Tarea>{
 		}
 	}
 	
-	public boolean asignarMiembro(int  tarea, int miembro) {
+	public boolean asignarMiembro(Tarea  t, int miembro) {
 		MiembroEquipo m = persist.loadMiembro(miembro);
-		Tarea t = persist.loadTarea(tarea);
-		if (t == null)
-			return false;
 		t.setMiembro(m);
 		return true;
 	}
