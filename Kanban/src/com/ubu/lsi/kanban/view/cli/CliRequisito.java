@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Scanner;
 
 import com.ubu.lsi.kanban.controller.ControllerRequisito;
+import com.ubu.lsi.kanban.model.Defecto;
+import com.ubu.lsi.kanban.model.HistoriaUsuario;
 import com.ubu.lsi.kanban.model.Requisito;
 import com.ubu.lsi.kanban.view.ViewRequisito;
 
@@ -30,7 +32,7 @@ public class CliRequisito implements ViewRequisito {
 		int prioridad, tipo=0;
 		boolean flag = true;
 		while(flag) {
-			System.out.println("Desea que su Requisito sea una Historia de Usuario [0] o Defecto[1]");
+			System.out.print("Desea que su Requisito sea una Historia de Usuario [0] o Defecto[1]");
 			tipo = sc.nextInt();
 			if (tipo == 0 || tipo ==1) {
 				flag = false;
@@ -39,17 +41,17 @@ public class CliRequisito implements ViewRequisito {
 			}
 		}
 		sc.nextLine();
-		System.out.println("Introduzca el nombre que le quiere dar al nuevo Requisito: ");
+		System.out.print("Introduzca el nombre que le quiere dar al nuevo Requisito: ");
 		nombre = sc.nextLine();
-		System.out.println("Introduzca la descripción que le quiere dar al nuevo Requisito");
+		System.out.print("Introduzca la descripción que le quiere dar al nuevo Requisito");
 		desc = sc.nextLine();
-		System.out.println("Introduzca la prioridad que le quiere dar el nuevo Requisito");
+		System.out.print("Introduzca la prioridad que le quiere dar el nuevo Requisito");
 		prioridad = sc.nextInt();
 		sc.nextLine();
 		if(tipo == 0) {
-			System.out.println("Introduzca el actor que se quiere dar a la Historia de usuario: ");
+			System.out.print("Introduzca el actor que se quiere dar a la Historia de usuario: ");
 		}else {
-			System.out.println("Introduzca el commit con el que está relacionado el Defecto: ");
+			System.out.print("Introduzca el commit con el que está relacionado el Defecto: ");
 		}
 		of = sc.nextLine();
 		return cr.nuevoRequisito(tipo, nombre, desc, prioridad, of);
@@ -67,7 +69,7 @@ public class CliRequisito implements ViewRequisito {
 
 	@Override
 	public void mostrarRequisitos(Collection<Requisito> requisitos) {
-		System.out.println("IDENTIFICADOR\t\tNOMBRE\t\tPRIORIDAD");
+		System.out.println("IDENTIFICADOR\tNOMBRE\tPRIORIDAD\tTIPO\t\tDATOS ADICIONALES");
 		for (Requisito requisito : requisitos) {
 			this.mostrarReducido(requisito);
 		}
@@ -75,6 +77,13 @@ public class CliRequisito implements ViewRequisito {
 
 	@Override
 	public void mostrarReducido(Requisito requisito) {
-		System.out.println("Identificador " + requisito.getId() + "\tNombre: " + requisito.getNombre() + "\tPrioridad: " + requisito.getPrioridad());
+		System.out.print(requisito.getId() + "\t\t" + requisito.getNombre() + "\t\t" + requisito.getPrioridad());
+		if(requisito instanceof HistoriaUsuario) {
+			HistoriaUsuario aux = (HistoriaUsuario) requisito;
+			System.out.println("\t\tHistoria de Usuario\tActor: " + aux.getActor());
+		}else {
+			Defecto aux2 = (Defecto) requisito;
+			System.out.println("\t\tDefecto\tcommit: " + aux2.getCommit());
+		}
 	}
 }

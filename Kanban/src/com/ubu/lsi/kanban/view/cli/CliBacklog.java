@@ -36,7 +36,7 @@ public class CliBacklog implements ViewBacklog {
 		String fini,nom;
 		Calendar ini = Calendar.getInstance();
 		while(flag) {
-			System.out.println("Desea introducir otra fecha de inicio que no sea el día de hoy?[s/n]");
+			System.out.print("Desea introducir otra fecha de inicio que no sea el día de hoy?[s/n]");
 			res = sc.nextLine();
 			if (res.equals("s") || res.equals("n")) {
 				flag = false;
@@ -45,7 +45,7 @@ public class CliBacklog implements ViewBacklog {
 		if (res.equals("n")) {
 			flag = true;
 			while(flag) {
-				System.out.println("Qúe fecha quiere que empiece el sprint? [dd-mm-aaaa]");
+				System.out.print("Qúe fecha quiere que empiece el sprint? [dd-mm-aaaa]");
 				fini = sc.nextLine();
 				try {
 					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -56,7 +56,7 @@ public class CliBacklog implements ViewBacklog {
 				}
 			}
 		}
-		System.out.println("Introduzca el nombre del Sprint: ");
+		System.out.print("Introduzca el nombre del Sprint: ");
 		nom = sc.nextLine();
 		ControllerBacklog cb = ControllerBacklog.getInstance();
 		SprintBacklog sp = cb.crearSprint(nom, ini);
@@ -74,7 +74,7 @@ public class CliBacklog implements ViewBacklog {
 		CliTarea ct = CliTarea.getInstance();
 		SprintStatus[] spt = {SprintStatus.PorHacer,SprintStatus.Haciendo,SprintStatus.Validacion,SprintStatus.Completada};
 		if(log instanceof ProductBacklog) {
-			System.out.println("PRODUCTBACKLOG{");
+			System.out.println("PRODUCTBACKLOG");
 		}else {
 			System.out.println("SPRINTBACKLOG " + ((SprintBacklog)log).getNombre());
 		}
@@ -83,7 +83,7 @@ public class CliBacklog implements ViewBacklog {
 			if(log instanceof SprintBacklog) {
 				System.out.println(spt[i]);
 			}
-			System.out.println("IDENTIFICADOR\t\tTÍTULO");
+			System.out.println("IDENTIFICADOR\tTÍTULO");
 			for( Tarea t : st) {
 				ct.mostrarReducido(t);
 			}
@@ -98,13 +98,13 @@ public class CliBacklog implements ViewBacklog {
 		Scanner sc = CliMenu.sc;
 		int idt, ids;
 		this.mostrar(pb);
-		System.out.println("Introduzca el número del identificador de la tarea que quiere mover al Sprint:");
+		System.out.print("Introduzca el número del identificador de la tarea que quiere mover al Sprint: ");
 		idt = sc.nextInt();
 		sc.nextLine();
 		ControllerBacklog cb = ControllerBacklog.getInstance();
 		Collection<SprintBacklog> col = cb.getList();
 		this.mostrarReducido(col);
-		System.out.println("Introduzca el identificador del Sprint al que quieres mover esta tarea");
+		System.out.print("Introduzca el identificador del Sprint al que quieres mover esta tarea: ");
 		ids = sc.nextInt();
 		sc.nextLine();
 		return cb.tareaSprint(ids, idt);
@@ -118,7 +118,7 @@ public class CliBacklog implements ViewBacklog {
 		ControllerBacklog cb = ControllerBacklog.getInstance();
 		Collection<SprintBacklog> listlog = cb.getList();
 		this.mostrarReducido(listlog);
-		System.out.println("Introduzca el identificador del Sprint del cuál desea mover un tarea: ");
+		System.out.print("Introduzca el identificador del Sprint del cuál desea mover un tarea: ");
 		ids = sc.nextInt();
 		this.mostrar(cb.getElement(ids));
 		while(flag) {
@@ -150,10 +150,10 @@ public class CliBacklog implements ViewBacklog {
 
 	@Override
 	public void mostrarReducido(Collection<SprintBacklog> sp) {
-		System.out.println("IDENTIFICADOR\t\tNOMBRE");
+		System.out.println("IDENTIFICADOR\tNOMBRE");
 		for (SprintBacklog sb : sp) {
 			if (sb.getEnd().after(Calendar.getInstance())) {
-				System.out.println("Identificador: " + sb.getId() + "\tNombre: " + sb.getNombre());
+				System.out.println(sb.getId() + "\t\t" + sb.getNombre());
 			}
 		}
 	}

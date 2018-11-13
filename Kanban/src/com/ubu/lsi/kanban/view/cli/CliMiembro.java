@@ -27,9 +27,9 @@ public class CliMiembro implements ViewMiembro {
 		Scanner sc = CliMenu.sc;
 		ControllerMiembro cm = ControllerMiembro.getInstance();
 		String nombre, puesto;
-		System.out.println("Introduzca el nombre del nuevo Miembro: ");
+		System.out.print("Introduzca el nombre del nuevo Miembro: ");
 		nombre = sc.nextLine();
-		System.out.println("Introduzca el puesto del nuevo Miembro");
+		System.out.print("Introduzca el puesto del nuevo Miembro: ");
 		puesto = sc.nextLine();
 		return cm.nuevoMiembro(nombre, puesto);
 	}
@@ -45,7 +45,7 @@ public class CliMiembro implements ViewMiembro {
 
 	@Override
 	public void mostrarMiembros(Collection<MiembroEquipo> miembros) {
-		System.out.println("IDENTIFICADOR\t\tNOMBRE\t\tPUESTO");
+		System.out.println("IDENTIFICADOR\tNOMBRE\tPUESTO");
 		for (MiembroEquipo miembro : miembros) {
 			this.mostrarReducido(miembro);
 		}
@@ -54,7 +54,7 @@ public class CliMiembro implements ViewMiembro {
 
 	@Override
 	public void mostrarReducido(MiembroEquipo miembro) {
-		System.out.println("Identificador: " + miembro.getId() + "\tNombre: " + miembro.getNombre() + "\tPuesto: " + miembro.getPuesto());
+		System.out.println(miembro.getId() + "\t\t" + miembro.getNombre() + "\t" + miembro.getPuesto());
 	}
 
 }
