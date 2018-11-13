@@ -4,23 +4,33 @@ import java.util.*;
 
 public class SprintBacklog extends Backlog {
 	
-	private Date start;
-	private Date end;
+	private Calendar start;
+	private Calendar end;
+	private int ids;
+	private String nombre;
+	private static int DAYS=30;
 	
-	private SprintBacklog(Date start, Date end) {
+	public SprintBacklog(int ids, Calendar start, String nombre) {
 		super();
-		super.log = new LinkedList<Collection<Tarea>>();
+		this.ids = ids;
+		super.log = new ArrayList<Set<Tarea>>(4);
 		//Por hacer ~ 0
-		super.log.add(new LinkedList<Tarea>());
+		super.log.add(new HashSet<Tarea>());
 		//Haciendo ~ 1
-		super.log.add(new LinkedList<Tarea>());
+		super.log.add(new HashSet<Tarea>());
 		//Validación ~ 2
-		super.log.add(new LinkedList<Tarea>());
+		super.log.add(new HashSet<Tarea>());
 		//Completadas ~ 3
-		super.log.add(new LinkedList<Tarea>());
+		super.log.add(new HashSet<Tarea>());
 		
 		this.start = start;
-		this.end = end;
+		this.end = (Calendar) start.clone();
+		this.end.add(Calendar.DATE,DAYS);
+		this.nombre = nombre;
+	}
+	
+	public SprintBacklog(int ids, String nombre) {
+		this(ids, Calendar.getInstance(), nombre);
 	}
 	
 	public boolean add(Tarea tarea) {
@@ -36,23 +46,23 @@ public class SprintBacklog extends Backlog {
 		return true;
 	}
 	
-	public Collection<Tarea> getLista(SprintStatus opc){
+	public Set<Tarea> getLista(SprintStatus opc){
 		return super.log.get(opc.getNum());
 	}
 	
-	public Date getStart() {
+	public int getId() {
+		return this.ids;
+	}
+	
+	public Calendar getStart() {
 		return this.start;
 	}
 	
-	public Date getEnd() {
+	public Calendar getEnd() {
 		return this.end;
 	}
 	
-	public void setStart(Date start) {
-		this.start = start;
-	}
-	
-	public void setEnd(Date end) {
-		this.end = end;
+	public String getNombre() {
+		return this.nombre;
 	}
 }
