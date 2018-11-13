@@ -2,9 +2,15 @@ package persistence;
 
 import java.util.*;
 import model.*;
+import java.io.*;
 
 public class CSVPersistence implements Persistence {
 
+	private static final String TAREAFILE = "tareas.csv";
+	private static final String MIEMBROFILE = "miembros.csv";
+	private static final String SPRINTFILE = "sprints.csv";
+	private static final String REQUISITOFILE = "requisitos.csv";
+	private static final char SPLIT = ',';
 	
 	private Map<String,String> config;
 	private Map<Integer,Requisito> requisitos;
@@ -26,12 +32,19 @@ public class CSVPersistence implements Persistence {
 	public void start() throws PersistenceException {
 		if (config == null) 
 			throw new PersistenceException("No se ha configurado");
+		
+		String folder = config.get("folder");
+		if (folder == null)
+			throw new PersistenceException("No se ha configurado el campo \"folder\"");
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader())
+		}
 	}
 
 	@Override
 	public void config(Map<String, String> options) {
 		this.config = options;
-
 	}
 
 	@Override
