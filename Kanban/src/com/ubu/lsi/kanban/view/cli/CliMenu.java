@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 import javax.swing.plaf.basic.BasicScrollPaneUI.VSBChangeListener;
 
-import com.ubu.lsi.kanban.model.ProductBacklog;
+import com.ubu.lsi.kanban.controller.*;
+import com.ubu.lsi.kanban.model.*;
 import com.ubu.lsi.kanban.view.*;
 
 public class CliMenu implements Menu{
@@ -36,15 +37,20 @@ public class CliMenu implements Menu{
 		System.out.println("Bienvenido a KanBan, la mejor aplicación del mundo");
 		do {
 			//clean();
-			System.out.println("Elija una opción");
-			System.out.println(" [1] Ver Product Backlog");
-			System.out.println(" [2] Crear Tarea");
-			System.out.println(" [3] Modificar Tarea");
-			System.out.println(" [4] Crear Sprint");
-			System.out.println(" [5] Asignar Tarea en Sprint");
-			System.out.println(" [6] Mover Tarea");
-			System.out.println(" [7] Crear Requisito");
-			System.out.println(" [8] Crear Miembro");
+			System.out.println("\nElija una opción");
+			
+			System.out.println(" [1] Crear Tarea");
+			System.out.println(" [2] Modificar Tarea");
+			System.out.println(" [3] Crear Sprint");
+			System.out.println(" [4] Asignar Tarea en Sprint");
+			System.out.println(" [5] Mover Tarea");
+			System.out.println(" [6] Crear Requisito");
+			System.out.println(" [7] Crear Miembro");
+			System.out.println(" [8] Ver Product Backlog");
+			System.out.println(" [9] Ver Sprint");
+			System.out.println(" [10] Ver Tarea");
+			System.out.println(" [11] Ver Requisitos");
+			System.out.println(" [12] Ver Miembros");
 			System.out.println("----------------------------");
 			System.out.println(" [0] Cerrar aplicación");
 			System.out.print("Tu opción: ");
@@ -86,37 +92,77 @@ public class CliMenu implements Menu{
 	private void executeOption(int option) {
 		boolean ct;
 		switch(option) {
-		case 1: //Ver Product Backlog
-			vb.mostrar(ProductBacklog.getInstance());
-			break;
-		case 2: //Crear Tarea
+		case 1: //Crear Tarea
 			ct = vt.crearTarea();
 			if(!ct)
 				System.err.println("La tarea ha fallado al crearse, comprueba que tiene requisito");
 			break;
-		case 3: //Modificar Tarea
+		case 2: //Modificar Tarea
 			vt.modificarTarea();
 			break;
-		case 4: //Crear sprint
+		case 3: //Crear sprint
 			vb.nuevoSprint();
 			break;
-		case 5: //Asignar Tarea en Sprint
+		case 4: //Asignar Tarea en Sprint
 			vb.moverProductSprint();
 			break;
-		case 6: //Mover Tarea
+		case 5: //Mover Tarea
 			vb.moverSprint();
 			break;
-		case 7: //Crear requisito
+		case 6: //Crear requisito
 			ct = vr.crearRequisito();
 			if(!ct)
 				System.err.println("No se ha podido crear el requisito");
 			break;
-		case 8: //Crear miembro
+		case 7: //Crear miembro
 			vm.crearMiembro();
 			break;
+		case 8: //Ver Product Backlog
+			vb.mostrar(ProductBacklog.getInstance());
+			break;
+		case 9: //Ver sprint
+			SprintBacklog sb = seleccionarSprint();
+			if(sb != null)
+				vb.mostrar(sb);
+			else
+				System.err.println("El Sprint seleccionado no existe");
+			break;
+		case 10: //Ver tarea
+			Tarea tt = seleccionarTarea();
+			if(tt != null)
+				vt.mostrar(tt);
+			else
+				System.err.println("La tarea seleccionado no existe");
+			break;
+		case 11: //Ver requisitos
+			vr.mostrarRequisitos(ControllerRequisito.getInstance().getList());
+			break;
+		case 12: //Ver miembros
+			vm.mostrarMiembros(ControllerMiembro.getInstance().getList());
+			break;
 		default:
-			System.out.println("Pedazo subnormal, te he dicho un número de 0 al 8");
+			System.out.println("Pedazo subnormal, te he dicho un número de 0 al 12");
 		}
+	}
+	
+	private SprintBacklog seleccionarSprint() {
+		Scanner sc = CliMenu.sc;
+		int ids;
+		vb.mostrarReducido(ControllerBacklog.getInstance().getList());
+		System.out.print("Elige que Sprint quieres ver: ");
+		ids = sc.nextInt();
+		sc.nextLine();
+		return ControllerBacklog.getInstance().getElement(ids);
+	}
+	
+	private Tarea seleccionarTarea() {
+		Scanner sc = CliMenu.sc;
+		int ids;
+		vt.mostratTareas(ControllerTarea.getInstance().getList());
+		System.out.print("Elige que Tarea quieres ver: ");
+		ids = sc.nextInt();
+		sc.nextLine();
+		return ControllerTarea.getInstance().getElement(ids);
 	}
 
 }

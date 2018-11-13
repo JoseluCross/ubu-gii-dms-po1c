@@ -64,12 +64,6 @@ public class CliBacklog implements ViewBacklog {
 	}
 
 	@Override
-	public void cerrarSprint(SprintBacklog sprint) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void mostrar(Backlog log) {
 		CliTarea ct = CliTarea.getInstance();
 		SprintStatus[] spt = {SprintStatus.PorHacer,SprintStatus.Haciendo,SprintStatus.Validacion,SprintStatus.Completada};

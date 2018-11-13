@@ -159,9 +159,9 @@ public class CSVPersistence implements Persistence {
 				Calendar cal = Calendar.getInstance();
 				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 			
-				cal.setTime(sdf.parse(sprint[1]));
+				cal.setTime(sdf.parse(sprint[2]));
 			
-				SprintBacklog s = new SprintBacklog(Integer.parseInt(sprint[0]),cal, sprint[2]);
+				SprintBacklog s = new SprintBacklog(Integer.parseInt(sprint[0]),cal, sprint[1]);
 				this.sprints.put(s.getId(), s);
 			}catch (Exception ex) {
 				throw new PersistenceException("Los sprints guardados son inconcistentes", ex);
@@ -290,7 +290,7 @@ public class CSVPersistence implements Persistence {
 				superpath+File.separator+REQUISITOFILE,
 				superpath+File.separator+SPRINTFILE,
 				superpath+File.separator+TAREAFILE,
-				superpath+File.separator+SPRINTFILE};
+				superpath+File.separator+SPRINTTAREA};
 		for (String name : names) {
 			File f = new File(name);
 			File f2 = new File(name+".old");
@@ -309,9 +309,13 @@ public class CSVPersistence implements Persistence {
 		for(SprintBacklog sb : this.sprints.values()) {
 			for(SprintStatus ss : SprintStatus.values()) {
 				for (Tarea st : sb.getLista(ss)) {
-					bw.write(String.join(SPLIT,""+st.getId(),""+sb.getId(),ss.toString())+"\n");
+					bw.write(String.join(SPLIT,""+st.getId(),""+sb.getId(),ss.toString()));
+					bw.newLine();
 				}
 			}
+		}
+		for(Tarea st : ProductBacklog.getInstance().getLista().get(0)) {
+			bw.write(String.join(SPLIT, ""+st.getId(),"-1","PorHacer"));
 		}
 		bw.close(); 
 	}
@@ -321,7 +325,8 @@ public class CSVPersistence implements Persistence {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 			String start = sdf.format(sb.getStart().getTime());
 			String end = sdf.format(sb.getEnd().getTime());
-			bw.write(String.join(SPLIT, ""+sb.getId(),sb.getNombre(),start,end)+"\n");
+			bw.write(String.join(SPLIT, ""+sb.getId(),sb.getNombre(),start,end));
+			bw.newLine();
 		}
 		bw.close();
 	}
@@ -337,14 +342,16 @@ public class CSVPersistence implements Persistence {
 				type = 1;
 				of = ((Defecto)rb).getCommit();
 			}
-			bw.write(String.join(SPLIT,""+type,""+rb.getId(),rb.getNombre(),rb.getDescripcion(),rb.getPrioridad()+"")+"\n");
+			bw.write(String.join(SPLIT,""+type,""+rb.getId(),rb.getNombre(),rb.getDescripcion(),rb.getPrioridad()+"",of));
+			bw.newLine();
 		}
 		bw.close();
 	}
 	
 	private void guardaMiembros(BufferedWriter bw) throws IOException {
 		for(MiembroEquipo mb : this.miembros.values()) {
-			bw.write(String.join(SPLIT, ""+mb.getId(),mb.getNombre(),mb.getPuesto())+"\n");
+			bw.write(String.join(SPLIT, ""+mb.getId(),mb.getNombre(),mb.getPuesto()));
+			bw.newLine();
 		}
 		bw.close();
 	}
@@ -363,7 +370,8 @@ public class CSVPersistence implements Persistence {
 					""+tr.getBeneficio(),
 					""+tr.getRequisito().getId(),
 					""+mb.getId()
-					)+"\n");
+					));
+			bw.newLine();
 		}
 		bw.close();
 	}

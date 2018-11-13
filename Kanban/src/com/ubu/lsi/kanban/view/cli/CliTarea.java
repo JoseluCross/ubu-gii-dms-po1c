@@ -67,7 +67,7 @@ public class CliTarea implements ViewTarea {
 
 		Collection<Tarea> tareas = ct.getList();
 		this.mostratTareas(tareas);
-		System.out.print("Introduzca el identificador de la Tarea que desa modificar: ");
+		System.out.print("Introduzca el identificador de la Tarea que desea modificar: ");
 		id = sc.nextInt();
 		Tarea tarea = ct.getElement(id);
 		while (mod) {

@@ -29,7 +29,7 @@ public class ControllerBacklog extends AbstractController<SprintBacklog>{
 		if(!prod.getLista().get(0).contains(t)) {
 			return false;
 		}
-		prod.getLista().get(0).remove(tarea);
+		prod.getLista().get(0).remove(t);
 		sp.add(t);
 		return true;
 	}

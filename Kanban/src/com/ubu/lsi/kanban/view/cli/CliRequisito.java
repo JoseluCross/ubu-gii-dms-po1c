@@ -32,7 +32,7 @@ public class CliRequisito implements ViewRequisito {
 		int prioridad, tipo=0;
 		boolean flag = true;
 		while(flag) {
-			System.out.print("Desea que su Requisito sea una Historia de Usuario [0] o Defecto[1]");
+			System.out.print("Desea que su Requisito sea una Historia de Usuario [0] o Defecto[1]: ");
 			tipo = sc.nextInt();
 			if (tipo == 0 || tipo ==1) {
 				flag = false;
@@ -43,9 +43,9 @@ public class CliRequisito implements ViewRequisito {
 		sc.nextLine();
 		System.out.print("Introduzca el nombre que le quiere dar al nuevo Requisito: ");
 		nombre = sc.nextLine();
-		System.out.print("Introduzca la descripción que le quiere dar al nuevo Requisito");
+		System.out.print("Introduzca la descripción que le quiere dar al nuevo Requisito: ");
 		desc = sc.nextLine();
-		System.out.print("Introduzca la prioridad que le quiere dar el nuevo Requisito");
+		System.out.print("Introduzca la prioridad que le quiere dar el nuevo Requisito: ");
 		prioridad = sc.nextInt();
 		sc.nextLine();
 		if(tipo == 0) {
