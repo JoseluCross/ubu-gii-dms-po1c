@@ -4,10 +4,9 @@ import java.util.*;
 import model.*;
 import persistence.Persistence;
 
-public class ControllerBacklog implements Controller<SprintBacklog>{
+public class ControllerBacklog extends AbstractController<SprintBacklog>{
 	
 	private static ControllerBacklog instance;
-	private Persistence persist;
 	
 	private ControllerBacklog() {
 		

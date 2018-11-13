@@ -1,11 +1,11 @@
 package controller;
-import model.*;
-import persistence.Persistence;
+import java.util.Collection;
 
-public class ControllerTarea {
+import model.*;
+
+public class ControllerTarea extends AbstractController<Tarea>{
 	
 	private static ControllerTarea instance;
-	private Persistence persist;
 	
 	private ControllerTarea() {
 		
@@ -17,8 +17,28 @@ public class ControllerTarea {
 		return instance;
 	}
 	
-	public int nuevaTarea() {
-		return persist.newIds();
+	public boolean nuevaTarea(String titulo, String descripcion, int coste, int beneficio, int requisito, int miembro) {
+		try {
+			int index = persist.newIds();
+			Requisito r = persist.loadRequisito(requisito);
+			MiembroEquipo m = persist.loadMiembro(miembro);
+			Tarea t = new Tarea(index, titulo, descripcion, coste, beneficio, r, m);
+			persist.nuevaTarea(t);
+			ControllerBacklog.getInstance().introducirTarea(t);
+			return true;
+		}catch(IllegalArgumentException ex) {
+			return false;
+		}
+	}
+	
+	public boolean editarRequisito(Tarea tarea, int requisito) {
+		try {
+			Requisito r = persist.loadRequisito(requisito);
+			tarea.setRequisito(r);
+			return true;
+		}catch(IllegalArgumentException ex) {
+			return false;
+		}
 	}
 	
 	public boolean asignarMiembro(int  tarea, int miembro) {
@@ -29,12 +49,15 @@ public class ControllerTarea {
 		t.setMiembro(m);
 		return true;
 	}
-	
-	public boolean quitarMiembro(int tarea) {
-		Tarea t = persist.loadTarea(tarea);
-		if (t == null)
-			return false;
-		t.setMiembro(null);
-		return true;
+
+	@Override
+	public Collection<Tarea> getList() {
+		return persist.loadTareas();
 	}
+
+	@Override
+	public Tarea getElement(int index) {
+		return persist.loadTarea(index);
+	}
+
 }
