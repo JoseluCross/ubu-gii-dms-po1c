@@ -260,12 +260,30 @@ public class CSVPersistence implements Persistence {
 			throw new PersistenceException("El fichero "+path+" no se puede escribir",ex);
 		}
 		/*Al crearse bien se copia la versión anterior a .old*/
+		String[] names = {MIEMBROFILE,REQUISITOFILE,SPRINTFILE,TAREAFILE,SPRINTFILE};
+		for (String name : names) {
+			File f = new File(name);
+			File f2 = new File(name+".old");
+			f.renameTo(f2);
+		}
 		/*Los csv.new pasan a llamarse .csv*/
+		for (String name : names) {
+			File f = new File(name+".new");
+			File f2 = new File(name);
+			f.renameTo(f2);
+		}
+		
 	}
 	
-	private void guardaTareasSprint(BufferedWriter bw) {
-		// TODO Auto-generated method stub
-		
+	private void guardaTareasSprint(BufferedWriter bw) throws IOException {
+		for(SprintBacklog sb : this.sprints.values()) {
+			for(SprintStatus ss : SprintStatus.values()) {
+				for (Tarea st : sb.getLista(ss)) {
+					bw.write(String.join(SPLIT,""+st.getId(),""+sb.getId(),ss.toString())+"\n");
+				}
+			}
+		}
+		bw.close(); 
 	}
 
 	private void guardaSprint(BufferedWriter bw) throws IOException {
