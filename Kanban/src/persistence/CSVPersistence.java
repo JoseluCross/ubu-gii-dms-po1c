@@ -3,6 +3,7 @@ package persistence;
 import java.util.*;
 import model.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 
 public class CSVPersistence implements Persistence {
 
@@ -10,8 +11,13 @@ public class CSVPersistence implements Persistence {
 	private static final String MIEMBROFILE = "miembros.csv";
 	private static final String SPRINTFILE = "sprints.csv";
 	private static final String REQUISITOFILE = "requisitos.csv";
-	private static final char SPLIT = ',';
+	private static final String SPRINTTAREA = "sprint-tareas.csv";
+	private static final String SPLIT = ",";
 	
+	private int idt;
+	private int ids;
+	private int idm;
+	private int idr;
 	private Map<String,String> config;
 	private Map<Integer,Requisito> requisitos;
 	private Map<Integer,Tarea> tareas;
@@ -20,6 +26,10 @@ public class CSVPersistence implements Persistence {
 	private static CSVPersistence instance;
 	
 	private CSVPersistence() {
+		this.requisitos = new HashMap<>();
+		this.tareas = new HashMap<>();
+		this.sprints = new HashMap<>();
+		this.miembros = new HashMap<>();
 	}
 	
 	public static CSVPersistence getInstance() {
@@ -37,9 +47,118 @@ public class CSVPersistence implements Persistence {
 		if (folder == null)
 			throw new PersistenceException("No se ha configurado el campo \"folder\"");
 		BufferedReader br = null;
+		String path = "";
 		try {
-			br = new BufferedReader(new FileReader())
+			path = folder+File.separator+TAREAFILE;
+			br = new BufferedReader(new FileReader(path));
+			cargaTareas(br);
+		}catch(FileNotFoundException ex) {
+			File f = new File(path);
+			f.getParentFile().mkdirs();
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				throw new PersistenceException("El fichero "+f.getPath()+" no se puede crear", e);
+			}
+		}catch(IOException ex) {
+			throw new PersistenceException("El fichero "+path+" no se puede leer",ex);
 		}
+	}
+	
+	private void cargaTareas(BufferedReader br) throws IOException, PersistenceException {
+        String line = "";
+		while((line = br.readLine()) != null) {
+			String[] task = line.split(SPLIT);
+			try {
+				Tarea t = new Tarea(
+						Integer.parseInt(task[0]),
+						task[1], 
+						task[2],
+						Integer.parseInt(task[3]),
+						Integer.parseInt(task[4]),
+						this.requisitos.get(Integer.parseInt(task[5])),
+						this.miembros.get(Integer.parseInt(task[6])));
+				this.tareas.put(t.getId(), t);
+			}catch(Exception ex) {
+				throw new PersistenceException("Las tareas guardadas son inconcistentes",ex);
+			}			
+		}
+		br.close();
+	}
+	
+	private void cargaTareasSprint(BufferedReader br) throws IOException, PersistenceException {
+		String line = "";
+		while((line = br.readLine()) != null) {
+			try {
+				String [] as = line.split(SPLIT);
+				int idt = Integer.parseInt(as[0]);
+				int ids = Integer.parseInt(as[1]);
+				SprintStatus ss = SprintStatus.valueOf(as[2]);
+				Tarea tt = tareas.get(idt);
+				SprintBacklog sb = sprints.get(ids);
+				if (sb == null) {
+					ProductBacklog pb = ProductBacklog.getInstance();
+					pb.add(tt);
+				}else {
+					sb.add(tt);
+					sb.moverTarea(tt, SprintStatus.PorHacer, ss);
+				}
+			
+			}catch(Exception ex) {
+				throw new PersistenceException("Error fatal en la carga de tareas en sprints",ex);
+			}
+		}
+		br.close();
+	}
+
+	private void cargaSprints(BufferedReader br) throws IOException, PersistenceException {
+		String line = "";
+		while((line = br.readLine()) != null) {
+			try {
+				String[] sprint = line.split(SPLIT);
+				Calendar cal = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			
+				cal.setTime(sdf.parse(sprint[1]));
+			
+				SprintBacklog s = new SprintBacklog(Integer.parseInt(sprint[0]),cal);
+				this.sprints.put(s.getId(), s);
+			}catch (Exception ex) {
+				throw new PersistenceException("Los sprints guardados son inconcistentes", ex);
+			}
+			
+		}
+		br.close();
+	}
+
+	private void cargaMiembros(BufferedReader br) throws PersistenceException, IOException {
+		String line = "";
+		while((line = br.readLine()) != null) {
+			try {
+				String[] miembro = line.split(SPLIT);
+				
+				MiembroEquipo r = new MiembroEquipo(Integer.parseInt(miembro[0]),miembro[1],miembro[2]);
+				this.miembros.put(r.getId(), r);
+			}catch(Exception ex) {
+				throw new PersistenceException("Los miembros almacenados son inconcistentes",ex);
+			}
+		}
+		br.close();
+	}
+	
+	private void cargaRequisitos(BufferedReader br) throws PersistenceException, IOException {
+		String line = "";
+		while((line = br.readLine()) != null) {
+			try {
+				String[] miembro = line.split(SPLIT);
+				
+				MiembroEquipo r = new MiembroEquipo(Integer.parseInt(miembro[0]),miembro[1],miembro[2]);
+				this.miembros.put(r.getId(), r);
+			}catch(Exception ex) {
+				throw new PersistenceException("Los miembros almacenados son inconcistentes",ex);
+			}
+		}
+		br.close();
 	}
 
 	@Override
@@ -49,20 +168,12 @@ public class CSVPersistence implements Persistence {
 
 	@Override
 	public Tarea loadTarea(int idt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void loadProductBacklog() {
-		// TODO Auto-generated method stub
-
+		return tareas.get(idt);
 	}
 
 	@Override
 	public SprintBacklog loadSprint(int ids) {
-		// TODO Auto-generated method stub
-		return null;
+		return sprints.get(ids);
 	}
 
 	@Override
@@ -73,20 +184,51 @@ public class CSVPersistence implements Persistence {
 
 	@Override
 	public MiembroEquipo loadMiembro(int idm) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.miembros.get(idm);
 	}
 
 	@Override
 	public Requisito loadRequisito(int idr) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.requisitos.get(idr);
 	}
 
 	@Override
 	public void save() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private int newID(Set<Integer> integer) {
+		int max=0;
+		for (Integer it : integer) {
+			if (it.intValue() > max)
+				max = it.intValue();
+		}
+		return max+1;
+	}
+
+	@Override
+	public int newIdt() {
+		this.idt++;
+		return idt;
+	}
+
+	@Override
+	public int newIds() {
+		this.ids++;
+		return ids;
+	}
+
+	@Override
+	public int newIdm() {
+		this.idm++;
+		return this.idm;
+	}
+
+	@Override
+	public int newIdr() {
+		this.idr++;
+		return idr;
 	}
 
 }

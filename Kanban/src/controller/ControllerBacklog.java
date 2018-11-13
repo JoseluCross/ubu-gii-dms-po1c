@@ -1,4 +1,6 @@
 package controller;
+import java.util.Calendar;
+
 import model.*;
 
 public class ControllerBacklog {
@@ -34,8 +36,11 @@ public class ControllerBacklog {
 		return sprint.moverTarea(tarea, desde, hacia);
 	}
 	
-	public SprintBacklog crearSprint() {
-		return new SprintBacklog();
+	public SprintBacklog crearSprint(int ids, Calendar cal) {
+		if (cal == null) {
+			return new SprintBacklog(ids);
+		}
+		return new SprintBacklog(ids, cal);
 	}
 	
 	public boolean moverEntreSprint(SprintBacklog sprint1, SprintBacklog sprint2, Tarea tarea, SprintStatus estoy) {

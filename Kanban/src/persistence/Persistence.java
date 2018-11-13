@@ -4,14 +4,17 @@ import model.*;
 
 public interface Persistence {
 	
-	public void start() throws PersistenceException;
-	public void save() throws PersistenceException;
-	public void config(Map<String,String> options);
-	public Tarea loadTarea(int idt) throws PersistenceException;
-	public void loadProductBacklog() throws PersistenceException;
-	public SprintBacklog loadSprint(int ids) throws PersistenceException;
-	public List<SprintBacklog> loadSprints(boolean close) throws PersistenceException;
-	public MiembroEquipo loadMiembro(int idm) throws PersistenceException;
-	public Requisito loadRequisito(int idr) throws PersistenceException;
+	void start() throws PersistenceException;
+	void save() throws PersistenceException;
+	void config(Map<String,String> options);
+	Tarea loadTarea(int idt) throws PersistenceException;
+	int newIdt();
+	SprintBacklog loadSprint(int ids) throws PersistenceException;
+	List<SprintBacklog> loadSprints(boolean close) throws PersistenceException;
+	int newIds();
+	MiembroEquipo loadMiembro(int idm) throws PersistenceException;
+	int newIdm();
+	Requisito loadRequisito(int idr) throws PersistenceException;
+	int newIdr();
 
 }
