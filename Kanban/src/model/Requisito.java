@@ -1,13 +1,13 @@
 package model;
 
 public abstract class Requisito {
-	private String id;
+	private String idr;
 	private String nombre;
 	private String descripcion;
 	private int prioridad;
 	
 	public Requisito(String id, String nombre, String descripcion, int prioridad) {
-		this.id = id;
+		this.idr = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.prioridad = prioridad;
@@ -15,7 +15,7 @@ public abstract class Requisito {
 	
 	//Getters
 	public String getId() {
-		return this.id;
+		return this.idr;
 	}
 	
 	public String getNombre() {

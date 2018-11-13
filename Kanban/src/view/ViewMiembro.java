@@ -1,7 +1,6 @@
 package view;
 import model.*;
 
-public interface ViewMiembro {
+public interface ViewMiembro extends Mostrable<MiembroEquipo>{
 	public boolean crearMiembro();
-	public void mostrar(MiembroEquipo miembro);
 }

@@ -32,7 +32,7 @@ public class CliTarea implements ViewTarea {
 
 	@Override
 	public void mostrar(Tarea tarea) {
-		System.out.println("Identificador: " + tarea.getID());
+		System.out.println("Identificador: " + tarea.getId());
 		System.out.println("Título: " + tarea.getTitulo());
 		System.out.println("Descripción: " + tarea.getDescripcion());
 		System.out.println("Coste: " + tarea.getCoste());

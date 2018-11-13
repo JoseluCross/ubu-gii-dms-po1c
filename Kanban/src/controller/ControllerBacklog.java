@@ -2,6 +2,19 @@ package controller;
 import model.*;
 
 public class ControllerBacklog {
+	
+	private static ControllerBacklog instance;
+	
+	private ControllerBacklog() {
+		
+	}
+	
+	public static ControllerBacklog getInstance() {
+		if (instance == null)
+			instance = new ControllerBacklog();
+		return instance;
+	}
+	
 	public boolean tareaSprint(SprintBacklog sprint, Tarea tarea) {
 		ProductBacklog prod = ProductBacklog.getInstance();
 		if(!prod.getLista().contains(tarea)) {

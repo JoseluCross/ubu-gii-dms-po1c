@@ -14,8 +14,8 @@ public class ProductBacklog extends Backlog {
 	
 	private ProductBacklog() {
 		super();
-		super.log = new LinkedList<Collection<Tarea>>();
-		super.log.add(new LinkedList<Tarea>());
+		super.log = new ArrayList<Set<Tarea>>(1);
+		super.log.add(new HashSet<Tarea>());
 	}
 	
 	public boolean add(Tarea tarea) {

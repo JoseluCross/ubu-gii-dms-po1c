@@ -31,7 +31,7 @@ public class Tarea {
 	
 	/*Getters*/
 	
-	public int getID() {
+	public int getId() {
 		return this.idt;
 	}
 	
@@ -90,7 +90,7 @@ public class Tarea {
 	@Override
 	public boolean equals(Object o) {
 		if(o instanceof Tarea)
-			return ((Tarea)o).getID()==this.idt;
+			return ((Tarea)o).getId()==this.idt;
 		return false;
 	}
 	

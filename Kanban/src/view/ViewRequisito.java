@@ -1,7 +1,6 @@
 package view;
 import model.*;
 
-public interface ViewRequisito {
+public interface ViewRequisito extends Mostrable<Requisito>{
 	public boolean crearRequisito();
-	public void mostrar(Requisito requisito);
 }

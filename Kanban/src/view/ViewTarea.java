@@ -1,8 +1,7 @@
 package view;
 import model.*;
 
-public interface ViewTarea {
+public interface ViewTarea extends Mostrable<Tarea>{
 	public boolean crearTarea();
 	public boolean modificarTarea(Tarea tarea);
-	public void mostrar(Tarea tarea);
 }
