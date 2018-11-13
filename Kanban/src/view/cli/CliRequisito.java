@@ -26,8 +26,11 @@ public class CliRequisito implements ViewRequisito {
 
 	@Override
 	public void mostrar(Requisito requisito) {
-		// TODO Auto-generated method stub
-
+		System.out.println("REQUISITO" + requisito.getId() + "{");
+		System.out.println("Identificador: " + requisito.getId());
+		System.out.println("Nombre: " + requisito.getNombre());
+		System.out.println("Descripción: " + requisito.getDescripcion());
+		System.out.println("Prioridad: " + requisito.getPrioridad());
+		System.out.println("}");
 	}
-
 }

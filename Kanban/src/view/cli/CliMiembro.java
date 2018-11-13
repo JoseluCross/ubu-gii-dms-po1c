@@ -26,8 +26,11 @@ public class CliMiembro implements ViewMiembro {
 
 	@Override
 	public void mostrar(MiembroEquipo miembro) {
-		// TODO Auto-generated method stub
-
+		System.out.println("MIEMBRO " + miembro.getId() +"{");
+		System.out.println("Identificador: " + miembro.getId());
+		System.out.println("Nombre: " + miembro.getNombre());
+		System.out.println("Puesto: " + miembro.getPuesto());
+		System.out.println("}");
 	}
 
 }

@@ -2,8 +2,9 @@
 
 package view.cli;
 
-import model.Backlog;
-import model.SprintBacklog;
+import java.util.Set;
+
+import model.*;
 import view.ViewBacklog;
 
 public class CliBacklog implements ViewBacklog {
@@ -23,8 +24,7 @@ public class CliBacklog implements ViewBacklog {
 	
 	@Override
 	public void nuevoSprint() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -35,8 +35,25 @@ public class CliBacklog implements ViewBacklog {
 
 	@Override
 	public void mostrar(Backlog log) {
-		// TODO Auto-generated method stub
-
+		CliTarea ct = CliTarea.getInstance();
+		SprintStatus[] spt = {SprintStatus.PorHacer,SprintStatus.Haciendo,SprintStatus.Validacion,SprintStatus.Completada};
+		if(log instanceof ProductBacklog) {
+			System.out.println("PRODUCTBACKLOG{");
+		}else {
+			System.out.println("SPRINTBACKLOG " + ((SprintBacklog)log).getNombre());
+		}
+		int i = 0;
+		for (Set<Tarea> st : log.getLista()) {
+			if(log instanceof SprintBacklog) {
+				System.out.println(spt[i]);
+			}
+			System.out.println("IDENTIFICADOR\t\tTÍTULO");
+			for( Tarea t : st) {
+				ct.mostrarReducido(t);
+			}
+			i++;
+		}
+			
 	}
 
 	@Override
