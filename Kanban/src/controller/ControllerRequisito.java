@@ -4,18 +4,29 @@ import java.util.Collection;
 
 import model.*;
 
-public class ControlerRequisito extends AbstractController<Requisito> {
+public class ControllerRequisito extends AbstractController<Requisito> {
 
+	private static ControllerRequisito instance;
+	
+	private ControllerRequisito() {
+		
+	}
+	
+	public static ControllerRequisito getInstance() {
+		if (instance == null)
+			instance = new ControllerRequisito();
+		return instance;
+	}
+	
+	
 	@Override
-	public Collection<E> getList() {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<Requisito> getList() {
+		return persist.loadRequisitos(); 
 	}
 
 	@Override
-	public E getElement(int index) {
-		// TODO Auto-generated method stub
-		return null;
+	public Requisito getElement(int index) {
+		return persist.loadRequisito(index);
 	}
 
 }

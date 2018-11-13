@@ -20,14 +20,12 @@ public class ControllerMiembro extends AbstractController<MiembroEquipo> {
 	
 	@Override
 	public Collection<MiembroEquipo> getList() {
-		// TODO Auto-generated method stub
-		return null;
+		return persist.loadMiembros();
 	}
 
 	@Override
 	public MiembroEquipo getElement(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return persist.loadMiembro(index);
 	}
 
 }
