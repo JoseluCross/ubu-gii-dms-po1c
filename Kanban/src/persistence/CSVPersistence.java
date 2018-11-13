@@ -144,7 +144,7 @@ public class CSVPersistence implements Persistence {
 			
 				cal.setTime(sdf.parse(sprint[1]));
 			
-				SprintBacklog s = new SprintBacklog(Integer.parseInt(sprint[0]),cal);
+				SprintBacklog s = new SprintBacklog(Integer.parseInt(sprint[0]),cal, sprint[2]);
 				this.sprints.put(s.getId(), s);
 			}catch (Exception ex) {
 				throw new PersistenceException("Los sprints guardados son inconcistentes", ex);

@@ -36,11 +36,11 @@ public class ControllerBacklog {
 		return sprint.moverTarea(tarea, desde, hacia);
 	}
 	
-	public SprintBacklog crearSprint(int ids, Calendar cal) {
+	public SprintBacklog crearSprint(int ids, String name, Calendar cal) {
 		if (cal == null) {
-			return new SprintBacklog(ids);
+			return new SprintBacklog(ids,name);
 		}
-		return new SprintBacklog(ids, cal);
+		return new SprintBacklog(ids, cal, name);
 	}
 	
 	public boolean moverEntreSprint(SprintBacklog sprint1, SprintBacklog sprint2, Tarea tarea, SprintStatus estoy) {
