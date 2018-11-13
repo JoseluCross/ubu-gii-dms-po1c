@@ -5,7 +5,7 @@ package view.cli;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -112,13 +112,14 @@ public class CliBacklog implements ViewBacklog {
 	@Override
 	public boolean moverSprint() {
 		Scanner sc = new Scanner(System.in);
-		int ids,idestado,idestfinal,idtarea;
+		int ids,idestado=0,idestfinal=0,idtarea;
 		boolean flag = true;
-		List<SprintBacklog> listlog = null;
+		ControllerBacklog cb = ControllerBacklog.getInstance();
+		Collection<SprintBacklog> listlog = cb.getList();
 		this.mostrarReducido(listlog);
 		System.out.println("Introduzca el identificador del Sprint del cuál desea mover un tarea: ");
 		ids = sc.nextInt();
-		while(true) {
+		while(flag) {
 			System.out.println("Introduzca el identificador de la lista en la que está la tarea que quiere mover: PorHacer[0], Haciendo[1], Validación[2], Completada[3]");
 			idestado = sc.nextInt();
 			if (idestado >= 0 && idestado<=3) {
@@ -128,10 +129,10 @@ public class CliBacklog implements ViewBacklog {
 			}
 		}
 		flag = true;
-		this.mostrar(listlog.get(ids));
+		this.mostrar(cb.getElement(ids));
 		System.out.println("Introduzca el identificador de la tarea que quiere mover: ");
 		idtarea = sc.nextInt();
-		while(true) {
+		while(flag) {
 			System.out.println("Introduzca el identificador de la lista a donde quiere mover la tarea seleccionada: PorHacer[0], Haciendo[1], Validación[2], Completada[3]");
 			idestfinal = sc.nextInt();
 			if (idestfinal >= 0 && idestfinal<=3) {
@@ -140,13 +141,12 @@ public class CliBacklog implements ViewBacklog {
 				System.out.println("Ha introducido mal el identifiacador del estado");
 			}
 		}
-		ControllerBacklog cb = ControllerBacklog.getInstance();
 		sc.close();
 		return cb.moverEnSprint(ids, SprintStatus.values()[idestado], SprintStatus.values()[idestfinal], idtarea);
 	}
 
 	@Override
-	public void mostrarReducido(List<SprintBacklog> sp) {
+	public void mostrarReducido(Collection<SprintBacklog> sp) {
 		System.out.println("IDENTIFICADOR\t\tNOMBRE");
 		for (SprintBacklog sb : sp) {
 			if (sb.getEnd().after(Calendar.getInstance())) {
