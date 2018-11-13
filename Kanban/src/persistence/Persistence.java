@@ -7,15 +7,19 @@ public interface Persistence {
 	void start() throws PersistenceException;
 	void save() throws PersistenceException;
 	void config(Map<String,String> options);
-	Tarea loadTarea(int idt) throws PersistenceException;
+	Tarea loadTarea(int idt);
 	int newIdt();
-	SprintBacklog loadSprint(int ids) throws PersistenceException;
-	List<SprintBacklog> loadSprints(boolean close) throws PersistenceException;
+	SprintBacklog loadSprint(int ids);
 	int newIds();
-	MiembroEquipo loadMiembro(int idm) throws PersistenceException;
+	MiembroEquipo loadMiembro(int idm);
 	int newIdm();
-	Requisito loadRequisito(int idr) throws PersistenceException;
+	Requisito loadRequisito(int idr);
 	int newIdr();
+	
+	Collection<SprintBacklog> loadSprints();
+	Collection<Tarea> loadTareas();
+	Collection<MiembroEquipo> loadMiembros();
+	Collection<Requisito> loadRequisitos();
 	
 	void nuevaTarea(Tarea t);
 	void nuevoMiembro(MiembroEquipo m);

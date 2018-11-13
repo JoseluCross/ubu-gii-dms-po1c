@@ -210,12 +210,6 @@ public class CSVPersistence implements Persistence {
 	}
 
 	@Override
-	public List<SprintBacklog> loadSprints(boolean close) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public MiembroEquipo loadMiembro(int idm) {
 		return this.miembros.get(idm);
 	}
@@ -282,6 +276,26 @@ public class CSVPersistence implements Persistence {
 	@Override
 	public void nuevoSprint(SprintBacklog s) {
 		this.sprints.put(s.getId(), s);
+	}
+
+	@Override
+	public Collection<SprintBacklog> loadSprints() {
+		return this.sprints.values();
+	}
+
+	@Override
+	public Collection<Tarea> loadTareas() {
+		return this.tareas.values();
+	}
+
+	@Override
+	public Collection<MiembroEquipo> loadMiembros() {
+		return this.miembros.values();
+	}
+
+	@Override
+	public Collection<Requisito> loadRequisitos() {
+		return this.requisitos.values();
 	}
 
 }

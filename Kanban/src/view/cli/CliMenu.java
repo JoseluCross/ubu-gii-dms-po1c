@@ -1,7 +1,5 @@
 package view.cli;
 
-import persistence.Persistence;
-
 public class CliMenu {
 	
 	private static CliMenu instance;
