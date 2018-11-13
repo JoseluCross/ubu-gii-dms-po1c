@@ -19,7 +19,7 @@ public class ControllerTarea extends AbstractController<Tarea>{
 	
 	public boolean nuevaTarea(String titulo, String descripcion, int coste, int beneficio, int requisito, int miembro) {
 		try {
-			int index = persist.newIds();
+			int index = persist.newIdt();
 			Requisito r = persist.loadRequisito(requisito);
 			MiembroEquipo m = persist.loadMiembro(miembro);
 			Tarea t = new Tarea(index, titulo, descripcion, coste, beneficio, r, m);

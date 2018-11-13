@@ -49,6 +49,7 @@ public class CSVPersistence implements Persistence {
 		if (folder == null)
 			throw new PersistenceException("No se ha configurado el campo \"folder\"");
 		BufferedReader br = null;
+		FileReader fr = null;
 		String superpath = folder+File.separator; 
 		String path = "";
 		boolean repeat = true;
@@ -56,28 +57,38 @@ public class CSVPersistence implements Persistence {
 			try {
 				/*Carga sprints*/
 				path = superpath+SPRINTFILE;
-				br = new BufferedReader(new FileReader(path));
+				fr = new FileReader(path);
+				br = new BufferedReader(fr);
 				cargaSprints(br);
+				fr.close();
 				this.ids = this.newID(sprints.keySet());
 				/*Carga de requisitos*/
 				path = superpath+REQUISITOFILE;
-				br = new BufferedReader(new FileReader(path));
+				fr = new FileReader(path);
+				br = new BufferedReader(fr);
 				cargaRequisitos(br);
+				fr.close();
 				this.idr = this.newID(requisitos.keySet());
 				/*Carga de miembros*/
 				path = superpath+MIEMBROFILE;
-				br = new BufferedReader(new FileReader(path));
+				fr = new FileReader(path);
+				br = new BufferedReader(fr);
 				cargaMiembros(br);
+				fr.close();
 				this.idm = this.newID(miembros.keySet());
 				/*Carga de tareas*/
 				path = superpath+TAREAFILE;
-				br = new BufferedReader(new FileReader(path));
+				fr = new FileReader(path);
+				br = new BufferedReader(fr);
 				cargaTareas(br);
+				fr.close();
 				this.idt = this.newID(tareas.keySet());
 				/*Carga tareas en los sprints*/
 				path = superpath+SPRINTTAREA;
-				br = new BufferedReader(new FileReader(path));
+				fr = new FileReader(path);
+				br = new BufferedReader(fr);
 				cargaTareasSprint(br);
+				fr.close();
 				repeat = false;
 				
 			}catch(FileNotFoundException ex) {
@@ -235,38 +246,51 @@ public class CSVPersistence implements Persistence {
 		if (folder == null)
 			throw new PersistenceException("No se ha configurado el campo \"folder\"");
 		BufferedWriter bw = null;
+		FileWriter fw = null;
 		String superpath = folder+File.separator; 
 		String path = "";
 		try {
 			/*Guarda sprints*/
 			path = superpath+SPRINTFILE;
-			bw = new BufferedWriter(new FileWriter(path+".new"));
+			fw = new FileWriter(path+".new");
+			bw = new BufferedWriter(fw);
 			guardaSprint(bw);
+			fw.close();
 			/*Guarda de requisitos*/
 			path = superpath+REQUISITOFILE;
-			bw = new BufferedWriter(new FileWriter(path+".new"));
+			fw = new FileWriter(path+".new");
+			bw = new BufferedWriter(fw);
 			guardaRequisitos(bw);
-			this.idr = this.newID(requisitos.keySet());
+			fw.close();
 			/*Guarda de miembros*/
 			path = superpath+MIEMBROFILE;
-			bw = new BufferedWriter(new FileWriter(path+".new"));
+			fw = new FileWriter(path+".new");
+			bw = new BufferedWriter(fw);
 			guardaMiembros(bw);
-			this.idm = this.newID(miembros.keySet());
+			fw.close();
 			/*Guarda de tareas*/
 			path = superpath+TAREAFILE;
-			bw = new BufferedWriter(new FileWriter(path+".new"));
+			fw = new FileWriter(path+".new");
+			bw = new BufferedWriter(fw);
 			guardaTareas(bw);
-			this.idt = this.newID(tareas.keySet());
+			fw.close();
 			/*Guarda tareas en los sprints*/
 			path = superpath+SPRINTTAREA;
-			bw = new BufferedWriter(new FileWriter(path+".new"));
+			fw = new FileWriter(path+".new");
+			bw = new BufferedWriter(fw);
 			guardaTareasSprint(bw);
+			fw.close();
 			
 		}catch(IOException ex) {
 			throw new PersistenceException("El fichero "+path+" no se puede escribir",ex);
 		}
 		/*Al crearse bien se copia la versión anterior a .old*/
-		String[] names = {MIEMBROFILE,REQUISITOFILE,SPRINTFILE,TAREAFILE,SPRINTFILE};
+		String[] names = {
+				superpath+File.separator+MIEMBROFILE,
+				superpath+File.separator+REQUISITOFILE,
+				superpath+File.separator+SPRINTFILE,
+				superpath+File.separator+TAREAFILE,
+				superpath+File.separator+SPRINTFILE};
 		for (String name : names) {
 			File f = new File(name);
 			File f2 = new File(name+".old");
