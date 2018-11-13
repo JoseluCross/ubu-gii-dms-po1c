@@ -16,5 +16,10 @@ public interface Persistence {
 	int newIdm();
 	Requisito loadRequisito(int idr) throws PersistenceException;
 	int newIdr();
+	
+	void nuevaTarea(Tarea t);
+	void nuevoMiembro(MiembroEquipo m);
+	void nuevoRequisito(Requisito r);
+	void nuevoSprint(SprintBacklog s);
 
 }

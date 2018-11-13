@@ -47,11 +47,34 @@ public class CSVPersistence implements Persistence {
 		if (folder == null)
 			throw new PersistenceException("No se ha configurado el campo \"folder\"");
 		BufferedReader br = null;
+		String superpath = folder+File.separator; 
 		String path = "";
 		try {
-			path = folder+File.separator+TAREAFILE;
+			/*Carga sprints*/
+			path = superpath+SPRINTFILE;
+			br = new BufferedReader(new FileReader(path));
+			cargaSprints(br);
+			this.idm = this.newID(sprints.keySet());
+			/*Carga de requisitos*/
+			path = superpath+REQUISITOFILE;
+			br = new BufferedReader(new FileReader(path));
+			cargaRequisitos(br);
+			this.idr = this.newID(requisitos.keySet());
+			/*Carga de miembros*/
+			path = superpath+MIEMBROFILE;
+			br = new BufferedReader(new FileReader(path));
+			cargaMiembros(br);
+			this.idm = this.newID(miembros.keySet());
+			/*Carga de tareas*/
+			path = superpath+TAREAFILE;
 			br = new BufferedReader(new FileReader(path));
 			cargaTareas(br);
+			this.idt = this.newID(tareas.keySet());
+			/*Carga tareas en los sprints*/
+			path = superpath+SPRINTTAREA;
+			br = new BufferedReader(new FileReader(path));
+			cargaTareasSprint(br);
+			
 		}catch(FileNotFoundException ex) {
 			File f = new File(path);
 			f.getParentFile().mkdirs();
@@ -150,10 +173,20 @@ public class CSVPersistence implements Persistence {
 		String line = "";
 		while((line = br.readLine()) != null) {
 			try {
-				String[] miembro = line.split(SPLIT);
-				
-				MiembroEquipo r = new MiembroEquipo(Integer.parseInt(miembro[0]),miembro[1],miembro[2]);
-				this.miembros.put(r.getId(), r);
+				String[] requisito = line.split(SPLIT);
+				Requisito r;
+				int type = Integer.parseInt(requisito[0]);
+				switch(type) {
+				case 0:
+					r = new HistoriaUsuario(Integer.parseInt(requisito[1]), requisito[2], requisito[3], Integer.parseInt(requisito[4]), requisito[5]);
+					break;
+				case 1:
+					r = new HistoriaUsuario(Integer.parseInt(requisito[1]), requisito[2], requisito[3], Integer.parseInt(requisito[4]), requisito[5]);
+					break;
+				default:
+					throw new PersistenceException();
+				}		
+				this.requisitos.put(r.getId(), r);
 			}catch(Exception ex) {
 				throw new PersistenceException("Los miembros almacenados son inconcistentes",ex);
 			}
@@ -204,7 +237,7 @@ public class CSVPersistence implements Persistence {
 			if (it.intValue() > max)
 				max = it.intValue();
 		}
-		return max+1;
+		return max;
 	}
 
 	@Override
@@ -229,6 +262,26 @@ public class CSVPersistence implements Persistence {
 	public int newIdr() {
 		this.idr++;
 		return idr;
+	}
+
+	@Override
+	public void nuevaTarea(Tarea t) {
+		this.tareas.put(t.getId(), t);	
+	}
+
+	@Override
+	public void nuevoMiembro(MiembroEquipo m) {
+		this.miembros.put(m.getId(), m);
+	}
+
+	@Override
+	public void nuevoRequisito(Requisito r) {
+		this.requisitos.put(r.getId(), r);
+	}
+
+	@Override
+	public void nuevoSprint(SprintBacklog s) {
+		this.sprints.put(s.getId(), s);
 	}
 
 }
