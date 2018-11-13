@@ -32,6 +32,7 @@ public class CliTarea implements ViewTarea {
 
 	@Override
 	public void mostrar(Tarea tarea) {
+		System.out.println("CLASE" + tarea.getId() +"{");
 		System.out.println("Identificador: " + tarea.getId());
 		System.out.println("Título: " + tarea.getTitulo());
 		System.out.println("Descripción: " + tarea.getDescripcion());
@@ -41,6 +42,12 @@ public class CliTarea implements ViewTarea {
 		req.mostrar(tarea.getRequisito());
 		CliMiembro mie = CliMiembro.getInstance();
 		mie.mostrar(tarea.getMiembroEquipo());
+		System.out.println("}");
+	}
+	
+	@Override
+	public void mostrarReducido(Tarea tarea) {
+		System.out.println("Identificador: " + tarea.getId() + "\tTítulo: " + tarea.getTitulo());
 	}
 
 }

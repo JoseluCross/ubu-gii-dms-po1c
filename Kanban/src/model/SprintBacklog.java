@@ -7,9 +7,10 @@ public class SprintBacklog extends Backlog {
 	private Calendar start;
 	private Calendar end;
 	private int ids;
+	private String nombre;
 	private static int DAYS=30;
 	
-	public SprintBacklog(int ids, Calendar start) {
+	public SprintBacklog(int ids, Calendar start, String nombre) {
 		super();
 		this.ids = ids;
 		super.log = new ArrayList<Set<Tarea>>(4);
@@ -25,10 +26,11 @@ public class SprintBacklog extends Backlog {
 		this.start = start;
 		this.end = (Calendar) start.clone();
 		this.end.add(Calendar.DATE,DAYS);
+		this.nombre = nombre;
 	}
 	
-	public SprintBacklog(int ids) {
-		this(ids, Calendar.getInstance());
+	public SprintBacklog(int ids, String nombre) {
+		this(ids, Calendar.getInstance(), nombre);
 	}
 	
 	public boolean add(Tarea tarea) {
@@ -44,7 +46,7 @@ public class SprintBacklog extends Backlog {
 		return true;
 	}
 	
-	public Collection<Tarea> getLista(SprintStatus opc){
+	public Set<Tarea> getLista(SprintStatus opc){
 		return super.log.get(opc.getNum());
 	}
 	
@@ -60,5 +62,7 @@ public class SprintBacklog extends Backlog {
 		return this.end;
 	}
 	
-	
+	public String getNombre() {
+		return this.nombre;
+	}
 }
