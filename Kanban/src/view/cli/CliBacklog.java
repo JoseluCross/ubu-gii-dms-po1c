@@ -114,8 +114,8 @@ public class CliBacklog implements ViewBacklog {
 		Scanner sc = new Scanner(System.in);
 		int ids,idestado,idestfinal,idtarea;
 		boolean flag = true;
-		
-		//MostrarReducido
+		List<SprintBacklog> listlog = null;
+		this.mostrarReducido(listlog);
 		System.out.println("Introduzca el identificador del Sprint del cuál desea mover un tarea: ");
 		ids = sc.nextInt();
 		while(true) {
@@ -128,7 +128,7 @@ public class CliBacklog implements ViewBacklog {
 			}
 		}
 		flag = true;
-		this.mostrar();
+		this.mostrar(listlog.get(ids));
 		System.out.println("Introduzca el identificador de la tarea que quiere mover: ");
 		idtarea = sc.nextInt();
 		while(true) {
