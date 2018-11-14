@@ -5,6 +5,8 @@ import java.util.*;
 import com.ubu.lsi.kanban.model.*;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 
 public class CSVPersistence implements Persistence {
@@ -281,6 +283,7 @@ public class CSVPersistence implements Persistence {
 			guardaTareasSprint(bw);
 			fw.close();
 			
+			bw.close();
 		}catch(IOException ex) {
 			throw new PersistenceException("El fichero "+path+" no se puede escribir",ex);
 		}
@@ -294,13 +297,21 @@ public class CSVPersistence implements Persistence {
 		for (String name : names) {
 			File f = new File(name);
 			File f2 = new File(name+".old");
-			f.renameTo(f2);
+			try {
+				Files.move(f.toPath(), f2.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException ex) {
+				throw new PersistenceException("El fichero "+f.toPath()+" no se puede escribir en "+f2.toPath(),ex);
+			}
 		}
 		/*Los csv.new pasan a llamarse .csv*/
 		for (String name : names) {
 			File f = new File(name+".new");
 			File f2 = new File(name);
-			f.renameTo(f2);
+			try {
+				Files.move(f.toPath(), f2.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException ex) {
+				throw new PersistenceException("El fichero "+f.toPath()+" no se puede escribir en "+f2.toPath(),ex);
+			}
 		}
 		
 	}
