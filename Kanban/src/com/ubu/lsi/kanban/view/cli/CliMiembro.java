@@ -3,29 +3,22 @@ package com.ubu.lsi.kanban.view.cli;
 import java.util.Collection;
 import java.util.Scanner;
 
-import com.ubu.lsi.kanban.controller.ControllerMiembro;
+import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.MiembroEquipo;
 import com.ubu.lsi.kanban.view.ViewMiembro;
 
 public class CliMiembro implements ViewMiembro {
 
-	private static CliMiembro instance;
+	private ControllerFactory cf;
 	
-	public static CliMiembro getInstance() {
-		if(instance == null) {
-			instance = new CliMiembro();
-		}
-		return instance;
-	}
-	
-	private CliMiembro() {
-		// TODO Auto-generated constructor stub
+	protected CliMiembro(ControllerFactory cf) {
+		this.cf = cf;
 	}
 	
 	@Override
 	public boolean crearMiembro() {
 		Scanner sc = CliMenu.sc;
-		ControllerMiembro cm = ControllerMiembro.getInstance();
+		ControllerMiembro cm = cf.getControllerMiembro();
 		String nombre, puesto;
 		System.out.print("Introduzca el nombre del nuevo Miembro: ");
 		nombre = sc.nextLine();

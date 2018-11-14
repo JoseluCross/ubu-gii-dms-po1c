@@ -9,23 +9,19 @@ import java.util.Collection;
 import java.util.Scanner;
 import java.util.Set;
 
-import com.ubu.lsi.kanban.controller.ControllerBacklog;
+import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.*;
 import com.ubu.lsi.kanban.view.ViewBacklog;
+import com.ubu.lsi.kanban.view.ViewTarea;
 
 public class CliBacklog implements ViewBacklog {
 
-	private static CliBacklog instance;
+	private ControllerFactory cf;
+	private ViewTarea vt;
 	
-	public static CliBacklog getInstance() {
-		if(instance == null) {
-			instance = new CliBacklog();
-		}
-		return instance;
-	}
-	
-	private CliBacklog() {
-		// TODO Auto-generated constructor stub
+	protected CliBacklog(ControllerFactory cf, ViewTarea vt) {
+		this.cf = cf;
+		this.vt = vt;
 	}
 	
 	@Override
@@ -58,14 +54,13 @@ public class CliBacklog implements ViewBacklog {
 		}
 		System.out.print("Introduzca el nombre del Sprint: ");
 		nom = sc.nextLine();
-		ControllerBacklog cb = ControllerBacklog.getInstance();
+		ControllerBacklog cb = cf.getControllerBacklog();
 		SprintBacklog sp = cb.crearSprint(nom, ini);
 		this.mostrar(sp);
 	}
 
 	@Override
 	public void mostrar(Backlog log) {
-		CliTarea ct = CliTarea.getInstance();
 		SprintStatus[] spt = {SprintStatus.PorHacer,SprintStatus.Haciendo,SprintStatus.Validacion,SprintStatus.Completada};
 		if(log instanceof ProductBacklog) {
 			System.out.println("PRODUCTBACKLOG");
@@ -79,7 +74,7 @@ public class CliBacklog implements ViewBacklog {
 			}
 			System.out.println("IDENTIFICADOR\tTÍTULO");
 			for( Tarea t : st) {
-				ct.mostrarReducido(t);
+				vt.mostrarReducido(t);
 			}
 			i++;
 		}
@@ -95,7 +90,7 @@ public class CliBacklog implements ViewBacklog {
 		System.out.print("Introduzca el número del identificador de la tarea que quiere mover al Sprint: ");
 		idt = sc.nextInt();
 		sc.nextLine();
-		ControllerBacklog cb = ControllerBacklog.getInstance();
+		ControllerBacklog cb = cf.getControllerBacklog();
 		Collection<SprintBacklog> col = cb.getList();
 		this.mostrarReducido(col);
 		System.out.print("Introduzca el identificador del Sprint al que quieres mover esta tarea: ");
@@ -109,7 +104,7 @@ public class CliBacklog implements ViewBacklog {
 		Scanner sc = CliMenu.sc;
 		int ids,idestado=0,idestfinal=0,idtarea;
 		boolean flag = true;
-		ControllerBacklog cb = ControllerBacklog.getInstance();
+		ControllerBacklog cb = cf.getControllerBacklog();
 		Collection<SprintBacklog> listlog = cb.getList();
 		this.mostrarReducido(listlog);
 		System.out.print("Introduzca el identificador del Sprint del cuál desea mover un tarea: ");

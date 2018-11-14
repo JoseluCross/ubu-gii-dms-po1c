@@ -3,7 +3,7 @@ package com.ubu.lsi.kanban.view.cli;
 import java.util.Collection;
 import java.util.Scanner;
 
-import com.ubu.lsi.kanban.controller.ControllerRequisito;
+import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.Defecto;
 import com.ubu.lsi.kanban.model.HistoriaUsuario;
 import com.ubu.lsi.kanban.model.Requisito;
@@ -11,23 +11,16 @@ import com.ubu.lsi.kanban.view.ViewRequisito;
 
 public class CliRequisito implements ViewRequisito {
 
-	private static CliRequisito instance;
+	private ControllerFactory cf;
 	
-	public static CliRequisito getInstance() {
-		if(instance == null) {
-			instance = new CliRequisito();
-		}
-		return instance;
-	}
-	
-	private CliRequisito() {
-		// TODO Auto-generated constructor stub
+	protected CliRequisito(ControllerFactory cf) {
+		this.cf = cf;
 	}
 	
 	@Override
 	public boolean crearRequisito() {
 		Scanner sc = CliMenu.sc;
-		ControllerRequisito cr = ControllerRequisito.getInstance();
+		ControllerRequisito cr = cf.getControllerRequisito();
 		String nombre,desc, of;
 		int prioridad, tipo=0;
 		boolean flag = true;

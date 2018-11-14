@@ -1,40 +1,10 @@
 package com.ubu.lsi.kanban.controller;
 
-import java.util.*;
-
 import com.ubu.lsi.kanban.model.*;
-import com.ubu.lsi.kanban.persistence.Persistence;
 
-public class ControllerMiembro extends AbstractController<MiembroEquipo> {
+public interface ControllerMiembro extends Controller<MiembroEquipo> {
 
-	private static ControllerMiembro instance;
+	boolean nuevoMiembro(String nombre, String puesto);
 	
-	private ControllerMiembro() {
-		
-	}
 	
-	public static ControllerMiembro getInstance() {
-		if (instance == null)
-			instance = new ControllerMiembro();
-		return instance;
-	}
-	
-	@Override
-	public Collection<MiembroEquipo> getList() {
-		return persist.loadMiembros();
-	}
-
-	@Override
-	public MiembroEquipo getElement(int index) {
-		return persist.loadMiembro(index);
-	}
-	
-	public boolean nuevoMiembro(String nombre, String puesto) {
-		if(nombre == null || puesto == null || nombre.isEmpty() || puesto.isEmpty())
-			return false;
-		MiembroEquipo mb = new MiembroEquipo(persist.newIdm(), nombre, puesto);
-		persist.nuevoMiembro(mb);
-		return true;
-	}
-
 }

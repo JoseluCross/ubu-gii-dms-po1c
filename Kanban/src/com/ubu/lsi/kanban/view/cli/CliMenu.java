@@ -2,33 +2,27 @@ package com.ubu.lsi.kanban.view.cli;
 
 import java.util.Scanner;
 
-import javax.swing.plaf.basic.BasicScrollPaneUI.VSBChangeListener;
-
-import com.ubu.lsi.kanban.controller.*;
+import com.ubu.lsi.kanban.controller.ControllerFactory;
 import com.ubu.lsi.kanban.model.*;
 import com.ubu.lsi.kanban.view.*;
 
 public class CliMenu implements Menu{
 	
-	private static CliMenu instance;
 	private ViewBacklog vb;
 	private ViewMiembro vm;
 	private ViewRequisito vr;
 	private ViewTarea vt;
 	protected static Scanner sc;
+	private ControllerFactory cf;
 	
-	public static CliMenu getInstance() {
-		if (instance == null)
-			instance = new CliMenu();
-		return instance;
-	}
-	
-	private CliMenu() {
-		vb = CliBacklog.getInstance();
-		vm = CliMiembro.getInstance();
-		vr = CliRequisito.getInstance();
-		vt = CliTarea.getInstance();
+	public CliMenu(ControllerFactory cf) {
+		
+		vm = new CliMiembro(cf);
+		vr = new CliRequisito(cf);
+		vt = new CliTarea(cf,vm,vr);
+		vb = new CliBacklog(cf,vt);
 		sc = new Scanner(System.in);
+		this.cf = cf;
 	}
 
 	@Override
@@ -36,7 +30,7 @@ public class CliMenu implements Menu{
 		int option = 0;
 		System.out.println("Bienvenido a KanBan, la mejor aplicación del mundo");
 		do {
-			//clean();
+			
 			System.out.println("\nElija una opción");
 			
 			System.out.println(" [1] Crear Tarea");
@@ -53,10 +47,10 @@ public class CliMenu implements Menu{
 			System.out.println(" [12] Ver Miembros");
 			System.out.println("----------------------------");
 			System.out.println(" [0] Cerrar aplicación");
+			
 			System.out.print("Tu opción: ");
 			option = sc.nextInt();
 			sc.nextLine();
-			//clean();
 			if(option != 0)
 				executeOption(option);
 			
@@ -85,10 +79,6 @@ public class CliMenu implements Menu{
 		return save;
 	}
 	
-	private void clean() {
-		while(sc.hasNext())
-			sc.next();
-	}
 	private void executeOption(int option) {
 		boolean ct;
 		switch(option) {
@@ -135,10 +125,10 @@ public class CliMenu implements Menu{
 				System.err.println("La tarea seleccionado no existe");
 			break;
 		case 11: //Ver requisitos
-			vr.mostrarRequisitos(ControllerRequisito.getInstance().getList());
+			vr.mostrarRequisitos(cf.getControllerRequisito().getList());
 			break;
 		case 12: //Ver miembros
-			vm.mostrarMiembros(ControllerMiembro.getInstance().getList());
+			vm.mostrarMiembros(cf.getControllerMiembro().getList());
 			break;
 		default:
 			System.out.println("Pedazo subnormal, te he dicho un número de 0 al 12");
@@ -148,21 +138,21 @@ public class CliMenu implements Menu{
 	private SprintBacklog seleccionarSprint() {
 		Scanner sc = CliMenu.sc;
 		int ids;
-		vb.mostrarReducido(ControllerBacklog.getInstance().getList());
+		vb.mostrarReducido(cf.getControllerBacklog().getList());
 		System.out.print("Elige que Sprint quieres ver: ");
 		ids = sc.nextInt();
 		sc.nextLine();
-		return ControllerBacklog.getInstance().getElement(ids);
+		return cf.getControllerBacklog().getElement(ids);
 	}
 	
 	private Tarea seleccionarTarea() {
 		Scanner sc = CliMenu.sc;
 		int ids;
-		vt.mostratTareas(ControllerTarea.getInstance().getList());
+		vt.mostratTareas(cf.getControllerTarea().getList());
 		System.out.print("Elige que Tarea quieres ver: ");
 		ids = sc.nextInt();
 		sc.nextLine();
-		return ControllerTarea.getInstance().getElement(ids);
+		return cf.getControllerTarea().getElement(ids);
 	}
 
 }

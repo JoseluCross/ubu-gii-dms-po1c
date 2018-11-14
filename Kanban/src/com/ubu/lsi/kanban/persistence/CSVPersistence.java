@@ -27,19 +27,12 @@ public class CSVPersistence implements Persistence {
 	private Map<Integer,Tarea> tareas;
 	private Map<Integer,SprintBacklog> sprints;
 	private Map<Integer,MiembroEquipo> miembros;
-	private static CSVPersistence instance;
 	
-	private CSVPersistence() {
+	protected CSVPersistence() {
 		this.requisitos = new HashMap<>();
 		this.tareas = new HashMap<>();
 		this.sprints = new HashMap<>();
 		this.miembros = new HashMap<>();
-	}
-	
-	public static CSVPersistence getInstance() {
-		if (instance == null)
-			instance = new CSVPersistence();
-		return instance;
 	}
 	
 	@Override

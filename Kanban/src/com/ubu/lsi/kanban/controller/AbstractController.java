@@ -2,13 +2,12 @@ package com.ubu.lsi.kanban.controller;
 
 import com.ubu.lsi.kanban.persistence.Persistence;
 
-public abstract class AbstractController<E> implements Controller<E> {
+public abstract class AbstractController {
 
-	protected static Persistence persist;
+	protected Persistence persist;
 	
-	public static void initializePersistence(Persistence p) {
-		if (persist == null)
-			persist= p;
+	protected AbstractController(Persistence persist) {
+		this.persist = persist;
 	}
 	
 }

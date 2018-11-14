@@ -3,25 +3,20 @@ package com.ubu.lsi.kanban.view.cli;
 import java.util.Collection;
 import java.util.Scanner;
 
-import com.ubu.lsi.kanban.controller.ControllerMiembro;
-import com.ubu.lsi.kanban.controller.ControllerRequisito;
-import com.ubu.lsi.kanban.controller.ControllerTarea;
+import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.*;
-import com.ubu.lsi.kanban.view.ViewTarea;
+import com.ubu.lsi.kanban.view.*;
 
 public class CliTarea implements ViewTarea {
 
-	private static CliTarea instance;
+	private ControllerFactory cf;
+	private ViewMiembro vm;
+	private ViewRequisito vr;
 
-	public static CliTarea getInstance() {
-		if (CliTarea.instance == null) {
-			instance = new CliTarea();
-		}
-		return instance;
-	}
-
-	private CliTarea() {
-		// TODO Auto-generated constructor stub
+	protected CliTarea(ControllerFactory cf, ViewMiembro vm, ViewRequisito vr) {
+		this.cf = cf;
+		this.vm = vm;
+		this.vr = vr;
 	}
 
 	@Override
@@ -29,11 +24,9 @@ public class CliTarea implements ViewTarea {
 		Scanner sc = CliMenu.sc;
 		String titulo, desc;
 		int coste, beneficio, idr = 0, idm = 0;
-		ControllerTarea ct = ControllerTarea.getInstance();
-		ControllerRequisito cr = ControllerRequisito.getInstance();
-		ControllerMiembro cm = ControllerMiembro.getInstance();
-		CliRequisito clr = CliRequisito.getInstance();
-		CliMiembro clm = CliMiembro.getInstance();
+		ControllerTarea ct = cf.getControllerTarea();
+		ControllerRequisito cr = cf.getControllerRequisito();
+		ControllerMiembro cm = cf.getControllerMiembro();
 		System.out.print("Introduzca el título que quiere dar a la nueva tarea: ");
 		titulo = sc.nextLine();
 		System.out.print("Introduzca la descripción de la tarea: ");
@@ -43,11 +36,11 @@ public class CliTarea implements ViewTarea {
 		System.out.print("Introduzca el beneficio de la tarea: ");
 		beneficio = sc.nextInt();
 		Collection<Requisito> listreq = cr.getList();
-		clr.mostrarRequisitos(listreq);
+		vr.mostrarRequisitos(listreq);
 		System.out.print("Introduzca el identificador del Requisito que quiera relacionar con esta Tarea: ");
 		idr = sc.nextInt();
 		Collection<MiembroEquipo> listmiembro = cm.getList();
-		clm.mostrarMiembros(listmiembro);
+		vm.mostrarMiembros(listmiembro);
 		System.out.print("Introduzca el identificador del Miembro al que quiera asignar esta Tarea: ");
 		idm = sc.nextInt();
 		return ct.nuevaTarea(titulo, desc, coste, beneficio, idr, idm);
@@ -56,11 +49,9 @@ public class CliTarea implements ViewTarea {
 	@Override
 	public void modificarTarea() {
 		Scanner sc = CliMenu.sc;
-		ControllerTarea ct = ControllerTarea.getInstance();
-		ControllerRequisito cr = ControllerRequisito.getInstance();
-		ControllerMiembro cm = ControllerMiembro.getInstance();
-		CliRequisito clr = CliRequisito.getInstance();
-		CliMiembro clm = CliMiembro.getInstance();
+		ControllerTarea ct = cf.getControllerTarea();
+		ControllerRequisito cr = cf.getControllerRequisito();
+		ControllerMiembro cm = cf.getControllerMiembro();
 		int id, opc = 0, idr, idm;
 		boolean flag = true, mod = true, flag2 = true;
 		String seguir = null;
@@ -107,7 +98,7 @@ public class CliTarea implements ViewTarea {
 			case 4:
 				System.out.println("Estos son los Requisitos que se pueden asignar a una tarea: ");
 				Collection<Requisito> listreq = cr.getList();
-				clr.mostrarRequisitos(listreq);
+				vr.mostrarRequisitos(listreq);
 				System.out.print("Introduzca el identificador del Requisito que quiera relacionar con esta Tarea: ");
 				idr = sc.nextInt();
 				if (!ct.editarRequisito(tarea, idr)) {
@@ -117,7 +108,7 @@ public class CliTarea implements ViewTarea {
 			case 5:
 				System.out.print("Estos son los Miembros que se pueden asignar a una tarea: ");
 				Collection<MiembroEquipo> listmiembro = cm.getList();
-				clm.mostrarMiembros(listmiembro);
+				vm.mostrarMiembros(listmiembro);
 				System.out.print("Introduzca el identificador del Miembro al que quiera asignar esta Tarea: ");
 				idm = sc.nextInt();
 				if (!ct.asignarMiembro(tarea, idm)) {
@@ -150,10 +141,8 @@ public class CliTarea implements ViewTarea {
 		System.out.println("Descripción: " + tarea.getDescripcion());
 		System.out.println("Coste: " + tarea.getCoste());
 		System.out.println("Beneficio: " + tarea.getBeneficio());
-		CliRequisito req = CliRequisito.getInstance();
-		req.mostrar(tarea.getRequisito());
-		CliMiembro mie = CliMiembro.getInstance();
-		mie.mostrar(tarea.getMiembroEquipo());
+		vr.mostrar(tarea.getRequisito());
+		vm.mostrar(tarea.getMiembroEquipo());
 		System.out.println("}");
 	}
 
