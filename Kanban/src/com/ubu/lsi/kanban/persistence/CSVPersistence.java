@@ -200,7 +200,7 @@ public class CSVPersistence implements Persistence {
 				}		
 				this.requisitos.put(r.getId(), r);
 			}catch(Exception ex) {
-				throw new PersistenceException("Los miembros almacenados son inconcistentes",ex);
+				throw new PersistenceException("Los requisitos almacenados son inconcistentes",ex);
 			}
 		}
 		br.close();
