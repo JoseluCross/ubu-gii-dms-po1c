@@ -1,3 +1,9 @@
+/*
+ * Asignatura: Diseño y Mantenimiento del Software.
+ * 4º Grado en Ingeniería Informática.
+ * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ */
+
 package com.ubu.lsi.kanban.view.cli;
 
 import java.util.Scanner;
@@ -6,15 +12,46 @@ import com.ubu.lsi.kanban.controller.ControllerFactory;
 import com.ubu.lsi.kanban.model.*;
 import com.ubu.lsi.kanban.view.*;
 
+/*
+ * Clase de Cli de Menu
+ */
 public class CliMenu implements Menu{
 	
+	/*
+	 * ViewBacklog.
+	 */
 	private ViewBacklog vb;
+	
+	/*
+	 * ViewMiembro.
+	 */
 	private ViewMiembro vm;
+	
+	/*
+	 * ViewRequisito.
+	 */
 	private ViewRequisito vr;
+	
+	/*
+	 * ViewTarea.
+	 */
 	private ViewTarea vt;
+	
+	/*
+	 * Scanner para coger los inputs del teclado.
+	 */
 	protected static Scanner sc;
+	
+	/*
+	 * ControllerFactory.
+	 */
 	private ControllerFactory cf;
 	
+	/*
+	 * Constructor.
+	 *
+	 * @param: cf, ControlllerFactory.
+	 */
 	public CliMenu(ControllerFactory cf) {
 		
 		vm = new CliMiembro(cf);
@@ -62,6 +99,11 @@ public class CliMenu implements Menu{
 		return sq;
 	}
 	
+	/*
+	 * Método que nos permite dar la opción de guardar los cambios que hemos hecho en el sistema.
+	 * 
+	 * @return: true si guardamos los cambios.
+	 */
 	private boolean saveQ() {
 		boolean flag = true;
 		boolean save = false;
@@ -79,6 +121,11 @@ public class CliMenu implements Menu{
 		return save;
 	}
 	
+	/*
+	 * Método que ejecuta una opción de las posibles en el menú.
+	 * 
+	 * @param: option, entero que representa la opción a realizar.
+	 */
 	private void executeOption(int option) {
 		boolean ct;
 		switch(option) {
@@ -135,6 +182,11 @@ public class CliMenu implements Menu{
 		}
 	}
 	
+	/*
+	 * Método que nos permite seleccionar un Sprint.
+	 * 
+	 * @return: SprintBacklog seleccionado.
+	 */
 	private SprintBacklog seleccionarSprint() {
 		Scanner sc = CliMenu.sc;
 		int ids;
@@ -145,6 +197,11 @@ public class CliMenu implements Menu{
 		return cf.getControllerBacklog().getElement(ids);
 	}
 	
+	/*
+	 * Método que nos permite seleccionar una Tarea,
+	 * 
+	 * @return: Tarea seleccionada.
+	 */
 	private Tarea seleccionarTarea() {
 		Scanner sc = CliMenu.sc;
 		int ids;

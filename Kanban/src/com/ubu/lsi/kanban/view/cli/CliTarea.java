@@ -1,3 +1,9 @@
+/*
+ * Asignatura: Diseño y Mantenimiento del Software.
+ * 4º Grado en Ingeniería Informática.
+ * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ */
+
 package com.ubu.lsi.kanban.view.cli;
 
 import java.util.Collection;
@@ -7,12 +13,33 @@ import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.*;
 import com.ubu.lsi.kanban.view.*;
 
+/*
+ * Clase del Cli de la Tareas.
+ */
 public class CliTarea implements ViewTarea {
 
+	/*
+	 * ControllerFactory.
+	 */
 	private ControllerFactory cf;
+	
+	/*
+	 * ViewMiembro.
+	 */
 	private ViewMiembro vm;
+	
+	/*
+	 * ViewRequisito.
+	 */
 	private ViewRequisito vr;
 
+	/*
+	 * Constructor protected.
+	 * 
+	 * @param1: cf, ControllerFactory.
+	 * @param2: vm, ViewMiembro.
+	 * @param3: vr, ViewRequisito.
+	 */
 	protected CliTarea(ControllerFactory cf, ViewMiembro vm, ViewRequisito vr) {
 		this.cf = cf;
 		this.vm = vm;
@@ -148,12 +175,12 @@ public class CliTarea implements ViewTarea {
 
 	@Override
 	public void mostrarReducido(Tarea tarea) {
-		System.out.println(tarea.getId() + "\t" + tarea.getTitulo());
+		System.out.println(tarea.getId() + "\t\t" + tarea.getTitulo());
 	}
 
 	@Override
 	public void mostratTareas(Collection<Tarea> tareas) {
-		System.out.println("IDENTIFICADOR\t\tTÍTULO");
+		System.out.println("IDENTIFICADOR\tTÍTULO");
 		for (Tarea tarea : tareas) {
 			this.mostrarReducido(tarea);
 		}

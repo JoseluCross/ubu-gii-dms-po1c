@@ -1,3 +1,9 @@
+/*
+ * Asignatura: Diseño y Mantenimiento del Software.
+ * 4º Grado en Ingeniería Informática.
+ * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ */
+
 package com.ubu.lsi.kanban.persistence;
 
 import java.util.*;
@@ -9,8 +15,14 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 
+/*
+ * Clase para realizar la persistencia en ficheros CSV.
+ */
 public class CSVPersistence implements Persistence {
 
+	/*
+	 * Fichero csv.
+	 */
 	private static final String TAREAFILE = "tareas.csv";
 	private static final String MIEMBROFILE = "miembros.csv";
 	private static final String SPRINTFILE = "sprints.csv";
@@ -18,16 +30,42 @@ public class CSVPersistence implements Persistence {
 	private static final String SPRINTTAREA = "sprint-tareas.csv";
 	private static final String SPLIT = ",";
 	
+	/*
+	 * Identificadores de Tarea, Sprint, Miembro y Requisito.
+	 */
 	private int idt;
 	private int ids;
 	private int idm;
 	private int idr;
+	
+	/*
+	 * Mapa de la configuración.
+	 */
 	private Map<String,String> config;
+	
+	/*
+	 * Mapa de los Requisitos con su identificador.
+	 */
 	private Map<Integer,Requisito> requisitos;
+	
+	/*
+	 * Mapa de las Tareas con su identifcador.
+	 */
 	private Map<Integer,Tarea> tareas;
+	
+	/*
+	 * Mapa de los Sprints con su identificador.
+	 */
 	private Map<Integer,SprintBacklog> sprints;
+	
+	/*
+	 * Mapa de los Miembros con su identificador.
+	 */
 	private Map<Integer,MiembroEquipo> miembros;
 	
+	/*
+	 * Constructor de la clase CSVPersistence.
+	 */
 	protected CSVPersistence() {
 		this.requisitos = new HashMap<>();
 		this.tareas = new HashMap<>();
@@ -100,6 +138,12 @@ public class CSVPersistence implements Persistence {
 		}
 	}
 	
+	/*
+	 * Método que carga las tareas de los ficheros de persistencia.
+	 * 
+	 * @param: br, BufferReader.
+	 * @throws: IOEXception, PersistenceException.
+	 */
 	private void cargaTareas(BufferedReader br) throws IOException, PersistenceException {
         String line = "";
 		while((line = br.readLine()) != null) {
@@ -121,6 +165,12 @@ public class CSVPersistence implements Persistence {
 		br.close();
 	}
 	
+	/*
+	 * Método que carga las relaciones sprint-tareas del fichero de persistencia.
+	 * 
+	 * @param: br, BufferReader.
+	 * @throws: IOEXception, PersistenceException.
+	 */
 	private void cargaTareasSprint(BufferedReader br) throws IOException, PersistenceException {
 		String line = "";
 		while((line = br.readLine()) != null) {
@@ -146,6 +196,12 @@ public class CSVPersistence implements Persistence {
 		br.close();
 	}
 
+	/*
+	 * Método que carga los Sprints de los ficheros de persistencia.
+	 * 
+	 * @param: br, BufferReader.
+	 * @throws: IOEXception, PersistenceException.
+	 */
 	private void cargaSprints(BufferedReader br) throws IOException, PersistenceException {
 		String line = "";
 		while((line = br.readLine()) != null) {
@@ -166,6 +222,12 @@ public class CSVPersistence implements Persistence {
 		br.close();
 	}
 
+	/*
+	 * Método que carga los miembros de los ficheros de persistencia.
+	 * 
+	 * @param: br, BufferReader.
+	 * @throws: IOEXception, PersistenceException.
+	 */
 	private void cargaMiembros(BufferedReader br) throws PersistenceException, IOException {
 		String line = "";
 		while((line = br.readLine()) != null) {
@@ -181,6 +243,12 @@ public class CSVPersistence implements Persistence {
 		br.close();
 	}
 	
+	/*
+	 * Método que carga los Requisitos de los ficheros de persistencia.
+	 * 
+	 * @param: br, BufferReader.
+	 * @throws: IOEXception, PersistenceException.
+	 */
 	private void cargaRequisitos(BufferedReader br) throws PersistenceException, IOException {
 		String line = "";
 		while((line = br.readLine()) != null) {
@@ -309,6 +377,12 @@ public class CSVPersistence implements Persistence {
 		
 	}
 	
+	/*
+	 * Método que guarda en el fichero de persistencia las relaciones de las tareas-sprints.
+	 * 
+	 * @param: bw, BufferedWriter
+	 * @throws: IOEXception
+	 */
 	private void guardaTareasSprint(BufferedWriter bw) throws IOException {
 		for(SprintBacklog sb : this.sprints.values()) {
 			for(SprintStatus ss : SprintStatus.values()) {
@@ -324,6 +398,12 @@ public class CSVPersistence implements Persistence {
 		bw.close(); 
 	}
 
+	/*
+	 * Método que guarda en el fichero de persistencia los Sprints.
+	 * 
+	 * @param: bw, BufferedWriter
+	 * @throws: IOEXception
+	 */
 	private void guardaSprint(BufferedWriter bw) throws IOException {
 		for(SprintBacklog sb : this.sprints.values()) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -335,6 +415,12 @@ public class CSVPersistence implements Persistence {
 		bw.close();
 	}
 	
+	/*
+	 * Método que guarda en el fichero de persistencia los Requisitos.
+	 * 
+	 * @param: bw, BufferedWriter
+	 * @throws: IOEXception
+	 */
 	private void guardaRequisitos(BufferedWriter bw) throws IOException {
 		for(Requisito rb : this.requisitos.values()) {
 			String of;
@@ -352,6 +438,12 @@ public class CSVPersistence implements Persistence {
 		bw.close();
 	}
 	
+	/*
+	 * Método que guarda en el fichero de persistencia los Miembros.
+	 * 
+	 * @param: bw, BufferedWriter
+	 * @throws: IOEXception
+	 */
 	private void guardaMiembros(BufferedWriter bw) throws IOException {
 		for(MiembroEquipo mb : this.miembros.values()) {
 			bw.write(String.join(SPLIT, ""+mb.getId(),mb.getNombre(),mb.getPuesto()));
@@ -360,6 +452,12 @@ public class CSVPersistence implements Persistence {
 		bw.close();
 	}
 	
+	/*
+	 * Método que guarda en el fichero de persistencia las Tareas.
+	 * 
+	 * @param: bw, BufferedWriter
+	 * @throws: IOEXception
+	 */
 	private void guardaTareas(BufferedWriter bw) throws IOException {
 		for(Tarea tr : this.tareas.values()) {
 			MiembroEquipo mb = tr.getMiembroEquipo();
@@ -380,6 +478,12 @@ public class CSVPersistence implements Persistence {
 		bw.close();
 	}
 	
+	/*
+	 * Nétodo que nos devuelve el siguiente id.
+	 * 
+	 * @param: integer, Set<Integer> de los identificadores.
+	 * @return: entero del siguiente identificador.
+	 */
 	private int newID(Set<Integer> integer) {
 		int max=0;
 		for (Integer it : integer) {

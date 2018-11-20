@@ -1,3 +1,9 @@
+/*
+ * Asignatura: Diseño y Mantenimiento del Software.
+ * 4º Grado en Ingeniería Informática.
+ * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ */
+
 package com.ubu.lsi.kanban.view.cli;
 
 import java.util.Collection;
@@ -9,10 +15,21 @@ import com.ubu.lsi.kanban.model.HistoriaUsuario;
 import com.ubu.lsi.kanban.model.Requisito;
 import com.ubu.lsi.kanban.view.ViewRequisito;
 
+/*
+ * Clase del Cli de los Requisitos.
+ */
 public class CliRequisito implements ViewRequisito {
 
+	/*
+	 * ControllerFactory.
+	 */
 	private ControllerFactory cf;
 	
+	/*
+	 * Constructor protected.
+	 * 
+	 * @param: cf, ControllerFactory.
+	 */
 	protected CliRequisito(ControllerFactory cf) {
 		this.cf = cf;
 	}
@@ -62,7 +79,7 @@ public class CliRequisito implements ViewRequisito {
 
 	@Override
 	public void mostrarRequisitos(Collection<Requisito> requisitos) {
-		System.out.println("IDENTIFICADOR\tNOMBRE\tPRIORIDAD\tTIPO\t\tDATOS ADICIONALES");
+		System.out.println("IDENTIFICADOR\tNOMBRE\tPRIORIDAD\tTIPO\t\t\tDATOS ADICIONALES");
 		for (Requisito requisito : requisitos) {
 			this.mostrarReducido(requisito);
 		}
@@ -73,10 +90,10 @@ public class CliRequisito implements ViewRequisito {
 		System.out.print(requisito.getId() + "\t\t" + requisito.getNombre() + "\t\t" + requisito.getPrioridad());
 		if(requisito instanceof HistoriaUsuario) {
 			HistoriaUsuario aux = (HistoriaUsuario) requisito;
-			System.out.println("\t\tHistoria de Usuario\tActor: " + aux.getActor());
+			System.out.println("\tHistoria de Usuario\tActor: " + aux.getActor());
 		}else {
 			Defecto aux2 = (Defecto) requisito;
-			System.out.println("\t\tDefecto\tcommit: " + aux2.getCommit());
+			System.out.println("\tDefecto\t\t\tcommit: " + aux2.getCommit());
 		}
 	}
 }
