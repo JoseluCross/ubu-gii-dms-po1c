@@ -4,20 +4,19 @@ package com.ubu.lsi.kanban.controller.basic;
 import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.persistence.Persistence;
 
-public class BasicControllerFactory implements ControllerFactory {
+public class BasicControllerFactory extends ControllerFactory {
 
-	Persistence p;
 	ControllerBacklog cb;
 	ControllerTarea ct;
 	ControllerMiembro cm;
 	ControllerRequisito cr;
 
 	public BasicControllerFactory(Persistence p) {
-		this.p = p;
-		this.cb = new BasicControllerBacklog(p);
-		this.ct = new BasicControllerTarea(p);
-		this.cm = new BasicControllerMiembro(p);
-		this.cr = new BasicControllerRequisito(p);
+		super(p);
+		this.cb = new BasicControllerBacklog(this.persitence);
+		this.ct = new BasicControllerTarea(this.persitence);
+		this.cm = new BasicControllerMiembro(this.persitence);
+		this.cr = new BasicControllerRequisito(this.persitence);
 	}
 
 	@Override

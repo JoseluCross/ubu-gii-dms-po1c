@@ -6,23 +6,21 @@ import com.ubu.lsi.kanban.controller.ControllerFactory;
 import com.ubu.lsi.kanban.model.*;
 import com.ubu.lsi.kanban.view.*;
 
-public class CliMenu implements Menu{
+public class CliMenu extends AbstractView implements Menu {
 	
 	private ViewBacklog vb;
 	private ViewMiembro vm;
 	private ViewRequisito vr;
 	private ViewTarea vt;
 	protected static Scanner sc;
-	private ControllerFactory cf;
 	
 	public CliMenu(ControllerFactory cf) {
-		
+		super(cf);
 		vm = new CliMiembro(cf);
 		vr = new CliRequisito(cf);
 		vt = new CliTarea(cf,vm,vr);
 		vb = new CliBacklog(cf,vt);
 		sc = new Scanner(System.in);
-		this.cf = cf;
 	}
 
 	@Override

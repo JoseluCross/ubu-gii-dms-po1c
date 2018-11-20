@@ -11,16 +11,16 @@ import java.util.Set;
 
 import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.*;
+import com.ubu.lsi.kanban.view.AbstractView;
 import com.ubu.lsi.kanban.view.ViewBacklog;
 import com.ubu.lsi.kanban.view.ViewTarea;
 
-public class CliBacklog implements ViewBacklog {
+public class CliBacklog extends AbstractView implements ViewBacklog {
 
-	private ControllerFactory cf;
 	private ViewTarea vt;
 	
 	protected CliBacklog(ControllerFactory cf, ViewTarea vt) {
-		this.cf = cf;
+		super(cf);
 		this.vt = vt;
 	}
 	

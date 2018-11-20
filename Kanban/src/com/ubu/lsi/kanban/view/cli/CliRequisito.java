@@ -7,29 +7,28 @@ import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.Defecto;
 import com.ubu.lsi.kanban.model.HistoriaUsuario;
 import com.ubu.lsi.kanban.model.Requisito;
+import com.ubu.lsi.kanban.view.AbstractView;
 import com.ubu.lsi.kanban.view.ViewRequisito;
 
-public class CliRequisito implements ViewRequisito {
+public class CliRequisito extends AbstractView implements ViewRequisito {
 
-	private ControllerFactory cf;
-	
 	protected CliRequisito(ControllerFactory cf) {
-		this.cf = cf;
+		super(cf);
 	}
-	
+
 	@Override
 	public boolean crearRequisito() {
 		Scanner sc = CliMenu.sc;
 		ControllerRequisito cr = cf.getControllerRequisito();
-		String nombre,desc, of;
-		int prioridad, tipo=0;
+		String nombre, desc, of;
+		int prioridad, tipo = 0;
 		boolean flag = true;
-		while(flag) {
+		while (flag) {
 			System.out.print("Desea que su Requisito sea una Historia de Usuario [0] o Defecto[1]: ");
 			tipo = sc.nextInt();
-			if (tipo == 0 || tipo ==1) {
+			if (tipo == 0 || tipo == 1) {
 				flag = false;
-			}else {
+			} else {
 				System.out.println("Se ha introducido mal el número, ha de ser 0 o 1");
 			}
 		}
@@ -41,9 +40,9 @@ public class CliRequisito implements ViewRequisito {
 		System.out.print("Introduzca la prioridad que le quiere dar el nuevo Requisito: ");
 		prioridad = sc.nextInt();
 		sc.nextLine();
-		if(tipo == 0) {
+		if (tipo == 0) {
 			System.out.print("Introduzca el actor que se quiere dar a la Historia de usuario: ");
-		}else {
+		} else {
 			System.out.print("Introduzca el commit con el que está relacionado el Defecto: ");
 		}
 		of = sc.nextLine();
@@ -71,10 +70,10 @@ public class CliRequisito implements ViewRequisito {
 	@Override
 	public void mostrarReducido(Requisito requisito) {
 		System.out.print(requisito.getId() + "\t\t" + requisito.getNombre() + "\t\t" + requisito.getPrioridad());
-		if(requisito instanceof HistoriaUsuario) {
+		if (requisito instanceof HistoriaUsuario) {
 			HistoriaUsuario aux = (HistoriaUsuario) requisito;
 			System.out.println("\t\tHistoria de Usuario\tActor: " + aux.getActor());
-		}else {
+		} else {
 			Defecto aux2 = (Defecto) requisito;
 			System.out.println("\t\tDefecto\tcommit: " + aux2.getCommit());
 		}

@@ -5,14 +5,14 @@ import java.util.Scanner;
 
 import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.MiembroEquipo;
+import com.ubu.lsi.kanban.view.AbstractView;
 import com.ubu.lsi.kanban.view.ViewMiembro;
 
-public class CliMiembro implements ViewMiembro {
+public class CliMiembro extends AbstractView implements ViewMiembro {
 
-	private ControllerFactory cf;
 	
 	protected CliMiembro(ControllerFactory cf) {
-		this.cf = cf;
+		super(cf);
 	}
 	
 	@Override

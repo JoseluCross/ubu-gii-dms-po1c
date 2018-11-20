@@ -7,14 +7,13 @@ import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.*;
 import com.ubu.lsi.kanban.view.*;
 
-public class CliTarea implements ViewTarea {
+public class CliTarea extends AbstractView implements ViewTarea {
 
-	private ControllerFactory cf;
 	private ViewMiembro vm;
 	private ViewRequisito vr;
 
 	protected CliTarea(ControllerFactory cf, ViewMiembro vm, ViewRequisito vr) {
-		this.cf = cf;
+		super(cf);
 		this.vm = vm;
 		this.vr = vr;
 	}
