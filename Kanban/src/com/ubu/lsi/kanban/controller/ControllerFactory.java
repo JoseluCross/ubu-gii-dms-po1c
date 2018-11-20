@@ -9,9 +9,7 @@ package com.ubu.lsi.kanban.controller;
 import com.ubu.lsi.kanban.persistence.Persistence;
 
 /*
- * Interfaz de la fábrica (FactoryMethod).
- * @author: José Miguel Ramírez Sanz
- * @author: José Luis Garrido Labrador
+ * Interfaz de la fábrica (AbstractFactory).
  */
 public abstract class ControllerFactory {
 	/*

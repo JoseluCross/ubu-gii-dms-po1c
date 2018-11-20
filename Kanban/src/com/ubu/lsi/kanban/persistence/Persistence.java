@@ -15,7 +15,7 @@ import com.ubu.lsi.kanban.model.*;
 public interface Persistence {
 	
 	/*
-	 * Método para cargar los datos al comenzar la ejecución.
+	 * Método para inicializar la persistencia.
 	 * 
 	 * @throws: PersistenceException.
 	 */

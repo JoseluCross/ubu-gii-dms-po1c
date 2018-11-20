@@ -394,6 +394,7 @@ public class CSVPersistence implements Persistence {
 		}
 		for(Tarea st : ProductBacklog.getInstance().getLista().get(0)) {
 			bw.write(String.join(SPLIT, ""+st.getId(),"-1","PorHacer"));
+			bw.newLine();
 		}
 		bw.close(); 
 	}

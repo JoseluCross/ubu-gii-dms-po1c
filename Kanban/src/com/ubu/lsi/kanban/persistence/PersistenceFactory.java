@@ -12,7 +12,7 @@ package com.ubu.lsi.kanban.persistence;
 public interface PersistenceFactory {
 
 	/*
-	 * Método que devuelve la persitencia.
+	 * Método que devuelve una nueva persitencia.
 	 * 
 	 * @return: Persistence.
 	 */
