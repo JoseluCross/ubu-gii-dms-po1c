@@ -1,3 +1,9 @@
+/*
+ * Asignatura: Diseño y Mantenimiento del Software.
+ * 4º Grado en Ingeniería Informática.
+ * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ */
+
 package com.ubu.lsi.kanban.view.cli;
 
 import java.util.Collection;
@@ -10,8 +16,21 @@ import com.ubu.lsi.kanban.model.Requisito;
 import com.ubu.lsi.kanban.view.AbstractView;
 import com.ubu.lsi.kanban.view.ViewRequisito;
 
+/*
+ * Clase del Cli de los Requisitos.
+ */
 public class CliRequisito extends AbstractView implements ViewRequisito {
 
+	/*
+	 * ControllerFactory.
+	 */
+	private ControllerFactory cf;
+	
+	/*
+	 * Constructor protected.
+	 * 
+	 * @param: cf, ControllerFactory.
+	 */
 	protected CliRequisito(ControllerFactory cf) {
 		super(cf);
 	}
@@ -61,7 +80,7 @@ public class CliRequisito extends AbstractView implements ViewRequisito {
 
 	@Override
 	public void mostrarRequisitos(Collection<Requisito> requisitos) {
-		System.out.println("IDENTIFICADOR\tNOMBRE\tPRIORIDAD\tTIPO\t\tDATOS ADICIONALES");
+		System.out.println("IDENTIFICADOR\tNOMBRE\tPRIORIDAD\tTIPO\t\t\tDATOS ADICIONALES");
 		for (Requisito requisito : requisitos) {
 			this.mostrarReducido(requisito);
 		}
@@ -75,7 +94,7 @@ public class CliRequisito extends AbstractView implements ViewRequisito {
 			System.out.println("\t\tHistoria de Usuario\tActor: " + aux.getActor());
 		} else {
 			Defecto aux2 = (Defecto) requisito;
-			System.out.println("\t\tDefecto\tcommit: " + aux2.getCommit());
+			System.out.println("\tDefecto\t\t\tcommit: " + aux2.getCommit());
 		}
 	}
 }

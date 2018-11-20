@@ -1,4 +1,8 @@
- 
+/*
+ * Asignatura: Diseño y Mantenimiento del Software.
+ * 4º Grado en Ingeniería Informática.
+ * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ */ 
 
 package com.ubu.lsi.kanban.view.cli;
 
@@ -15,10 +19,27 @@ import com.ubu.lsi.kanban.view.AbstractView;
 import com.ubu.lsi.kanban.view.ViewBacklog;
 import com.ubu.lsi.kanban.view.ViewTarea;
 
+/*
+ * Clase del Cli de los Backlogs.
+ */
 public class CliBacklog extends AbstractView implements ViewBacklog {
-
+	
+	/*
+	 * ControllerFactory.
+	 */
+	private ControllerFactory cf;
+	
+	/*
+	 * ViewTarea.
+	 */
 	private ViewTarea vt;
 	
+	/*
+	 * Constructor protected.
+	 * 
+	 * @param1: cf, ControllerFactory.
+	 * @param2: vt, ViewTarea.
+	 */
 	protected CliBacklog(ControllerFactory cf, ViewTarea vt) {
 		super(cf);
 		this.vt = vt;
