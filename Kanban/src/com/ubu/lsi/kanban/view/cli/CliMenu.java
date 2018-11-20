@@ -65,33 +65,37 @@ public class CliMenu extends AbstractView implements Menu{
 	public boolean start() {
 		int option = 0;
 		System.out.println("Bienvenido a KanBan, la mejor aplicación del mundo");
-		do {
-			
-			System.out.println("\nElija una opción");
-			
-			System.out.println(" [1] Crear Tarea");
-			System.out.println(" [2] Modificar Tarea");
-			System.out.println(" [3] Crear Sprint");
-			System.out.println(" [4] Asignar Tarea en Sprint");
-			System.out.println(" [5] Mover Tarea");
-			System.out.println(" [6] Crear Requisito");
-			System.out.println(" [7] Crear Miembro");
-			System.out.println(" [8] Ver Product Backlog");
-			System.out.println(" [9] Ver Sprint");
-			System.out.println(" [10] Ver Tarea");
-			System.out.println(" [11] Ver Requisitos");
-			System.out.println(" [12] Ver Miembros");
-			System.out.println("----------------------------");
-			System.out.println(" [0] Cerrar aplicación");
-			
-			System.out.print("Tu opción: ");
-			option = sc.nextInt();
-			sc.nextLine();
-			if(option != 0)
-				executeOption(option);
-			
-			
-		}while(option != 0);			
+		try {
+			do {
+				
+				System.out.println("\nElija una opción");
+				
+				System.out.println(" [1] Crear Tarea");
+				System.out.println(" [2] Modificar Tarea");
+				System.out.println(" [3] Crear Sprint");
+				System.out.println(" [4] Asignar Tarea en Sprint");
+				System.out.println(" [5] Mover Tarea");
+				System.out.println(" [6] Crear Requisito");
+				System.out.println(" [7] Crear Miembro");
+				System.out.println(" [8] Ver Product Backlog");
+				System.out.println(" [9] Ver Sprint");
+				System.out.println(" [10] Ver Tarea");
+				System.out.println(" [11] Ver Requisitos");
+				System.out.println(" [12] Ver Miembros");
+				System.out.println("----------------------------");
+				System.out.println(" [0] Cerrar aplicación");
+				
+				System.out.print("Tu opción: ");
+				option = sc.nextInt();
+				sc.nextLine();
+				if(option != 0)
+					executeOption(option);
+				
+				
+			}while(option != 0);	
+		}catch(Exception ex) {
+			System.err.println("Error "+ex.getMessage());
+		}
 		
 		boolean sq = saveQ();
 		sc.close();

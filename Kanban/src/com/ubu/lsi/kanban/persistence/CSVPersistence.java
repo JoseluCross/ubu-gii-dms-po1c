@@ -64,7 +64,7 @@ public class CSVPersistence implements Persistence {
 	private Map<Integer,MiembroEquipo> miembros;
 	
 	/*
-	 * Constructor de la clase CSVPersistence.
+	 * Constructor de la clase CSVPersistence. Protegido, solo puede instanciarlo su fábrica
 	 */
 	protected CSVPersistence() {
 		this.requisitos = new HashMap<>();
