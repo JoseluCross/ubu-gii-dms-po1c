@@ -58,4 +58,9 @@ public class BasicControllerTarea extends ControllerTarea{
 		return persist.loadTarea(index);
 	}
 
+	@Override
+	public void actualizaTarea(Tarea t) {
+		this.persist.nuevaTarea(t);
+	}
+
 }

@@ -44,6 +44,12 @@ public abstract class ControllerTarea extends Controller<Tarea> {
 	 */
 	public abstract boolean asignarMiembro(Tarea t, int miembro);
 	
+	/**
+	 * Modifica una tarea haciendo su cambio permanente
+	 * @param t tarea que se ha modificado
+	 */
+	public abstract void actualizaTarea(Tarea t);
+	
 	/*
 	 * Constructor protected
 	 */

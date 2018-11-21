@@ -145,6 +145,7 @@ public class CliTarea extends ViewTarea {
 			default:
 				System.out.println("Error en el bucle de las posibles opciones");
 			}
+			this.cf.getControllerTarea().actualizaTarea(tarea);
 			while (flag2) {
 				System.out.print("Desea seguir modificando esta Tarea? [s/n]");
 				seguir = sc.nextLine();

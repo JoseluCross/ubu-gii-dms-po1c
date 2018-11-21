@@ -124,28 +124,28 @@ public interface Persistence {
 	Collection<Requisito> loadRequisitos();
 	
 	/*
-	 * Método para poner en el mapa la Tarea pasada.
+	 * Almacena una tarea o la actualiza si ya existe.
 	 * 
 	 * @param: t, Tarea.
 	 */
 	void nuevaTarea(Tarea t);
 	
 	/*
-	 * Método para poner en el mapa el Miembro pasado.
+	 * Almacena un miembro o lo actualiza si ya existe.
 	 * 
 	 * @param: m, MiembroEquipo.
 	 */
 	void nuevoMiembro(MiembroEquipo m);
 	
 	/*
-	 * Método para poner en el mapa el Requisito pasado.
+	 * Almacena un requisito o lo actualiza si ya existe.
 	 * 
 	 * @param: r, Requisito.
 	 */
 	void nuevoRequisito(Requisito r);
 	
 	/*
-	 * Método para poner en el mapa el Sprint pasado.
+	 * Almacena un sprint o lo actualiza si ya existe
 	 * 
 	 * @param: s, SprintBacklog.
 	 */
