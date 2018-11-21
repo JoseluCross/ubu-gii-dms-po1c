@@ -1,7 +1,7 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.view.cli;
@@ -15,7 +15,7 @@ import com.ubu.lsi.kanban.view.*;
 /*
  * Clase de Cli de Menu
  */
-public class CliMenu extends AbstractView implements Menu{
+public class CliMenu extends Menu{
 	
 	/*
 	 * ViewBacklog.
@@ -64,11 +64,11 @@ public class CliMenu extends AbstractView implements Menu{
 	@Override
 	public boolean start() {
 		int option = 0;
-		System.out.println("Bienvenido a KanBan, la mejor aplicación del mundo");
+		System.out.println("Bienvenido a KanBan, la mejor aplicaciï¿½n del mundo");
 		try {
 			do {
 				
-				System.out.println("\nElija una opción");
+				System.out.println("\nElija una opciï¿½n");
 				
 				System.out.println(" [1] Crear Tarea");
 				System.out.println(" [2] Modificar Tarea");
@@ -83,9 +83,9 @@ public class CliMenu extends AbstractView implements Menu{
 				System.out.println(" [11] Ver Requisitos");
 				System.out.println(" [12] Ver Miembros");
 				System.out.println("----------------------------");
-				System.out.println(" [0] Cerrar aplicación");
+				System.out.println(" [0] Cerrar aplicaciï¿½n");
 				
-				System.out.print("Tu opción: ");
+				System.out.print("Tu opciï¿½n: ");
 				option = sc.nextInt();
 				sc.nextLine();
 				if(option != 0)
@@ -103,7 +103,7 @@ public class CliMenu extends AbstractView implements Menu{
 	}
 	
 	/*
-	 * Método que nos permite dar la opción de guardar los cambios que hemos hecho en el sistema.
+	 * Mï¿½todo que nos permite dar la opciï¿½n de guardar los cambios que hemos hecho en el sistema.
 	 * 
 	 * @return: true si guardamos los cambios.
 	 */
@@ -125,9 +125,9 @@ public class CliMenu extends AbstractView implements Menu{
 	}
 	
 	/*
-	 * Método que ejecuta una opción de las posibles en el menú.
+	 * Mï¿½todo que ejecuta una opciï¿½n de las posibles en el menï¿½.
 	 * 
-	 * @param: option, entero que representa la opción a realizar.
+	 * @param: option, entero que representa la opciï¿½n a realizar.
 	 */
 	private void executeOption(int option) {
 		boolean ct;
@@ -181,12 +181,12 @@ public class CliMenu extends AbstractView implements Menu{
 			vm.mostrarMiembros(cf.getControllerMiembro().getList());
 			break;
 		default:
-			System.out.println("Pedazo subnormal, te he dicho un número de 0 al 12");
+			System.out.println("Pedazo subnormal, te he dicho un nï¿½mero de 0 al 12");
 		}
 	}
 	
 	/*
-	 * Método que nos permite seleccionar un Sprint.
+	 * Mï¿½todo que nos permite seleccionar un Sprint.
 	 * 
 	 * @return: SprintBacklog seleccionado.
 	 */
@@ -201,7 +201,7 @@ public class CliMenu extends AbstractView implements Menu{
 	}
 	
 	/*
-	 * Método que nos permite seleccionar una Tarea,
+	 * Mï¿½todo que nos permite seleccionar una Tarea,
 	 * 
 	 * @return: Tarea seleccionada.
 	 */

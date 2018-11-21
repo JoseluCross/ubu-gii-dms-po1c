@@ -1,37 +1,46 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.view;
 import java.util.Collection;
 
+import com.ubu.lsi.kanban.controller.ControllerFactory;
 import com.ubu.lsi.kanban.model.*;
 
 /*
  * Interfaz View de Miembro.
  */
-public interface ViewMiembro extends Mostrable<MiembroEquipo>{
+public abstract class ViewMiembro extends View<MiembroEquipo>{
 	
 	/*
-	 * Método que nos permite crear un nuevo Miembor de Equipo.
+	 * Mï¿½todo que nos permite crear un nuevo Miembor de Equipo.
 	 * 
 	 * @return: true si el miembro se ha creado correctamente.
 	 */
-	public boolean crearMiembro();
+	public abstract boolean crearMiembro();
 	
 	/*
 	 * Muestra un conjunto de miembros.
 	 * 
 	 * @param: miembros, Collection<MiembroEquipo> conjunto de miembros a imprimir.
 	 */
-	public void mostrarMiembros(Collection<MiembroEquipo> miembros);
+	public abstract void mostrarMiembros(Collection<MiembroEquipo> miembros);
 	
 	/*
 	 * Muestra de forma reducida un miembro.
 	 * 
 	 * @param: miembro, Miembro a mostrar.
 	 */
-	public void mostrarReducido(MiembroEquipo miembro);
+	public abstract void mostrarReducido(MiembroEquipo miembro);
+	
+	/**
+	 * {@inheritDoc}
+	 * @param cf {@inheritDoc}
+	 */
+	protected ViewMiembro(ControllerFactory cf) {
+		super(cf);
+	}
 }

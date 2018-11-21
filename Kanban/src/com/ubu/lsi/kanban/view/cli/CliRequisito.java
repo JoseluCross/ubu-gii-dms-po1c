@@ -1,7 +1,7 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.view.cli;
@@ -13,13 +13,12 @@ import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.Defecto;
 import com.ubu.lsi.kanban.model.HistoriaUsuario;
 import com.ubu.lsi.kanban.model.Requisito;
-import com.ubu.lsi.kanban.view.AbstractView;
 import com.ubu.lsi.kanban.view.ViewRequisito;
 
 /*
  * Clase del Cli de los Requisitos.
  */
-public class CliRequisito extends AbstractView implements ViewRequisito {
+public class CliRequisito extends ViewRequisito {
 
 	/*
 	 * ControllerFactory.
@@ -48,13 +47,13 @@ public class CliRequisito extends AbstractView implements ViewRequisito {
 			if (tipo == 0 || tipo == 1) {
 				flag = false;
 			} else {
-				System.out.println("Se ha introducido mal el número, ha de ser 0 o 1");
+				System.out.println("Se ha introducido mal el nï¿½mero, ha de ser 0 o 1");
 			}
 		}
 		sc.nextLine();
 		System.out.print("Introduzca el nombre que le quiere dar al nuevo Requisito: ");
 		nombre = sc.nextLine();
-		System.out.print("Introduzca la descripción que le quiere dar al nuevo Requisito: ");
+		System.out.print("Introduzca la descripciï¿½n que le quiere dar al nuevo Requisito: ");
 		desc = sc.nextLine();
 		System.out.print("Introduzca la prioridad que le quiere dar el nuevo Requisito: ");
 		prioridad = sc.nextInt();
@@ -62,7 +61,7 @@ public class CliRequisito extends AbstractView implements ViewRequisito {
 		if (tipo == 0) {
 			System.out.print("Introduzca el actor que se quiere dar a la Historia de usuario: ");
 		} else {
-			System.out.print("Introduzca el commit con el que está relacionado el Defecto: ");
+			System.out.print("Introduzca el commit con el que estï¿½ relacionado el Defecto: ");
 		}
 		of = sc.nextLine();
 		return cr.nuevoRequisito(tipo, nombre, desc, prioridad, of);
@@ -73,7 +72,7 @@ public class CliRequisito extends AbstractView implements ViewRequisito {
 		System.out.println("REQUISITO" + requisito.getId() + "{");
 		System.out.println("Identificador: " + requisito.getId());
 		System.out.println("Nombre: " + requisito.getNombre());
-		System.out.println("Descripción: " + requisito.getDescripcion());
+		System.out.println("Descripciï¿½n: " + requisito.getDescripcion());
 		System.out.println("Prioridad: " + requisito.getPrioridad());
 		System.out.println("}");
 	}

@@ -1,42 +1,51 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.view;
 import java.util.Collection;
 
+import com.ubu.lsi.kanban.controller.ControllerFactory;
 import com.ubu.lsi.kanban.model.*;
 
 /*
  * Interfaz View de las Tareas.
  */
-public interface ViewTarea extends Mostrable<Tarea>{
+public abstract class ViewTarea extends View<Tarea>{
 	
 	/*
-	 * Método que nos permite crear una Tarea.
+	 * Mï¿½todo que nos permite crear una Tarea.
 	 * 
 	 * @return: true si la Tarea se ha creado de forma exitosa.
 	 */
-	public boolean crearTarea();
+	public abstract boolean crearTarea();
 	
 	/*
 	 * Nos permite modificar una Tarea.
 	 */
-	public void modificarTarea();
+	public abstract void modificarTarea();
 	
 	/*
 	 * Muestra de forma reducida una Tarea.
 	 * 
 	 * @param: tarea, Tarea a mostrar.
 	 */
-	public void mostrarReducido(Tarea tarea);
+	public abstract void mostrarReducido(Tarea tarea);
 	
 	/*
 	 * Muestra un conjunto de Tareas.
 	 * 
 	 * @param: tareas, Collection<Tarea> conjunto de tareas a mostrar.
 	 */
-	public void mostratTareas(Collection<Tarea> tareas);
+	public abstract void mostratTareas(Collection<Tarea> tareas);
+	
+	/**
+	 * {@inheritDoc}
+	 * @param cf {@inheritDoc}
+	 */
+	protected ViewTarea(ControllerFactory cf) {
+		super(cf);
+	}
 }

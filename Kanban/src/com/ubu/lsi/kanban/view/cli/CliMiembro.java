@@ -1,7 +1,7 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.view.cli;
@@ -11,13 +11,12 @@ import java.util.Scanner;
 
 import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.MiembroEquipo;
-import com.ubu.lsi.kanban.view.AbstractView;
 import com.ubu.lsi.kanban.view.ViewMiembro;
 
 /*
  * Clase del Cli del Miembro.
  */
-public class CliMiembro extends AbstractView implements ViewMiembro {
+public class CliMiembro extends ViewMiembro {
 
 	/*
 	 * ControllerFactory.

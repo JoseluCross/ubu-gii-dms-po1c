@@ -9,16 +9,11 @@ package com.ubu.lsi.kanban.view;
 import com.ubu.lsi.kanban.controller.ControllerFactory;
 
 /*
- * Interfaz del men�.
+ * Interfaz para todas las vistas.
  */
-public abstract class Menu {
+public abstract class View<E> {
 	
-	/*
-	 * M�todo para comenzar el men�.
-	 * 
-	 * @return: true si no ha ocurrido ning�n error.
-	 */
-	public abstract boolean start();
+	public abstract void mostrar(E e);
 	
 	protected ControllerFactory cf;
 	
@@ -27,7 +22,7 @@ public abstract class Menu {
 	 * 
 	 * @param cf Fábrica abstracta con la familia de controladores
 	 */
-	protected Menu(ControllerFactory cf) {
+	protected View(ControllerFactory cf) {
 		this.cf = cf;
 	}
 

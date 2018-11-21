@@ -1,37 +1,46 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.view;
 import java.util.Collection;
 
+import com.ubu.lsi.kanban.controller.ControllerFactory;
 import com.ubu.lsi.kanban.model.*;
 
 /*
  * Inerfaz del View de los Requisitos.
  */
-public interface ViewRequisito extends Mostrable<Requisito>{
+public abstract class ViewRequisito extends View<Requisito>{
 	
 	/*
-	 * Método que nos permite crear un Requisito.
+	 * Mï¿½todo que nos permite crear un Requisito.
 	 * 
 	 * @return: true si el Requisito se ha creado bien.
 	 */
-	public boolean crearRequisito();
+	public abstract boolean crearRequisito();
 	
 	/*
 	 * Muestra un conjunto de Requisitos.
 	 * 
 	 * @return: requisitos, Collection<Requisito> conjunto de Requisitos  imprimir.
 	 */
-	public void mostrarRequisitos(Collection<Requisito> requisitos);
+	public abstract void mostrarRequisitos(Collection<Requisito> requisitos);
 	
 	/*
 	 * Muestra de forma reudicda un Requisito.
 	 * 
 	 * @param: Requisito a mostrar.
 	 */
-	public void mostrarReducido(Requisito requisito);
+	public abstract void mostrarReducido(Requisito requisito);
+	
+	/**
+	 * {@inheritDoc}
+	 * @param cf {@inheritDoc}
+	 */
+	protected ViewRequisito(ControllerFactory cf) {
+		super(cf);
+	}
 }

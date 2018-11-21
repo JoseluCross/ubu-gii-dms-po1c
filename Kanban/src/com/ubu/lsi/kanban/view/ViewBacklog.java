@@ -1,42 +1,51 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.view;
 import java.util.Collection;
 
+import com.ubu.lsi.kanban.controller.ControllerFactory;
 import com.ubu.lsi.kanban.model.*;
 
 /*
  * Interfaz del View de los Backlogs.
  */
-public interface ViewBacklog extends Mostrable<Backlog>{
+public abstract class ViewBacklog extends View<Backlog>{
 	
 	/*
 	 * Crea un nuevo Sprint.
 	 */
-	public void nuevoSprint();
+	public abstract void nuevoSprint();
 	
 	/*
-	 * Método que permite mover una tarea del ProductBacklog a un SprintBacklog.
+	 * Mï¿½todo que permite mover una tarea del ProductBacklog a un SprintBacklog.
 	 * 
 	 * @return: true si el movimiento no ha dado error.
 	 */
-	public boolean moverProductSprint();
+	public abstract boolean moverProductSprint();
 	
 	/*
-	 * Método que nos permite mover una tarea dentro de un mismo Sprint.
+	 * Mï¿½todo que nos permite mover una tarea dentro de un mismo Sprint.
 	 * 
-	 * @return: true si se ha conseguido mover la tarea con éxito.
+	 * @return: true si se ha conseguido mover la tarea con ï¿½xito.
 	 */
-	public boolean moverSprint();
+	public abstract boolean moverSprint();
 	
 	/*
 	 * Muestra de forma reducida un conjunto de Sprints.
 	 * 
 	 * @param: sp, Collection<SprintBacklog> conjunto de Sprints a mostrar de forma reducida.
 	 */
-	public void mostrarReducido(Collection<SprintBacklog> sp);
+	public abstract void mostrarReducido(Collection<SprintBacklog> sp);
+	
+	/**
+	 * {@inheritDoc}
+	 * @param cf {@inheritDoc}
+	 */
+	protected ViewBacklog(ControllerFactory cf) {
+		super(cf);
+	}
 }

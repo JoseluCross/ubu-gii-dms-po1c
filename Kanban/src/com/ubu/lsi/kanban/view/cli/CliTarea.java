@@ -1,7 +1,7 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.view.cli;
@@ -16,7 +16,7 @@ import com.ubu.lsi.kanban.view.*;
 /*
  * Clase del Cli de la Tareas.
  */
-public class CliTarea extends AbstractView implements ViewTarea {
+public class CliTarea extends ViewTarea {
 
 	/*
 	 * ControllerFactory.
@@ -54,9 +54,9 @@ public class CliTarea extends AbstractView implements ViewTarea {
 		ControllerTarea ct = cf.getControllerTarea();
 		ControllerRequisito cr = cf.getControllerRequisito();
 		ControllerMiembro cm = cf.getControllerMiembro();
-		System.out.print("Introduzca el título que quiere dar a la nueva tarea: ");
+		System.out.print("Introduzca el tï¿½tulo que quiere dar a la nueva tarea: ");
 		titulo = sc.nextLine();
-		System.out.print("Introduzca la descripción de la tarea: ");
+		System.out.print("Introduzca la descripciï¿½n de la tarea: ");
 		desc = sc.nextLine();
 		System.out.print("Introduzca el coste de la tarea: ");
 		coste = sc.nextInt();
@@ -93,7 +93,7 @@ public class CliTarea extends AbstractView implements ViewTarea {
 			this.mostrar(tarea);
 			while (flag) {
 				System.out.print(
-						"Introduzca el valor relacionado con el cambio que desea hacer: Título[0], Descripción[1], Coste[2], Beneficio[3], Requisito[4] y Miembro[5]");
+						"Introduzca el valor relacionado con el cambio que desea hacer: Tï¿½tulo[0], Descripciï¿½n[1], Coste[2], Beneficio[3], Requisito[4] y Miembro[5]");
 				opc = sc.nextInt();
 				if (opc >= 0 && opc <= 5) {
 					flag = false;
@@ -101,13 +101,13 @@ public class CliTarea extends AbstractView implements ViewTarea {
 			}
 			switch (opc) {
 			case 0:
-				System.out.print("Introduzca el nuevo título que se quiere dar a la tarea. (el título actual es: "
+				System.out.print("Introduzca el nuevo tï¿½tulo que se quiere dar a la tarea. (el tï¿½tulo actual es: "
 						+ tarea.getTitulo() + ")");
 				tarea.setTitulo(sc.nextLine());
 				break;
 			case 1:
 				System.out.print(
-						"Introduzca la nueva descripción que se quiere dar a la tarea. (la descripción actual es: "
+						"Introduzca la nueva descripciï¿½n que se quiere dar a la tarea. (la descripciï¿½n actual es: "
 								+ tarea.getDescripcion() + ")");
 				tarea.setDescripcion(sc.nextLine());
 				break;
@@ -164,8 +164,8 @@ public class CliTarea extends AbstractView implements ViewTarea {
 	public void mostrar(Tarea tarea) {
 		System.out.println("TAREA" + tarea.getId() + "{");
 		System.out.println("Identificador: " + tarea.getId());
-		System.out.println("Título: " + tarea.getTitulo());
-		System.out.println("Descripción: " + tarea.getDescripcion());
+		System.out.println("Tï¿½tulo: " + tarea.getTitulo());
+		System.out.println("Descripciï¿½n: " + tarea.getDescripcion());
 		System.out.println("Coste: " + tarea.getCoste());
 		System.out.println("Beneficio: " + tarea.getBeneficio());
 		vr.mostrar(tarea.getRequisito());
@@ -180,7 +180,7 @@ public class CliTarea extends AbstractView implements ViewTarea {
 
 	@Override
 	public void mostratTareas(Collection<Tarea> tareas) {
-		System.out.println("IDENTIFICADOR\tTÍTULO");
+		System.out.println("IDENTIFICADOR\tTï¿½TULO");
 		for (Tarea tarea : tareas) {
 			this.mostrarReducido(tarea);
 		}

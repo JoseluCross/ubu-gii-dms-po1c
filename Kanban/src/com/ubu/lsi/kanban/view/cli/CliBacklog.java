@@ -1,7 +1,7 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */ 
 
 package com.ubu.lsi.kanban.view.cli;
@@ -15,14 +15,13 @@ import java.util.Set;
 
 import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.*;
-import com.ubu.lsi.kanban.view.AbstractView;
 import com.ubu.lsi.kanban.view.ViewBacklog;
 import com.ubu.lsi.kanban.view.ViewTarea;
 
 /*
  * Clase del Cli de los Backlogs.
  */
-public class CliBacklog extends AbstractView implements ViewBacklog {
+public class CliBacklog extends ViewBacklog {
 	
 	/*
 	 * ControllerFactory.
@@ -53,7 +52,7 @@ public class CliBacklog extends AbstractView implements ViewBacklog {
 		String fini,nom;
 		Calendar ini = Calendar.getInstance();
 		while(flag) {
-			System.out.print("Desea introducir otra fecha de inicio que no sea el día de hoy?[s/n]");
+			System.out.print("Desea introducir otra fecha de inicio que no sea el dï¿½a de hoy?[s/n]");
 			res = sc.nextLine();
 			if (res.equals("s") || res.equals("n")) {
 				flag = false;
@@ -62,14 +61,14 @@ public class CliBacklog extends AbstractView implements ViewBacklog {
 		if (res.equals("n")) {
 			flag = true;
 			while(flag) {
-				System.out.print("Qúe fecha quiere que empiece el sprint? [dd-mm-aaaa]");
+				System.out.print("Qï¿½e fecha quiere que empiece el sprint? [dd-mm-aaaa]");
 				fini = sc.nextLine();
 				try {
 					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 					ini.setTime(sdf.parse(fini));
 					flag = false;
 				}catch(ParseException ex) {
-					System.out.println("El formato introducido es erróneo");
+					System.out.println("El formato introducido es errï¿½neo");
 				}
 			}
 		}
@@ -93,7 +92,7 @@ public class CliBacklog extends AbstractView implements ViewBacklog {
 			if(log instanceof SprintBacklog) {
 				System.out.println(spt[i]);
 			}
-			System.out.println("IDENTIFICADOR\tTÍTULO");
+			System.out.println("IDENTIFICADOR\tTï¿½TULO");
 			for( Tarea t : st) {
 				vt.mostrarReducido(t);
 			}
@@ -108,7 +107,7 @@ public class CliBacklog extends AbstractView implements ViewBacklog {
 		Scanner sc = CliMenu.sc;
 		int idt, ids;
 		this.mostrar(pb);
-		System.out.print("Introduzca el número del identificador de la tarea que quiere mover al Sprint: ");
+		System.out.print("Introduzca el nï¿½mero del identificador de la tarea que quiere mover al Sprint: ");
 		idt = sc.nextInt();
 		sc.nextLine();
 		ControllerBacklog cb = cf.getControllerBacklog();
@@ -128,11 +127,11 @@ public class CliBacklog extends AbstractView implements ViewBacklog {
 		ControllerBacklog cb = cf.getControllerBacklog();
 		Collection<SprintBacklog> listlog = cb.getList();
 		this.mostrarReducido(listlog);
-		System.out.print("Introduzca el identificador del Sprint del cuál desea mover un tarea: ");
+		System.out.print("Introduzca el identificador del Sprint del cuï¿½l desea mover un tarea: ");
 		ids = sc.nextInt();
 		this.mostrar(cb.getElement(ids));
 		while(flag) {
-			System.out.print("Introduzca el identificador de la lista en la que está la tarea que quiere mover: PorHacer[0], Haciendo[1], Validación[2], Completada[3]");
+			System.out.print("Introduzca el identificador de la lista en la que estï¿½ la tarea que quiere mover: PorHacer[0], Haciendo[1], Validaciï¿½n[2], Completada[3]");
 			idestado = sc.nextInt();
 			if (idestado >= 0 && idestado<=3) {
 				flag = false;
@@ -146,7 +145,7 @@ public class CliBacklog extends AbstractView implements ViewBacklog {
 		System.out.print("Introduzca el identificador de la tarea que quiere mover: ");
 		idtarea = sc.nextInt();
 		while(flag) {
-			System.out.print("Introduzca el identificador de la lista a donde quiere mover la tarea seleccionada: PorHacer[0], Haciendo[1], Validación[2], Completada[3]");
+			System.out.print("Introduzca el identificador de la lista a donde quiere mover la tarea seleccionada: PorHacer[0], Haciendo[1], Validaciï¿½n[2], Completada[3]");
 			idestfinal = sc.nextInt();
 			if (idestfinal >= 0 && idestfinal<=3) {
 				flag = false;
