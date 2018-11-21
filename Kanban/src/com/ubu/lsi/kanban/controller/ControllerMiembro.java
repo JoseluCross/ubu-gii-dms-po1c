@@ -7,11 +7,12 @@
 package com.ubu.lsi.kanban.controller;
 
 import com.ubu.lsi.kanban.model.*;
+import com.ubu.lsi.kanban.persistence.Persistence;
 
 /*
  * Interfaz del Controlador de los miembros de equipo.
  */
-public interface ControllerMiembro extends Controller<MiembroEquipo> {
+public abstract class  ControllerMiembro extends Controller<MiembroEquipo> {
 	
 	/*
 	 * Método que nos permite crear un nuevo miembro.
@@ -19,7 +20,14 @@ public interface ControllerMiembro extends Controller<MiembroEquipo> {
 	 * @param1: nombre, String del nombre que se le quiere dar al miembro.
 	 * @param2: puesto, String del puesto que se le quiere dar al miembro.
 	 */
-	boolean nuevoMiembro(String nombre, String puesto);
+	public abstract boolean nuevoMiembro(String nombre, String puesto);
+	
+	/*
+	 * Constructor protected
+	 */
+	protected ControllerMiembro(Persistence persist) {
+		super(persist);
+	}
 	
 	
 }

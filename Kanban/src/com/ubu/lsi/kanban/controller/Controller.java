@@ -7,15 +7,30 @@
 package com.ubu.lsi.kanban.controller;
 import java.util.*;
 
+import com.ubu.lsi.kanban.persistence.Persistence;
+
 /*
  * Interfaz de los Controladores
  */
-public interface Controller<E> {
+public abstract class Controller<E> {
+	
+	/*
+	 * Método para dar persistencia
+	 */
+	protected Persistence persist;
+	
+	/*
+	 * Constructor protected
+	 */
+	protected Controller(Persistence persist) {
+		this.persist = persist;
+	}
+	
 	/*
 	 * Método que devuelve la lista del Controlador.
 	 * @return: lista de elementos que maneja el controlador.
 	 */
-	Collection<E> getList();
+	public abstract Collection<E> getList();
 	
 	/*
 	 * Método que nos devuelve un elemento de la lista del controlador.
@@ -23,6 +38,6 @@ public interface Controller<E> {
 	 * @param: Índice del elemento dentro de la lista.
 	 * @return: Elemento de la lista del Controlador.
 	 */
-	E getElement(int index);
+	public abstract E getElement(int index);
 
 }

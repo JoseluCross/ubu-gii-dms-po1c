@@ -5,7 +5,7 @@ import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.*;
 import com.ubu.lsi.kanban.persistence.Persistence;
 
-public class BasicControllerTarea extends AbstractController implements ControllerTarea{
+public class BasicControllerTarea extends ControllerTarea{
 	
 	
 	protected BasicControllerTarea(Persistence p) {

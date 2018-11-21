@@ -5,7 +5,7 @@ import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.*;
 import com.ubu.lsi.kanban.persistence.Persistence;
 
-public class BasicControllerBacklog extends AbstractController implements ControllerBacklog{
+public class BasicControllerBacklog extends ControllerBacklog{
 	
 	
 	protected BasicControllerBacklog(Persistence p) {
