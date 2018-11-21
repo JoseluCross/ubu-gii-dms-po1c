@@ -6,7 +6,7 @@ import com.ubu.lsi.kanban.controller.*;
 import com.ubu.lsi.kanban.model.*;
 import com.ubu.lsi.kanban.persistence.Persistence;
 
-public class BasicControllerMiembro extends AbstractController implements ControllerMiembro {
+public class BasicControllerMiembro extends ControllerMiembro {
 
 	protected BasicControllerMiembro(Persistence p) {
 		super(p);

@@ -7,11 +7,12 @@
 package com.ubu.lsi.kanban.controller;
 
 import com.ubu.lsi.kanban.model.Requisito;
+import com.ubu.lsi.kanban.persistence.Persistence;
 
 /*
  * Interfaz del Controlador de los Requisitos.
  */
-public interface ControllerRequisito extends Controller<Requisito> {
+public abstract class ControllerRequisito extends Controller<Requisito> {
 	
 	/*
 	 * Método que nos permite crear un nuevo Requisito.
@@ -23,6 +24,13 @@ public interface ControllerRequisito extends Controller<Requisito> {
 	 * @param5: of, String que representa el actor en caso de las Historias de Usuario y commit en el caso de los Defectos.
 	 * @return: true si se ha creado correctamente el Requisito.
 	 */
-	boolean nuevoRequisito(int tipo, String nombre, String descripcion, int prioridad, String of);
+	public abstract boolean nuevoRequisito(int tipo, String nombre, String descripcion, int prioridad, String of);
+	
+	/*
+	 * Constructor protected
+	 */
+	protected ControllerRequisito(Persistence persist) {
+		super(persist);
+	}
 	
 }

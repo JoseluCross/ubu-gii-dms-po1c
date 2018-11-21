@@ -7,11 +7,12 @@
 package com.ubu.lsi.kanban.controller;
 
 import com.ubu.lsi.kanban.model.*;
+import com.ubu.lsi.kanban.persistence.Persistence;
 
 /*
  * Interfaz del Controlador de las Tareas.
  */
-public interface ControllerTarea extends Controller<Tarea> {
+public abstract class ControllerTarea extends Controller<Tarea> {
 	
 	/*
 	 * Método que nos permite crear una nueva Tarea.
@@ -23,7 +24,7 @@ public interface ControllerTarea extends Controller<Tarea> {
 	 * @param5: requisito, entero que representa el índice del Requisito relacionado con la Tarea.
 	 * @param6: miembro, entero que representa el índice del Miembro relacionado con la Tarea.
 	 */
-	boolean nuevaTarea(String titulo, String descripcion, int coste, int beneficio, int requisito, int miembro);
+	public abstract boolean nuevaTarea(String titulo, String descripcion, int coste, int beneficio, int requisito, int miembro);
 	
 	/*
 	 * Método que nos permite editar el Requisito de una Tarea.
@@ -32,7 +33,7 @@ public interface ControllerTarea extends Controller<Tarea> {
 	 * @param2: requisito, entero que representa el índice del Requisito relacionado con la Tarea.
 	 * @return: true si la edición se realiza correctamente.
 	 */
-	boolean editarRequisito(Tarea t, int requisito);
+	public abstract boolean editarRequisito(Tarea t, int requisito);
 	
 	/*
 	 * Método que nos permite asignar a una Tarea un Miembro. También sirve para modificar este atributo.
@@ -41,6 +42,13 @@ public interface ControllerTarea extends Controller<Tarea> {
 	 * @param2: miembro, entero que representa el índice del Miembro relacionado con la Tarea.
 	 * @return: true si la asignación se realiza correctamente.
 	 */
-	boolean asignarMiembro(Tarea t, int miembro);
+	public abstract boolean asignarMiembro(Tarea t, int miembro);
+	
+	/*
+	 * Constructor protected
+	 */
+	protected ControllerTarea(Persistence persist) {
+		super(persist);
+	}
 	
 }

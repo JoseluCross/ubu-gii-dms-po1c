@@ -8,11 +8,12 @@ package com.ubu.lsi.kanban.controller;
 import java.util.Calendar;
 
 import com.ubu.lsi.kanban.model.*;
+import com.ubu.lsi.kanban.persistence.Persistence;
 
 /*
  * Interfaz del Controlador de los Backlogs (ProductBacklog y SprintBacklog).
  */
-public interface ControllerBacklog extends Controller<SprintBacklog> {
+public abstract class ControllerBacklog extends Controller<SprintBacklog> {
 	/*
 	 * Método que pone una tarea en un SprintBacklog.
 	 * 
@@ -20,7 +21,7 @@ public interface ControllerBacklog extends Controller<SprintBacklog> {
 	 * @param2: tarea, entero del índice de la tarea.
 	 * @return: true si se ha conseguido añadir con éxito la tarea en el sprint.
 	 */
-	boolean tareaSprint(int sprint, int tarea);
+	public abstract boolean tareaSprint(int sprint, int tarea);
 	
 	/*
 	 * Método que nos permite mover una tarea dentro de los distintos estados de un Sprint.
@@ -31,7 +32,22 @@ public interface ControllerBacklog extends Controller<SprintBacklog> {
 	 * @param4: tarea, entero del índice de la tarea.
 	 * @return: true si el cambio de estado se ha hecho correctamente.
 	 */
-	boolean moverEnSprint(int sprint, SprintStatus desde, SprintStatus hacia, int tarea);
-	SprintBacklog crearSprint(String name, Calendar cal);
+	public abstract boolean moverEnSprint(int sprint, SprintStatus desde, SprintStatus hacia, int tarea);
+	
+	/*
+	 * Constructor protected
+	 */
+	protected ControllerBacklog(Persistence persist) {
+		super(persist);
+	}
+	
+	/**
+	 * Crea un nuevo sprint a partir de un nombre y una fecha
+	 * 
+	 * @param name nombre del sprint
+	 * @param cal fecha de inicio
+	 * @return sprint nuevo creado
+	 */
+	public abstract SprintBacklog crearSprint(String name, Calendar cal);
 	
 }
