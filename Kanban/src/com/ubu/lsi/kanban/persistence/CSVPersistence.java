@@ -1,7 +1,7 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.persistence;
@@ -39,7 +39,7 @@ public class CSVPersistence implements Persistence {
 	private int idr;
 	
 	/*
-	 * Mapa de la configuración.
+	 * Mapa de la configuraciï¿½n.
 	 */
 	private Map<String,String> config;
 	
@@ -64,7 +64,7 @@ public class CSVPersistence implements Persistence {
 	private Map<Integer,MiembroEquipo> miembros;
 	
 	/*
-	 * Constructor de la clase CSVPersistence. Protegido, solo puede instanciarlo su fábrica
+	 * Constructor de la clase CSVPersistence. Protegido, solo puede instanciarlo su fï¿½brica
 	 */
 	protected CSVPersistence() {
 		this.requisitos = new HashMap<>();
@@ -139,7 +139,7 @@ public class CSVPersistence implements Persistence {
 	}
 	
 	/*
-	 * Método que carga las tareas de los ficheros de persistencia.
+	 * Mï¿½todo que carga las tareas de los ficheros de persistencia.
 	 * 
 	 * @param: br, BufferReader.
 	 * @throws: IOEXception, PersistenceException.
@@ -166,7 +166,7 @@ public class CSVPersistence implements Persistence {
 	}
 	
 	/*
-	 * Método que carga las relaciones sprint-tareas del fichero de persistencia.
+	 * Mï¿½todo que carga las relaciones sprint-tareas del fichero de persistencia.
 	 * 
 	 * @param: br, BufferReader.
 	 * @throws: IOEXception, PersistenceException.
@@ -197,7 +197,7 @@ public class CSVPersistence implements Persistence {
 	}
 
 	/*
-	 * Método que carga los Sprints de los ficheros de persistencia.
+	 * Mï¿½todo que carga los Sprints de los ficheros de persistencia.
 	 * 
 	 * @param: br, BufferReader.
 	 * @throws: IOEXception, PersistenceException.
@@ -223,7 +223,7 @@ public class CSVPersistence implements Persistence {
 	}
 
 	/*
-	 * Método que carga los miembros de los ficheros de persistencia.
+	 * Mï¿½todo que carga los miembros de los ficheros de persistencia.
 	 * 
 	 * @param: br, BufferReader.
 	 * @throws: IOEXception, PersistenceException.
@@ -244,7 +244,7 @@ public class CSVPersistence implements Persistence {
 	}
 	
 	/*
-	 * Método que carga los Requisitos de los ficheros de persistencia.
+	 * Mï¿½todo que carga los Requisitos de los ficheros de persistencia.
 	 * 
 	 * @param: br, BufferReader.
 	 * @throws: IOEXception, PersistenceException.
@@ -261,7 +261,7 @@ public class CSVPersistence implements Persistence {
 					r = new HistoriaUsuario(Integer.parseInt(requisito[1]), requisito[2], requisito[3], Integer.parseInt(requisito[4]), requisito[5]);
 					break;
 				case 1:
-					r = new HistoriaUsuario(Integer.parseInt(requisito[1]), requisito[2], requisito[3], Integer.parseInt(requisito[4]), requisito[5]);
+					r = new Defecto(Integer.parseInt(requisito[1]), requisito[2], requisito[3], Integer.parseInt(requisito[4]), requisito[5]);
 					break;
 				default:
 					throw new PersistenceException();
@@ -348,7 +348,7 @@ public class CSVPersistence implements Persistence {
 		}catch(IOException ex) {
 			throw new PersistenceException("El fichero "+path+" no se puede escribir",ex);
 		}
-		/*Al crearse bien se copia la versión anterior a .old*/
+		/*Al crearse bien se copia la versiï¿½n anterior a .old*/
 		String[] names = {
 				superpath+File.separator+MIEMBROFILE,
 				superpath+File.separator+REQUISITOFILE,
@@ -378,7 +378,7 @@ public class CSVPersistence implements Persistence {
 	}
 	
 	/*
-	 * Método que guarda en el fichero de persistencia las relaciones de las tareas-sprints.
+	 * Mï¿½todo que guarda en el fichero de persistencia las relaciones de las tareas-sprints.
 	 * 
 	 * @param: bw, BufferedWriter
 	 * @throws: IOEXception
@@ -400,7 +400,7 @@ public class CSVPersistence implements Persistence {
 	}
 
 	/*
-	 * Método que guarda en el fichero de persistencia los Sprints.
+	 * Mï¿½todo que guarda en el fichero de persistencia los Sprints.
 	 * 
 	 * @param: bw, BufferedWriter
 	 * @throws: IOEXception
@@ -417,7 +417,7 @@ public class CSVPersistence implements Persistence {
 	}
 	
 	/*
-	 * Método que guarda en el fichero de persistencia los Requisitos.
+	 * Mï¿½todo que guarda en el fichero de persistencia los Requisitos.
 	 * 
 	 * @param: bw, BufferedWriter
 	 * @throws: IOEXception
@@ -440,7 +440,7 @@ public class CSVPersistence implements Persistence {
 	}
 	
 	/*
-	 * Método que guarda en el fichero de persistencia los Miembros.
+	 * Mï¿½todo que guarda en el fichero de persistencia los Miembros.
 	 * 
 	 * @param: bw, BufferedWriter
 	 * @throws: IOEXception
@@ -454,7 +454,7 @@ public class CSVPersistence implements Persistence {
 	}
 	
 	/*
-	 * Método que guarda en el fichero de persistencia las Tareas.
+	 * Mï¿½todo que guarda en el fichero de persistencia las Tareas.
 	 * 
 	 * @param: bw, BufferedWriter
 	 * @throws: IOEXception
@@ -480,7 +480,7 @@ public class CSVPersistence implements Persistence {
 	}
 	
 	/*
-	 * Nétodo que nos devuelve el siguiente id.
+	 * Nï¿½todo que nos devuelve el siguiente id.
 	 * 
 	 * @param: integer, Set<Integer> de los identificadores.
 	 * @return: entero del siguiente identificador.
