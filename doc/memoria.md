@@ -1,7 +1,10 @@
-Criterios de Diseño
+MEMORIA DE LA PRÁCTICA
 ==
 ###### Diseño de José Miguel Ramírez Sanz y José Luis Garrido Labrador
 ###### **Profesor:** Jesús Alonso Abad
+
+## Introducción
+KanBan es una aplicación de gestión de SCRUM. Altamente extensible, como se explicará a continuación y adaptable a muchos entornos, incluso a sistemas con reglas diferentes. Funciona de manera desacoplada en diversas capas que facilitan la inclusión de nuevas funcionalidades, adaptación de las reglas de negocio.
 
 ## Arquitectura general
 Se ha dividido la aplicación en cuatro capas independientes y relacionadas entre si. Estas son:
@@ -26,9 +29,9 @@ En el caso particular de la implementación **CSVFactory** se ha considerado **S
 ### **Controlador**
 Los controladores del sistema se encargan de gestionar el funcionamiento interno de las tareas para cumplir los requisitos. Funcionan en familias, según las funcionalidades extras que se les quiera añadir, así como los requisitos que se añadan o se cambien.
 
-También tiene la responsabilidad de gestionar la persistencia, siendo el único objeto del diseño que se encarga de la gestión de la persistencia, es por tanto que replica varias funciones de la persistencia, se podría considerar una especie de **Adaptador**, es decir, adapta una interfaz para que el sistema pueda usarlo sin conocer la de la persistencia, sin embargo funciona como una envoltura a las funcionalidades de la persistencia y no como una adpatación real ya que realmente lo que hace es ejecutar tareas referentes a los requisitos antes de modificar los datos almacenados.
+También tiene la responsabilidad de gestionar la persistencia, siendo el único objeto del diseño que se encarga de la gestión de la persistencia, es por tanto que replica varias funciones de la persistencia, se podría considerar una especie de **Adaptador**, es decir, adapta una interfaz para que el sistema pueda usarlo sin conocer la de la persistencia, sin embargo funciona como una envoltura a las funcionalidades de la persistencia y no como una adaptación real ya que realmente lo que hace es ejecutar tareas referentes a los requisitos antes de modificar los datos almacenados.
 
-Se construye mediante una **Fábrica abstracta** (*ControllerFactory*) que se encarga de construir a toda la familia de controladores y encargarse de que todos utilicen el mismo controlador de persistencia.
+Se construye mediante una **Fábrica abstracta** (*ControllerFactory*) que se encarga de construir a toda la familia de controladores y asegurar de que todos utilicen el mismo controlador de persistencia.
 
 ### **Vista**
 Las vistas crean una guía de implementación de la interacción, en semejanza a **MVC** se encarga de comunicarse con el usuario, derivar las peticiones al controlador y mostrar el modelo, aunque en vez de usar un **Observador** para mostrar los cambios continuos en el modelo simplemente muestra a demanda las representaciones de este. 
