@@ -1,8 +1,8 @@
 /*
- * Asignatura: Dise�o y Mantenimiento del Software.
- * 4� Grado en Ingenier�a Inform�tica.
- * Alumnos: Jos� Miguel Ram�rez Sanz y Jos� Luis Garrido Labrador.
- */ 
+ * Asignatura: Diseño y Mantenimiento del Software.
+ * 4º Grado en Ingeniería Informática.
+ * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ */
 
 package com.ubu.lsi.kanban.view.cli;
 
@@ -47,7 +47,7 @@ public class CliBacklog extends ViewBacklog {
 		String fini,nom;
 		Calendar ini = Calendar.getInstance();
 		while(flag) {
-			System.out.print("Desea introducir otra fecha de inicio que no sea el d�a de hoy?[s/n]");
+			System.out.print("Desea introducir otra fecha de inicio que no sea el día de hoy?[s/n]");
 			res = sc.nextLine();
 			if (res.equals("s") || res.equals("n")) {
 				flag = false;
@@ -56,14 +56,14 @@ public class CliBacklog extends ViewBacklog {
 		if (res.equals("n")) {
 			flag = true;
 			while(flag) {
-				System.out.print("Q�e fecha quiere que empiece el sprint? [dd-mm-aaaa]");
+				System.out.print("¿Qué fecha quiere que empiece el sprint? [dd-mm-aaaa]");
 				fini = sc.nextLine();
 				try {
 					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 					ini.setTime(sdf.parse(fini));
 					flag = false;
 				}catch(ParseException ex) {
-					System.out.println("El formato introducido es err�neo");
+					System.out.println("El formato introducido es erróneo");
 				}
 			}
 		}
@@ -102,7 +102,7 @@ public class CliBacklog extends ViewBacklog {
 		Scanner sc = CliMenu.sc;
 		int idt, ids;
 		this.mostrar(pb);
-		System.out.print("Introduzca el n�mero del identificador de la tarea que quiere mover al Sprint: ");
+		System.out.print("Introduzca el número del identificador de la tarea que quiere mover al Sprint: ");
 		idt = sc.nextInt();
 		sc.nextLine();
 		ControllerBacklog cb = cf.getControllerBacklog();
@@ -122,11 +122,11 @@ public class CliBacklog extends ViewBacklog {
 		ControllerBacklog cb = cf.getControllerBacklog();
 		Collection<SprintBacklog> listlog = cb.getList();
 		this.mostrarReducido(listlog);
-		System.out.print("Introduzca el identificador del Sprint del cu�l desea mover un tarea: ");
+		System.out.print("Introduzca el identificador del Sprint del cuál desea mover un tarea: ");
 		ids = sc.nextInt();
 		this.mostrar(cb.getElement(ids));
 		while(flag) {
-			System.out.print("Introduzca el identificador de la lista en la que est� la tarea que quiere mover: PorHacer[0], Haciendo[1], Validaci�n[2], Completada[3]");
+			System.out.print("Introduzca el identificador de la lista en la que est� la tarea que quiere mover: PorHacer[0], Haciendo[1], Validación[2], Completada[3]");
 			idestado = sc.nextInt();
 			if (idestado >= 0 && idestado<=3) {
 				flag = false;
@@ -140,7 +140,7 @@ public class CliBacklog extends ViewBacklog {
 		System.out.print("Introduzca el identificador de la tarea que quiere mover: ");
 		idtarea = sc.nextInt();
 		while(flag) {
-			System.out.print("Introduzca el identificador de la lista a donde quiere mover la tarea seleccionada: PorHacer[0], Haciendo[1], Validaci�n[2], Completada[3]");
+			System.out.print("Introduzca el identificador de la lista a donde quiere mover la tarea seleccionada: PorHacer[0], Haciendo[1], Validación[2], Completada[3]");
 			idestfinal = sc.nextInt();
 			if (idestfinal >= 0 && idestfinal<=3) {
 				flag = false;

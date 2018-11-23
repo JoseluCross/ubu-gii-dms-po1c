@@ -51,7 +51,7 @@ public class CliTarea extends ViewTarea {
 		ControllerMiembro cm = cf.getControllerMiembro();
 		System.out.print("Introduzca el t�tulo que quiere dar a la nueva tarea: ");
 		titulo = sc.nextLine();
-		System.out.print("Introduzca la descripci�n de la tarea: ");
+		System.out.print("Introduzca la descripción de la tarea: ");
 		desc = sc.nextLine();
 		System.out.print("Introduzca el coste de la tarea: ");
 		coste = sc.nextInt();
@@ -88,7 +88,7 @@ public class CliTarea extends ViewTarea {
 			this.mostrar(tarea);
 			while (flag) {
 				System.out.print(
-						"Introduzca el valor relacionado con el cambio que desea hacer: T�tulo[0], Descripci�n[1], Coste[2], Beneficio[3], Requisito[4] y Miembro[5]");
+						"Introduzca el valor relacionado con el cambio que desea hacer: Título[0], Descripción[1], Coste[2], Beneficio[3], Requisito[4] y Miembro[5]");
 				opc = sc.nextInt();
 				if (opc >= 0 && opc <= 5) {
 					flag = false;
@@ -96,13 +96,13 @@ public class CliTarea extends ViewTarea {
 			}
 			switch (opc) {
 			case 0:
-				System.out.print("Introduzca el nuevo t�tulo que se quiere dar a la tarea. (el t�tulo actual es: "
+				System.out.print("Introduzca el nuevo título que se quiere dar a la tarea. (el título actual es: "
 						+ tarea.getTitulo() + ")");
 				tarea.setTitulo(sc.nextLine());
 				break;
 			case 1:
 				System.out.print(
-						"Introduzca la nueva descripci�n que se quiere dar a la tarea. (la descripci�n actual es: "
+						"Introduzca la nueva descripción que se quiere dar a la tarea. (la descripción actual es: "
 								+ tarea.getDescripcion() + ")");
 				tarea.setDescripcion(sc.nextLine());
 				break;
@@ -160,8 +160,8 @@ public class CliTarea extends ViewTarea {
 	public void mostrar(Tarea tarea) {
 		System.out.println("TAREA" + tarea.getId() + "{");
 		System.out.println("Identificador: " + tarea.getId());
-		System.out.println("T�tulo: " + tarea.getTitulo());
-		System.out.println("Descripci�n: " + tarea.getDescripcion());
+		System.out.println("Título: " + tarea.getTitulo());
+		System.out.println("Descripción: " + tarea.getDescripcion());
 		System.out.println("Coste: " + tarea.getCoste());
 		System.out.println("Beneficio: " + tarea.getBeneficio());
 		vr.mostrar(tarea.getRequisito());
@@ -176,7 +176,7 @@ public class CliTarea extends ViewTarea {
 
 	@Override
 	public void mostratTareas(Collection<Tarea> tareas) {
-		System.out.println("IDENTIFICADOR\tT�TULO");
+		System.out.println("IDENTIFICADOR\tTÍTULO");
 		for (Tarea tarea : tareas) {
 			this.mostrarReducido(tarea);
 		}

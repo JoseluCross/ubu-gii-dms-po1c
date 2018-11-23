@@ -42,13 +42,13 @@ public class CliRequisito extends ViewRequisito {
 			if (tipo == 0 || tipo == 1) {
 				flag = false;
 			} else {
-				System.out.println("Se ha introducido mal el n�mero, ha de ser 0 o 1");
+				System.out.println("Se ha introducido mal el número, ha de ser 0 o 1");
 			}
 		}
 		sc.nextLine();
 		System.out.print("Introduzca el nombre que le quiere dar al nuevo Requisito: ");
 		nombre = sc.nextLine();
-		System.out.print("Introduzca la descripci�n que le quiere dar al nuevo Requisito: ");
+		System.out.print("Introduzca la descripción que le quiere dar al nuevo Requisito: ");
 		desc = sc.nextLine();
 		System.out.print("Introduzca la prioridad que le quiere dar el nuevo Requisito: ");
 		prioridad = sc.nextInt();
@@ -56,7 +56,7 @@ public class CliRequisito extends ViewRequisito {
 		if (tipo == 0) {
 			System.out.print("Introduzca el actor que se quiere dar a la Historia de usuario: ");
 		} else {
-			System.out.print("Introduzca el commit con el que est� relacionado el Defecto: ");
+			System.out.print("Introduzca el commit con el que está relacionado el Defecto: ");
 		}
 		of = sc.nextLine();
 		return cr.nuevoRequisito(tipo, nombre, desc, prioridad, of);

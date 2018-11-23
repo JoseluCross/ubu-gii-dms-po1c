@@ -1,7 +1,7 @@
 /*
- * Asignatura: Dise�o y Mantenimiento del Software.
- * 4� Grado en Ingenier�a Inform�tica.
- * Alumnos: Jos� Miguel Ram�rez Sanz y Jos� Luis Garrido Labrador.
+ * Asignatura: Diseño y Mantenimiento del Software.
+ * 4º Grado en Ingeniería Informática.
+ * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.view.cli;
@@ -59,10 +59,10 @@ public class CliMenu extends Menu{
 	@Override
 	public boolean start() {
 		int option = 0;
-		System.out.println("Bienvenido a KanBan, la mejor aplicaci�n del mundo");
+		System.out.println("Bienvenido a KanBan, la mejor aplicación del mundo");
 		do {
 			try {
-				System.out.println("\nElija una opci�n");
+				System.out.println("\nElija una opción");
 				
 				System.out.println(" [1] Crear Tarea");
 				System.out.println(" [2] Modificar Tarea");
@@ -77,9 +77,9 @@ public class CliMenu extends Menu{
 				System.out.println(" [11] Ver Requisitos");
 				System.out.println(" [12] Ver Miembros");
 				System.out.println("----------------------------");
-				System.out.println(" [0] Cerrar aplicaci�n");
+				System.out.println(" [0] Cerrar aplicación");
 				
-				System.out.print("Tu opci�n: ");
+				System.out.print("Tu opción: ");
 				option = sc.nextInt();
 				sc.nextLine();
 				if(option != 0)
@@ -98,7 +98,7 @@ public class CliMenu extends Menu{
 	}
 	
 	/*
-	 * M�todo que nos permite dar la opci�n de guardar los cambios que hemos hecho en el sistema.
+	 * Método que nos permite dar la opción de guardar los cambios que hemos hecho en el sistema.
 	 * 
 	 * @return: true si guardamos los cambios.
 	 */
@@ -176,7 +176,7 @@ public class CliMenu extends Menu{
 			vm.mostrarMiembros(cf.getControllerMiembro().getList());
 			break;
 		default:
-			System.out.println("Pedazo subnormal, te he dicho un n�mero de 0 al 12");
+			System.err.println("Por favor, elige un número de 0 al 12");
 		}
 	}
 	

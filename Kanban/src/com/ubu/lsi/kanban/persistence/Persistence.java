@@ -1,7 +1,7 @@
 /*
- * Asignatura: Dise�o y Mantenimiento del Software.
- * 4� Grado en Ingenier�a Inform�tica.
- * Alumnos: Jos� Miguel Ram�rez Sanz y Jos� Luis Garrido Labrador.
+ * Asignatura: Diseño y Mantenimiento del Software.
+ * 4º Grado en Ingeniería Informática.
+ * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.persistence;
