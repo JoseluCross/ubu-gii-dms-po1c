@@ -1,7 +1,7 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.persistence;
@@ -15,28 +15,28 @@ import com.ubu.lsi.kanban.model.*;
 public interface Persistence {
 	
 	/*
-	 * Método para inicializar la persistencia.
+	 * Mï¿½todo para inicializar la persistencia.
 	 * 
 	 * @throws: PersistenceException.
 	 */
 	void start() throws PersistenceException;
 	
 	/*
-	 * Método que guarda en los ficheros de persistencia todos los datos al finalizar la ejecución (Opción 0 del menú).
+	 * Mï¿½todo que guarda en los ficheros de persistencia todos los datos al finalizar la ejecuciï¿½n (Opciï¿½n 0 del menï¿½).
 	 * 
 	 * @throws: PersistenceException;
 	 */
 	void save() throws PersistenceException;
 	
 	/*
-	 * Método para realizar la configuración
+	 * Mï¿½todo para realizar la configuraciï¿½n
 	 * 
 	 * @param: options, Mapa<String,String> con las opciones.
 	 */
-	void config(Map<String,String> options);
+	void config(Map<String,String> options) throws PersistenceException;
 	
 	/*
-	 * Método para cargar una Tarea por su identificador;
+	 * Mï¿½todo para cargar una Tarea por su identificador;
 	 * 
 	 * @param: idt, entero que representa el identificador de la Tarea.
 	 * @return: Tarea que coincide con el identificador.
@@ -44,14 +44,14 @@ public interface Persistence {
 	Tarea loadTarea(int idt);
 	
 	/*
-	 * Método que nos devuelve el siguiente identificador de la Tarea.
+	 * Mï¿½todo que nos devuelve el siguiente identificador de la Tarea.
 	 * 
 	 * @return: siguiente valor del identificador.
 	 */
 	int newIdt();
 	
 	/*
-	 * Método que nos carga un Sprint.
+	 * Mï¿½todo que nos carga un Sprint.
 	 * 
 	 * @param: ids, entero que representa el identificador del Sprint.
 	 * @return: SprintBacklog que coincide con el identificador.
@@ -59,14 +59,14 @@ public interface Persistence {
 	SprintBacklog loadSprint(int ids);
 	
 	/*
-	 * Método que nos devuelve el siguiente identificador del Sprint.
+	 * Mï¿½todo que nos devuelve el siguiente identificador del Sprint.
 	 * 
 	 * @return: siguiente valor del identificador.
 	 */
 	int newIds();
 	
 	/*
-	 * Mñetodo que carga un Miembro.
+	 * Mï¿½etodo que carga un Miembro.
 	 * 
 	 * @param: idm, entero que representa el identificador del miembro.
 	 * @return: Miembro que coincide con el identificador.
@@ -74,14 +74,14 @@ public interface Persistence {
 	MiembroEquipo loadMiembro(int idm);
 	
 	/*
-	 * Método que nos devuelve el siguiente identificador del Miembro.
+	 * Mï¿½todo que nos devuelve el siguiente identificador del Miembro.
 	 * 
 	 * @return: siguiente valor del identificador.
 	 */
 	int newIdm();
 	
 	/*
-	 * Método que carga un Requisito.
+	 * Mï¿½todo que carga un Requisito.
 	 * 
 	 * @param: idr, entero que representa el identificador del Requisito.
 	 * @return: Requisito que coincide con el identificador.
@@ -89,35 +89,35 @@ public interface Persistence {
 	Requisito loadRequisito(int idr);
 	
 	/*
-	 * Método que nos devuelve el siguiente identificador del Requisito.
+	 * Mï¿½todo que nos devuelve el siguiente identificador del Requisito.
 	 * 
 	 * @return: siguiente valor del identificador.
 	 */
 	int newIdr();
 	
 	/*
-	 * Método que devuelve los Sprints.
+	 * Mï¿½todo que devuelve los Sprints.
 	 * 
 	 * @return: Collection<SprintBacklog> conjunto de Sprints.
 	 */
 	Collection<SprintBacklog> loadSprints();
 	
 	/*
-	 * Método que devuelve las Tareas.
+	 * Mï¿½todo que devuelve las Tareas.
 	 * 
 	 * @return: Collection<Tarea> conjunto de Tareas.
 	 */
 	Collection<Tarea> loadTareas();
 	
 	/*
-	 * Método que devuelve los Miembros.
+	 * Mï¿½todo que devuelve los Miembros.
 	 * 
 	 * @return: Collection<Miembro> conjunto de Miembros.
 	 */
 	Collection<MiembroEquipo> loadMiembros();
 	
 	/*
-	 * Método que devuelve los Requisitos.
+	 * Mï¿½todo que devuelve los Requisitos.
 	 * 
 	 * @return: Collection<Requisito> conjunto de Requisitos.
 	 */

@@ -275,8 +275,17 @@ public class CSVPersistence implements Persistence {
 	}
 
 	@Override
-	public void config(Map<String, String> options) {
-		this.config = options;
+	public void config(Map<String, String> options) throws PersistenceException {
+		try {
+			String route = options.get("folder");
+			route = route.replaceAll("\\$home\\$", System.getProperty("user.home"));
+			route = route.replaceAll("\\/", File.separator);
+			options.put("folder",route);
+			this.config = options;
+			System.out.println(route);
+		}catch(NullPointerException ex) {
+			throw new PersistenceException("El atributo folder no existe en la configuración");
+		}
 	}
 
 	@Override

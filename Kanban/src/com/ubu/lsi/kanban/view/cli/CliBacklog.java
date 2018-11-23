@@ -24,11 +24,6 @@ import com.ubu.lsi.kanban.view.ViewTarea;
 public class CliBacklog extends ViewBacklog {
 	
 	/*
-	 * ControllerFactory.
-	 */
-	private ControllerFactory cf;
-	
-	/*
 	 * ViewTarea.
 	 */
 	private ViewTarea vt;

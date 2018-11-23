@@ -19,11 +19,6 @@ import com.ubu.lsi.kanban.view.*;
 public class CliTarea extends ViewTarea {
 
 	/*
-	 * ControllerFactory.
-	 */
-	private ControllerFactory cf;
-	
-	/*
 	 * ViewMiembro.
 	 */
 	private ViewMiembro vm;

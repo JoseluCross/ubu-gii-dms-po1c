@@ -1,7 +1,7 @@
 /*
- * Asignatura: Diseño y Mantenimiento del Software.
- * 4º Grado en Ingeniería Informática.
- * Alumnos: José Miguel Ramírez Sanz y José Luis Garrido Labrador.
+ * Asignatura: Diseï¿½o y Mantenimiento del Software.
+ * 4ï¿½ Grado en Ingenierï¿½a Informï¿½tica.
+ * Alumnos: Josï¿½ Miguel Ramï¿½rez Sanz y Josï¿½ Luis Garrido Labrador.
  */
 
 package com.ubu.lsi.kanban.start;
@@ -12,11 +12,12 @@ import com.ubu.lsi.kanban.controller.basic.BasicControllerFactory;
 import com.ubu.lsi.kanban.persistence.*;
 import com.ubu.lsi.kanban.view.Menu;
 import com.ubu.lsi.kanban.view.cli.CliMenu;
+import com.jkanetwork.kson.*;
 
-import java.io.File;
+import java.io.IOException;
 
 /*
- * Clase para la ejecución.
+ * Clase para la ejecuciï¿½n.
  */
 public class Main {
 
@@ -28,7 +29,7 @@ public class Main {
 	/*
 	 * main.
 	 */
-	public static void main(String[] args) throws PersistenceException {
+	public static void main(String[] args) throws PersistenceException, KsonException, IOException {
 		ControllerFactory cf = config();
 		Menu menu = new CliMenu(cf);
 		boolean save = menu.start();
@@ -37,16 +38,15 @@ public class Main {
 	}
 	
 	/*
-	 * Configuración.
+	 * Configuraciï¿½n.
 	 * 
 	 * @return: ControllerFactory.
 	 * @throws PersistenceException.
 	 */
-	private static ControllerFactory config() throws PersistenceException {
+	private static ControllerFactory config() throws PersistenceException, KsonException, IOException {
 		persist = CSVPersistenceFactory.getInstance().getPersistence();
 		
-		Map<String,String> config = new HashMap<>();
-		config.put("folder", System.getProperty("user.home")+File.separator+".config"+File.separator+"KanBan");
+		Map<String,String> config = Kson.parse("settings.kson");
 		persist.config(config);
 		persist.start();
 		

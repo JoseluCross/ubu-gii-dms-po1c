@@ -43,11 +43,6 @@ public class CliMenu extends Menu{
 	protected static Scanner sc;
 
 	/*
-	 * ControllerFactory.
-	 */
-	private ControllerFactory cf;
-	
-	/*
 	 * Constructor.
 	 *
 	 * @param: cf, ControlllerFactory.
@@ -65,9 +60,8 @@ public class CliMenu extends Menu{
 	public boolean start() {
 		int option = 0;
 		System.out.println("Bienvenido a KanBan, la mejor aplicaci�n del mundo");
-		try {
-			do {
-				
+		do {
+			try {
 				System.out.println("\nElija una opci�n");
 				
 				System.out.println(" [1] Crear Tarea");
@@ -90,12 +84,13 @@ public class CliMenu extends Menu{
 				sc.nextLine();
 				if(option != 0)
 					executeOption(option);
+			}catch(Exception ex) {
+				System.err.println("Error "+ex.getMessage());
+				ex.printStackTrace();
+			}
 				
-				
-			}while(option != 0);	
-		}catch(Exception ex) {
-			System.err.println("Error "+ex.getMessage());
-		}
+		}while(option != 0);	
+		
 		
 		boolean sq = saveQ();
 		sc.close();

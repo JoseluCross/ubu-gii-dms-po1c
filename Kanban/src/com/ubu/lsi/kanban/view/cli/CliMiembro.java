@@ -18,11 +18,7 @@ import com.ubu.lsi.kanban.view.ViewMiembro;
  */
 public class CliMiembro extends ViewMiembro {
 
-	/*
-	 * ControllerFactory.
-	 */
-	private ControllerFactory cf;
-	
+
 	/*
 	 * Constructor protected.
 	 * 

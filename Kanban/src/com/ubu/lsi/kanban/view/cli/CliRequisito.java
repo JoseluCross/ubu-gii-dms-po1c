@@ -21,11 +21,6 @@ import com.ubu.lsi.kanban.view.ViewRequisito;
 public class CliRequisito extends ViewRequisito {
 
 	/*
-	 * ControllerFactory.
-	 */
-	private ControllerFactory cf;
-	
-	/*
 	 * Constructor protected.
 	 * 
 	 * @param: cf, ControllerFactory.
@@ -79,7 +74,7 @@ public class CliRequisito extends ViewRequisito {
 
 	@Override
 	public void mostrarRequisitos(Collection<Requisito> requisitos) {
-		System.out.println("IDENTIFICADOR\tNOMBRE\tPRIORIDAD\tTIPO\t\t\tDATOS ADICIONALES");
+		System.out.println("ID\tNOMBRE\t\tPRIORIDAD\tTIPO\t\t\tDATOS ADICIONALES");
 		for (Requisito requisito : requisitos) {
 			this.mostrarReducido(requisito);
 		}
@@ -87,13 +82,13 @@ public class CliRequisito extends ViewRequisito {
 
 	@Override
 	public void mostrarReducido(Requisito requisito) {
-		System.out.print(requisito.getId() + "\t\t" + requisito.getNombre() + "\t\t" + requisito.getPrioridad());
+		System.out.print(requisito.getId() + "\t" + requisito.getNombre() + "\t\t" + requisito.getPrioridad());
 		if (requisito instanceof HistoriaUsuario) {
 			HistoriaUsuario aux = (HistoriaUsuario) requisito;
 			System.out.println("\t\tHistoria de Usuario\tActor: " + aux.getActor());
 		} else {
 			Defecto aux2 = (Defecto) requisito;
-			System.out.println("\tDefecto\t\t\tcommit: " + aux2.getCommit());
+			System.out.println("\t\tDefecto\t\t\tcommit: " + aux2.getCommit());
 		}
 	}
 }
