@@ -87,6 +87,7 @@ public class CliMenu extends Menu{
 			}catch(Exception ex) {
 				System.err.println("Error "+ex.getMessage());
 				ex.printStackTrace();
+				sc.nextLine();
 			}
 				
 		}while(option != 0);	

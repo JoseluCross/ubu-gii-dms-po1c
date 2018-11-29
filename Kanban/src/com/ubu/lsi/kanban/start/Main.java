@@ -44,11 +44,13 @@ public class Main {
 	 * @throws PersistenceException.
 	 */
 	private static ControllerFactory config() throws PersistenceException, KsonException, IOException {
-		persist = CSVPersistenceFactory.getInstance().getPersistence();
-		
 		Map<String,String> config = Kson.parse("settings.kson");
+		
+		persist = SQLitePersistenceFactory.getInstance().getPersistence();
 		persist.config(config);
 		persist.start();
+		
+
 		
 		ControllerFactory cf = new BasicControllerFactory(persist);
 		return cf;

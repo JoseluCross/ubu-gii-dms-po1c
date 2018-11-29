@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 /*
  * Clase para realizar la persistencia en ficheros CSV.
  */
-public class CSVPersistence implements Persistence {
+public class CSVPersistence extends Persistence {
 
 	/*
 	 * Fichero csv.
@@ -30,47 +30,12 @@ public class CSVPersistence implements Persistence {
 	private static final String SPRINTTAREA = "sprint-tareas.csv";
 	private static final String SPLIT = ",";
 	
-	/*
-	 * Identificadores de Tarea, Sprint, Miembro y Requisito.
-	 */
-	private int idt;
-	private int ids;
-	private int idm;
-	private int idr;
-	
-	/*
-	 * Mapa de la configuración.
-	 */
-	private Map<String,String> config;
-	
-	/*
-	 * Mapa de los Requisitos con su identificador.
-	 */
-	private Map<Integer,Requisito> requisitos;
-	
-	/*
-	 * Mapa de las Tareas con su identifcador.
-	 */
-	private Map<Integer,Tarea> tareas;
-	
-	/*
-	 * Mapa de los Sprints con su identificador.
-	 */
-	private Map<Integer,SprintBacklog> sprints;
-	
-	/*
-	 * Mapa de los Miembros con su identificador.
-	 */
-	private Map<Integer,MiembroEquipo> miembros;
-	
+		
 	/*
 	 * Constructor de la clase CSVPersistence. Protegido, solo puede instanciarlo su fábrica
 	 */
 	protected CSVPersistence() {
-		this.requisitos = new HashMap<>();
-		this.tareas = new HashMap<>();
-		this.sprints = new HashMap<>();
-		this.miembros = new HashMap<>();
+		super();
 	}
 	
 	@Override
@@ -275,41 +240,6 @@ public class CSVPersistence implements Persistence {
 	}
 
 	@Override
-	public void config(Map<String, String> options) throws PersistenceException {
-		try {
-			String route = options.get("folder");
-			//12route = route.replaceAll("\\/", File.separator);
-			route = System.getProperty("user.home")+File.separator+route;
-			System.out.println(route);
-
-			options.put("folder",route);
-			this.config = options;
-		}catch(NullPointerException ex) {
-			throw new PersistenceException("El atributo folder no existe en la configuración");
-		}
-	}
-
-	@Override
-	public Tarea loadTarea(int idt) {
-		return tareas.get(idt);
-	}
-
-	@Override
-	public SprintBacklog loadSprint(int ids) {
-		return sprints.get(ids);
-	}
-
-	@Override
-	public MiembroEquipo loadMiembro(int idm) {
-		return this.miembros.get(idm);
-	}
-
-	@Override
-	public Requisito loadRequisito(int idr) {
-		return this.requisitos.get(idr);
-	}
-
-	@Override
 	public void save() throws PersistenceException {
 		/*Primero se crean los ficheros .csv.new*/
 		if (config == null) 
@@ -504,68 +434,5 @@ public class CSVPersistence implements Persistence {
 		return max;
 	}
 
-	@Override
-	public int newIdt() {
-		this.idt++;
-		return idt;
-	}
-
-	@Override
-	public int newIds() {
-		this.ids++;
-		return ids;
-	}
-
-	@Override
-	public int newIdm() {
-		this.idm++;
-		return this.idm;
-	}
-
-	@Override
-	public int newIdr() {
-		this.idr++;
-		return idr;
-	}
-
-	@Override
-	public void nuevaTarea(Tarea t) {
-		this.tareas.put(t.getId(), t);	
-	}
-
-	@Override
-	public void nuevoMiembro(MiembroEquipo m) {
-		this.miembros.put(m.getId(), m);
-	}
-
-	@Override
-	public void nuevoRequisito(Requisito r) {
-		this.requisitos.put(r.getId(), r);
-	}
-
-	@Override
-	public void nuevoSprint(SprintBacklog s) {
-		this.sprints.put(s.getId(), s);
-	}
-
-	@Override
-	public Collection<SprintBacklog> loadSprints() {
-		return this.sprints.values();
-	}
-
-	@Override
-	public Collection<Tarea> loadTareas() {
-		return this.tareas.values();
-	}
-
-	@Override
-	public Collection<MiembroEquipo> loadMiembros() {
-		return this.miembros.values();
-	}
-
-	@Override
-	public Collection<Requisito> loadRequisitos() {
-		return this.requisitos.values();
-	}
-
+	
 }
