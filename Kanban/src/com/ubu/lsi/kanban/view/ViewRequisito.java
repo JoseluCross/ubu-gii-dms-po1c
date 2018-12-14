@@ -15,12 +15,6 @@ import com.ubu.lsi.kanban.model.*;
  */
 public abstract class ViewRequisito extends View<Requisito>{
 	
-	/*
-	 * M�todo que nos permite crear un Requisito.
-	 * 
-	 * @return: true si el Requisito se ha creado bien.
-	 */
-	public abstract boolean crearRequisito();
 	
 	/*
 	 * Muestra un conjunto de Requisitos.
@@ -36,11 +30,5 @@ public abstract class ViewRequisito extends View<Requisito>{
 	 */
 	public abstract void mostrarReducido(Requisito requisito);
 	
-	/**
-	 * {@inheritDoc}
-	 * @param cf {@inheritDoc}
-	 */
-	protected ViewRequisito(ControllerFactory cf) {
-		super(cf);
-	}
+
 }

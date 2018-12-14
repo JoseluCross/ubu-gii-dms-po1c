@@ -418,21 +418,6 @@ public class CSVPersistence extends Persistence {
 		}
 		bw.close();
 	}
-	
-	/*
-	 * Método que nos devuelve el siguiente id.
-	 * 
-	 * @param: integer, Set<Integer> de los identificadores.
-	 * @return: entero del siguiente identificador.
-	 */
-	private int newID(Set<Integer> integer) {
-		int max=0;
-		for (Integer it : integer) {
-			if (it.intValue() > max)
-				max = it.intValue();
-		}
-		return max;
-	}
 
 	
 }

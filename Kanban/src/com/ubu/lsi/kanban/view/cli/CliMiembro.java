@@ -19,27 +19,18 @@ import com.ubu.lsi.kanban.view.ViewMiembro;
 public class CliMiembro extends ViewMiembro {
 
 
-	/*
-	 * Constructor protected.
-	 * 
-	 * @param: cf, ControllerFactory
-	 */
-	protected CliMiembro(ControllerFactory cf) {
-		super(cf);
+	private static CliMiembro instance;
+	
+	private CliMiembro() {
+		
 	}
 	
-	@Override
-	public boolean crearMiembro() {
-		Scanner sc = CliMenu.sc;
-		ControllerMiembro cm = cf.getControllerMiembro();
-		String nombre, puesto;
-		System.out.print("Introduzca el nombre del nuevo Miembro: ");
-		nombre = sc.nextLine();
-		System.out.print("Introduzca el puesto del nuevo Miembro: ");
-		puesto = sc.nextLine();
-		return cm.nuevoMiembro(nombre, puesto);
+	public static CliMiembro getInstance() {
+		if (instance == null)
+			instance = new CliMiembro();
+		return instance;
 	}
-
+	
 	@Override
 	public void mostrar(MiembroEquipo miembro) {
 		System.out.println("MIEMBRO " + miembro.getId() +"{");

@@ -16,13 +16,6 @@ import com.ubu.lsi.kanban.model.*;
 public abstract class ViewMiembro extends View<MiembroEquipo>{
 	
 	/*
-	 * M�todo que nos permite crear un nuevo Miembor de Equipo.
-	 * 
-	 * @return: true si el miembro se ha creado correctamente.
-	 */
-	public abstract boolean crearMiembro();
-	
-	/*
 	 * Muestra un conjunto de miembros.
 	 * 
 	 * @param: miembros, Collection<MiembroEquipo> conjunto de miembros a imprimir.
@@ -36,11 +29,4 @@ public abstract class ViewMiembro extends View<MiembroEquipo>{
 	 */
 	public abstract void mostrarReducido(MiembroEquipo miembro);
 	
-	/**
-	 * {@inheritDoc}
-	 * @param cf {@inheritDoc}
-	 */
-	protected ViewMiembro(ControllerFactory cf) {
-		super(cf);
-	}
 }

@@ -243,5 +243,20 @@ public abstract class Persistence {
 	public void nuevoSprint(SprintBacklog s) {
 		this.sprints.put(s.getId(), s);
 	}
+	
+	/*
+	 * Método que nos devuelve el siguiente id.
+	 * 
+	 * @param: integer, Set<Integer> de los identificadores.
+	 * @return: entero del siguiente identificador.
+	 */
+	protected int newID(Set<Integer> integer) {
+		int max=0;
+		for (Integer it : integer) {
+			if (it.intValue() > max)
+				max = it.intValue();
+		}
+		return max;
+	}
 
 }

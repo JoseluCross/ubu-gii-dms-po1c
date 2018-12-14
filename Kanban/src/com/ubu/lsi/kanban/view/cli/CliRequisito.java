@@ -20,46 +20,16 @@ import com.ubu.lsi.kanban.view.ViewRequisito;
  */
 public class CliRequisito extends ViewRequisito {
 
-	/*
-	 * Constructor protected.
-	 * 
-	 * @param: cf, ControllerFactory.
-	 */
-	protected CliRequisito(ControllerFactory cf) {
-		super(cf);
+	private static CliRequisito instance;
+	
+	private CliRequisito() {
+		
 	}
-
-	@Override
-	public boolean crearRequisito() {
-		Scanner sc = CliMenu.sc;
-		ControllerRequisito cr = cf.getControllerRequisito();
-		String nombre, desc, of;
-		int prioridad, tipo = 0;
-		boolean flag = true;
-		while (flag) {
-			System.out.print("Desea que su Requisito sea una Historia de Usuario [0] o Defecto[1]: ");
-			tipo = sc.nextInt();
-			if (tipo == 0 || tipo == 1) {
-				flag = false;
-			} else {
-				System.out.println("Se ha introducido mal el número, ha de ser 0 o 1");
-			}
-		}
-		sc.nextLine();
-		System.out.print("Introduzca el nombre que le quiere dar al nuevo Requisito: ");
-		nombre = sc.nextLine();
-		System.out.print("Introduzca la descripción que le quiere dar al nuevo Requisito: ");
-		desc = sc.nextLine();
-		System.out.print("Introduzca la prioridad que le quiere dar el nuevo Requisito: ");
-		prioridad = sc.nextInt();
-		sc.nextLine();
-		if (tipo == 0) {
-			System.out.print("Introduzca el actor que se quiere dar a la Historia de usuario: ");
-		} else {
-			System.out.print("Introduzca el commit con el que está relacionado el Defecto: ");
-		}
-		of = sc.nextLine();
-		return cr.nuevoRequisito(tipo, nombre, desc, prioridad, of);
+	
+	public static CliRequisito getInstance() {
+		if (instance == null)
+			instance = new CliRequisito();
+		return instance;
 	}
 
 	@Override
@@ -67,7 +37,7 @@ public class CliRequisito extends ViewRequisito {
 		System.out.println("REQUISITO" + requisito.getId() + "{");
 		System.out.println("Identificador: " + requisito.getId());
 		System.out.println("Nombre: " + requisito.getNombre());
-		System.out.println("Descripci�n: " + requisito.getDescripcion());
+		System.out.println("Descripción: " + requisito.getDescripcion());
 		System.out.println("Prioridad: " + requisito.getPrioridad());
 		System.out.println("}");
 	}

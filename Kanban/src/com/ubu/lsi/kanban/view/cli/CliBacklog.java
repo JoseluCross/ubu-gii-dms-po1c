@@ -23,55 +23,17 @@ import com.ubu.lsi.kanban.view.ViewTarea;
  */
 public class CliBacklog extends ViewBacklog {
 	
-	/*
-	 * ViewTarea.
-	 */
-	private ViewTarea vt;
 	
-	/*
-	 * Constructor protected.
-	 * 
-	 * @param1: cf, ControllerFactory.
-	 * @param2: vt, ViewTarea.
-	 */
-	protected CliBacklog(ControllerFactory cf, ViewTarea vt) {
-		super(cf);
-		this.vt = vt;
+	private static CliBacklog instance;
+	
+	private CliBacklog() {
+		
 	}
 	
-	@Override
-	public void nuevoSprint() {
-		Scanner sc = CliMenu.sc;
-		boolean flag = true;
-		String res = null;
-		String fini,nom;
-		Calendar ini = Calendar.getInstance();
-		while(flag) {
-			System.out.print("Desea introducir otra fecha de inicio que no sea el día de hoy?[s/n]");
-			res = sc.nextLine();
-			if (res.equals("s") || res.equals("n")) {
-				flag = false;
-			}
-		}
-		if (res.equals("n")) {
-			flag = true;
-			while(flag) {
-				System.out.print("¿Qué fecha quiere que empiece el sprint? [dd-mm-aaaa]");
-				fini = sc.nextLine();
-				try {
-					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-					ini.setTime(sdf.parse(fini));
-					flag = false;
-				}catch(ParseException ex) {
-					System.out.println("El formato introducido es erróneo");
-				}
-			}
-		}
-		System.out.print("Introduzca el nombre del Sprint: ");
-		nom = sc.nextLine();
-		ControllerBacklog cb = cf.getControllerBacklog();
-		SprintBacklog sp = cb.crearSprint(nom, ini);
-		this.mostrar(sp);
+	public static CliBacklog getInstance() {
+		if (instance == null)
+			instance = new CliBacklog();
+		return instance;
 	}
 
 	@Override
@@ -87,69 +49,13 @@ public class CliBacklog extends ViewBacklog {
 			if(log instanceof SprintBacklog) {
 				System.out.println(spt[i]);
 			}
-			System.out.println("IDENTIFICADOR\tT�TULO");
+			System.out.println("IDENTIFICADOR\tTÍTULO");
 			for( Tarea t : st) {
-				vt.mostrarReducido(t);
+				CliTarea.getInstance().mostrarReducido(t);
 			}
 			i++;
 		}
 			
-	}
-
-	@Override
-	public boolean moverProductSprint() {
-		ProductBacklog pb = ProductBacklog.getInstance();
-		Scanner sc = CliMenu.sc;
-		int idt, ids;
-		this.mostrar(pb);
-		System.out.print("Introduzca el número del identificador de la tarea que quiere mover al Sprint: ");
-		idt = sc.nextInt();
-		sc.nextLine();
-		ControllerBacklog cb = cf.getControllerBacklog();
-		Collection<SprintBacklog> col = cb.getList();
-		this.mostrarReducido(col);
-		System.out.print("Introduzca el identificador del Sprint al que quieres mover esta tarea: ");
-		ids = sc.nextInt();
-		sc.nextLine();
-		return cb.tareaSprint(ids, idt);
-	}
-
-	@Override
-	public boolean moverSprint() {
-		Scanner sc = CliMenu.sc;
-		int ids,idestado=0,idestfinal=0,idtarea;
-		boolean flag = true;
-		ControllerBacklog cb = cf.getControllerBacklog();
-		Collection<SprintBacklog> listlog = cb.getList();
-		this.mostrarReducido(listlog);
-		System.out.print("Introduzca el identificador del Sprint del cuál desea mover un tarea: ");
-		ids = sc.nextInt();
-		this.mostrar(cb.getElement(ids));
-		while(flag) {
-			System.out.print("Introduzca el identificador de la lista en la que est� la tarea que quiere mover: PorHacer[0], Haciendo[1], Validación[2], Completada[3]");
-			idestado = sc.nextInt();
-			if (idestado >= 0 && idestado<=3) {
-				flag = false;
-			}else {
-				System.out.println("Ha introducido mal el identifiacador del estado");
-			}
-		}
-		sc.nextLine();
-		flag = true;
-		//this.mostrar(cb.getElement(ids));
-		System.out.print("Introduzca el identificador de la tarea que quiere mover: ");
-		idtarea = sc.nextInt();
-		while(flag) {
-			System.out.print("Introduzca el identificador de la lista a donde quiere mover la tarea seleccionada: PorHacer[0], Haciendo[1], Validación[2], Completada[3]");
-			idestfinal = sc.nextInt();
-			if (idestfinal >= 0 && idestfinal<=3) {
-				flag = false;
-			}else {
-				System.out.println("Ha introducido mal el identifiacador del estado");
-			}
-		}
-		sc.nextLine();
-		return cb.moverEnSprint(ids, SprintStatus.values()[idestado], SprintStatus.values()[idestfinal], idtarea);
 	}
 
 	@Override

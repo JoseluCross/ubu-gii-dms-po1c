@@ -1,7 +1,6 @@
 package com.ubu.lsi.kanban.persistence;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,8 +9,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Map;
 
 import com.ubu.lsi.kanban.model.Defecto;
 import com.ubu.lsi.kanban.model.HistoriaUsuario;
@@ -132,9 +129,13 @@ public class SQLitePersistence extends Persistence {
 	
 	private void load(Connection con) throws SQLException, ParseException {
 		loadMiembros(con);
+		this.idm = this.newID(miembros.keySet());
 		loadRequisitos(con);
+		this.idr = this.newID(requisitos.keySet());
 		loadTareas(con);
+		this.idt = this.newID(tareas.keySet());
 		loadSprints(con);
+		this.ids = this.newID(sprints.keySet());
 		loadSprintTareas(con);
 	}
 	

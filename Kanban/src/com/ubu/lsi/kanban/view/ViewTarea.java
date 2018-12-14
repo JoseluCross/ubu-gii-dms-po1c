@@ -16,18 +16,6 @@ import com.ubu.lsi.kanban.model.*;
 public abstract class ViewTarea extends View<Tarea>{
 	
 	/*
-	 * M�todo que nos permite crear una Tarea.
-	 * 
-	 * @return: true si la Tarea se ha creado de forma exitosa.
-	 */
-	public abstract boolean crearTarea();
-	
-	/*
-	 * Nos permite modificar una Tarea.
-	 */
-	public abstract void modificarTarea();
-	
-	/*
 	 * Muestra de forma reducida una Tarea.
 	 * 
 	 * @param: tarea, Tarea a mostrar.
@@ -39,13 +27,6 @@ public abstract class ViewTarea extends View<Tarea>{
 	 * 
 	 * @param: tareas, Collection<Tarea> conjunto de tareas a mostrar.
 	 */
-	public abstract void mostratTareas(Collection<Tarea> tareas);
-	
-	/**
-	 * {@inheritDoc}
-	 * @param cf {@inheritDoc}
-	 */
-	protected ViewTarea(ControllerFactory cf) {
-		super(cf);
-	}
+	public abstract void mostrarTareas(Collection<Tarea> tareas);
+
 }

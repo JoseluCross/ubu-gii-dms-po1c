@@ -15,15 +15,4 @@ public abstract class View<E> {
 	
 	public abstract void mostrar(E e);
 	
-	protected ControllerFactory cf;
-	
-	/**
-	 * Constructor de la vista
-	 * 
-	 * @param cf Fábrica abstracta con la familia de controladores
-	 */
-	protected View(ControllerFactory cf) {
-		this.cf = cf;
-	}
-
 }
