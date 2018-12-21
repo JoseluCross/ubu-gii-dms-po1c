@@ -40,5 +40,9 @@ La vista se ha definido de manera semejante al controlador, es decir, una clase 
 
 Esto se ha hecho para que todas las vistas tengan la misma **Fábrica Abstracta** de controladores y toda la vista utilice la misma familia de controladores. Sin embargo, estas clases hacen más de guía que de contrato ya que la única clase que se utiliza por el *main* es la clase Menu que debe tener la función *start* que devuelve *boolean* (según se desee guardar o no los cambios en el sistema). En la práctica serán las implementaciones de Menú que haran de **Mediador** entre las clases de submodelo de interfaz, siendo incluso posible que no se utilicen las otras implementaciones de las vistas.
 
+Las opciones del menú (incluido este) han sido gestionadas mediante **Estado** que permite un flujo más normal y fácil de expandir. Cada estado devuelve un nuevo estado sobre el que se seguirá la ejecución hasta que sea nulo. La mayoría vuelve al MenuState a excepción de modificar que puede repetirse.
+
+Las vistas al uso han sido convertidas en **Singleton** ya que solamente muestran información en pantalla.
+
 ### **Modelo**
 El modelo sigue el diseño debatido en clase. Con el **Backlog** siendo singleton.
