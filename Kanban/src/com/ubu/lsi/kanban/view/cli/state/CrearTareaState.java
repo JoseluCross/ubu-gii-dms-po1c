@@ -30,17 +30,17 @@ public class CrearTareaState implements ViewState {
 		System.out.print("Introduzca la descripción de la tarea: ");
 		desc = sc.nextLine();
 		System.out.print("Introduzca el coste de la tarea: ");
-		coste = sc.nextInt();
+		coste = Integer.parseInt(sc.nextLine());
 		System.out.print("Introduzca el beneficio de la tarea: ");
-		beneficio = sc.nextInt();
+		beneficio = Integer.parseInt(sc.nextLine());
 		Collection<Requisito> listreq = cr.getList();
 		CliRequisito.getInstance().mostrarRequisitos(listreq);
 		System.out.print("Introduzca el identificador del Requisito que quiera relacionar con esta Tarea: ");
-		idr = sc.nextInt();
+		idr = Integer.parseInt(sc.nextLine());
 		Collection<MiembroEquipo> listmiembro = cm.getList();
 		CliMiembro.getInstance().mostrarMiembros(listmiembro);
 		System.out.print("Introduzca el identificador del Miembro al que quiera asignar esta Tarea: ");
-		idm = sc.nextInt();
+		idm = Integer.parseInt(sc.nextLine());
 		boolean res = ct.nuevaTarea(titulo, desc, coste, beneficio, idr, idm);
 		if(!res)
 			System.err.println("La tarea ha fallado al crearse, comprueba que tiene requisito");

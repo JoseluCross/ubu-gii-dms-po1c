@@ -42,7 +42,13 @@ public class CliMenu extends Menu{
 		int option = 0;
 		System.out.println("Bienvenido a KanBan, la mejor aplicación del mundo");
 		do {
-			currentState = currentState.haz(cf);
+			try {
+				currentState = currentState.haz(cf);
+			}catch(Exception ex) {
+				currentState = new MenuState();
+				System.err.println("Error: "+ex.getMessage());
+				System.err.flush();
+			}
 		}while(currentState!=null);	
 				
 		boolean sq = saveQ();

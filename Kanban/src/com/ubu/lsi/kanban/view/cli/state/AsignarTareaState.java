@@ -20,14 +20,12 @@ public class AsignarTareaState implements ViewState {
 		int idt, ids;
 		CliBacklog.getInstance().mostrar(pb);
 		System.out.print("Introduzca el número del identificador de la tarea que quiere mover al Sprint: ");
-		idt = sc.nextInt();
-		sc.nextLine();
+		idt = Integer.parseInt(sc.nextLine());
 		ControllerBacklog cb = cf.getControllerBacklog();
 		Collection<SprintBacklog> col = cb.getList();
 		CliBacklog.getInstance().mostrarReducido(col);
 		System.out.print("Introduzca el identificador del Sprint al que quieres mover esta tarea: ");
-		ids = sc.nextInt();
-		sc.nextLine();
+		ids = Integer.parseInt(sc.nextLine());
 		if(!cb.tareaSprint(ids, idt)) {
 			System.err.println("No se ha podido asignar la tarea");
 		}

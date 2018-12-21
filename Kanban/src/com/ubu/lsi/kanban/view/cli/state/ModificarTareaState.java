@@ -32,7 +32,7 @@ public class ModificarTareaState implements ViewState {
 		Collection<Tarea> tareas = ct.getList();
 		CliTarea.getInstance().mostrarTareas(tareas);
 		System.out.print("Introduzca el identificador de la Tarea que desea modificar: ");
-		id = sc.nextInt();
+		id = Integer.parseInt(sc.nextLine());
 		Tarea tarea = ct.getElement(id);
 
 		System.out.println("La tarea que quiere modificar es la siguiente: ");
@@ -40,8 +40,7 @@ public class ModificarTareaState implements ViewState {
 		while (flag) {
 			System.out.println(
 					"Introduzca el valor relacionado con el cambio que desea hacer: Título[0], Descripción[1], Coste[2], Beneficio[3], Requisito[4] y Miembro[5]");
-			opc = sc.nextInt();
-			sc.nextLine();
+			opc = Integer.parseInt(sc.nextLine());
 			if (opc >= 0 && opc <= 5) {
 				flag = false;
 			}
@@ -61,22 +60,20 @@ public class ModificarTareaState implements ViewState {
 		case 2:
 			System.out.print("Introduzca el nuevo coste que se quiere dar a la tarea. (el coste actual es: "
 					+ tarea.getCoste() + ")\nNuevo Coste: ");
-			tarea.setCoste(sc.nextInt());
-			sc.nextLine();
+			tarea.setCoste(Integer.parseInt(sc.nextLine()));
 			break;
 		case 3:
 			System.out
 					.print("Introduzca el nuevo beneficio que se quiere dar a la tarea. (el beneficio actual es: "
 							+ tarea.getBeneficio() + ")\nNuevo Beneficio: ");
-			tarea.setBeneficio(sc.nextInt());
+			tarea.setBeneficio(Integer.parseInt(sc.nextLine()));
 			break;
 		case 4:
 			System.out.println("Estos son los Requisitos que se pueden asignar a una tarea: ");
 			Collection<Requisito> listreq = cr.getList();
 			CliRequisito.getInstance().mostrarRequisitos(listreq);
 			System.out.print("Introduzca el identificador del Requisito que quiera relacionar con esta Tarea: ");
-			idr = sc.nextInt();
-			sc.nextLine();
+			idr = Integer.parseInt(sc.nextLine());
 			if (!ct.editarRequisito(tarea, idr)) {
 				System.out.println("El Requisito seleccionado no es posible.");
 			}
@@ -86,8 +83,7 @@ public class ModificarTareaState implements ViewState {
 			Collection<MiembroEquipo> listmiembro = cm.getList();
 			CliMiembro.getInstance().mostrarMiembros(listmiembro);
 			System.out.print("Introduzca el identificador del Miembro al que quiera asignar esta Tarea: ");
-			idm = sc.nextInt();
-			sc.nextLine();
+			idm = Integer.parseInt(sc.nextLine());
 			if (!ct.asignarMiembro(tarea, idm)) {
 				System.out.println("El Miembro seleccionado no es posible.");
 			}

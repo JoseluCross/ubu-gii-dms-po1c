@@ -31,8 +31,7 @@ public class VerTareaState implements ViewState{
 		int ids;
 		CliTarea.getInstance().mostrarTareas(cf.getControllerTarea().getList());
 		System.out.print("Elige que Tarea quieres ver: ");
-		ids = sc.nextInt();
-		sc.nextLine();
+		ids = Integer.parseInt(sc.nextLine());
 		return cf.getControllerTarea().getElement(ids);
 	}
 

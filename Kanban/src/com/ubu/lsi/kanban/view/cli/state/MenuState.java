@@ -52,8 +52,7 @@ public class MenuState implements ViewState {
 			System.out.println(" [0] Cerrar aplicación");
 			
 			System.out.print("Tu opción: ");
-			option = CliMenu.sc.nextInt();
-			CliMenu.sc.nextLine();
+			option = Integer.parseInt(CliMenu.sc.nextLine());
 			if(option > states.size() || option < 0) {
 				System.err.println("Por favor, introduzca una opción correcta");
 			}

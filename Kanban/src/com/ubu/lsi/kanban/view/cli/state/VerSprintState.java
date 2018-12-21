@@ -33,8 +33,7 @@ public class VerSprintState implements ViewState {
 		int ids;
 		CliBacklog.getInstance().mostrarReducido(cf.getControllerBacklog().getList());
 		System.out.print("Elige que Sprint quieres ver: ");
-		ids = sc.nextInt();
-		sc.nextLine();
+		ids = Integer.parseInt(sc.nextLine());
 		return cf.getControllerBacklog().getElement(ids);
 	}
 
